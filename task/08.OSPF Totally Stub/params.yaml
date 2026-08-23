@@ -1,0 +1,11 @@
+r1_names: [Algrim, Ballast, Alpha, North, Aria]
+r2_names: [Barik, Beam, Beta, East, Brio]
+
+r1_loopback_pool: "1.0.0.0/8"
+r2_loopback_pool: "2.0.0.0/8"
+r1_extra_loopback_pool: "172.16.0.0/16"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24, 25, 26]
+
+link1_media_options: [ethernet, fastethernet, serial]

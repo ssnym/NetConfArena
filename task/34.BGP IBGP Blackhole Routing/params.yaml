@@ -1,0 +1,52 @@
+r1_names:
+- King
+- Atlas
+- Beacon
+- Cobalt
+- Delta
+- Ember
+- Falcon
+- Glacier
+- Harbor
+r2_names:
+- Prince
+- Ivory
+- Jasper
+- Kepler
+- Lagoon
+- Matrix
+- Nimbus
+- Orion
+- Prairie
+r3_names:
+- Queen
+- Quartz
+- Rocket
+- Summit
+- Titan
+- Union
+- Vector
+- Willow
+- Xray
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 24
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 24
+r1_loopback0_pool: 1.0.0.0/8
+r1_loopback0_prefix_lens:
+- 24
+r1_tunnel1_pool: 192.168.0.0/16
+r1_tunnel1_prefix_lens:
+- 24
+r3_loopback0_pool: 3.0.0.0/8
+r3_loopback0_prefix_lens:
+- 24
+r3_tunnel1_pool: 192.168.0.0/16
+r3_tunnel1_prefix_lens:
+- 24

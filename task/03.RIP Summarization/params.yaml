@@ -1,0 +1,19 @@
+r1_names: [Apron, Hub, Center, Core, Junction, Nexus]
+r2_names: [Ballast, Alpha, North, Spoke1, Aria]
+r3_names: [Beam, Beta, East, Spoke2, Brio]
+r4_names: [Brick, Gamma, South, Spoke3, Coda]
+
+r2_loopback_pool: "172.16.0.0/12"
+r3_loopback_pool: "20.0.0.0/8"
+r4_loopback_pool: "10.0.0.0/10"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24, 25, 26]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24, 25, 26]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24, 25, 26]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]
+link3_media_options: [ethernet, fastethernet, serial]

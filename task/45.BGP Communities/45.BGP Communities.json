@@ -1,0 +1,531 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "router3_name": {
+            "type": "choice",
+            "options": "r3_names",
+            "different_from": [
+                "router1_name",
+                "router2_name"
+            ]
+        },
+        "as1": {
+            "type": "choice",
+            "options": "as1_options"
+        },
+        "as2": {
+            "type": "choice",
+            "options": "as2_options",
+            "different_from": [
+                "as1"
+            ]
+        },
+        "community_value": {
+            "type": "choice",
+            "options": "community_value_options"
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        },
+        "link2_media": {
+            "type": "choice",
+            "options": "link2_media_options"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.12.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "_link2": {
+            "type": "random_subnet",
+            "pool": "link2_pool",
+            "prefix_len": "link2_prefix_lens",
+            "default": "192.168.13.0/24",
+            "no_overlap": [
+                "_link1"
+            ]
+        },
+        "link2_network": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "network"
+        },
+        "link2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "netmask"
+        },
+        "link2_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "prefixlen"
+        },
+        "link2_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 1
+        },
+        "link2_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 2
+        },
+        "_community_net": {
+            "type": "random_subnet",
+            "pool": "community_pool",
+            "prefix_len": "community_prefix_lens",
+            "default": "23.23.23.0/24"
+        },
+        "community_network": {
+            "type": "subnet_attr",
+            "subnet": "_community_net",
+            "attr": "network"
+        },
+        "community_mask": {
+            "type": "subnet_attr",
+            "subnet": "_community_net",
+            "attr": "netmask"
+        },
+        "community_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_community_net",
+            "attr": "prefixlen"
+        },
+        "community_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_community_net",
+            "attr": "wildcard"
+        },
+        "community_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_community_net",
+            "attr": "host",
+            "index": 1
+        },
+        "community_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_community_net",
+            "attr": "host",
+            "index": 2
+        },
+        "community_cidr": {
+            "type": "format",
+            "template": "{community_network}/{community_prefix_len}"
+        }
+    },
+    "scenario": "BGP Communities",
+    "goals": "• All IP addresses have been preconfigured for you.\n• Configure EBGP between router {{router3_name}} and {{router1_name}}.\n  AS {{as1}}: {{router3_name}}\n  AS {{as2}}: {{router1_name}}, {{router2_name}}\n• Configure EBGP between router {{router3_name}} and {{router2_name}}.\n• Advertise the loopback0 interface on router {{router1_name}} and {{router2_name}}.\n• Configure router {{router2_name}} to send the community value {{community_value}} for network {{community_network}} /{{community_prefix_len}}.\n• Configure router {{router3_name}} to match on the community value {{community_value}} and send traffic for {{community_network}} /{{community_prefix_len}} to router {{router2_name}}.",
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2",
+            "r3"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r3"
+                ],
+                "media": "{{link1_media}}"
+            },
+            {
+                "id": "link2",
+                "nodes": [
+                    "r2",
+                    "r3"
+                ],
+                "media": "{{link2_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -274.830519166,
+                "y": -164.128463019
+            },
+            "r2": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": -2.37867965644,
+                    "y": 39.3467170881
+                },
+                "x": -281.194480197,
+                "y": 25.3761543396
+            },
+            "r3": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router3_name}}",
+                    "x": -14.1066017178,
+                    "y": 38.6396103069
+                },
+                "x": -564.037192672,
+                "y": -74.3259018079
+            }
+        },
+        "notes": [
+            {
+                "color": "#0000ff",
+                "text": ".1",
+                "x": -475.175756958,
+                "y": -59.2720779386
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link2_network}} /{{link2_prefix_len}}",
+                "x": -452.54833996,
+                "y": 20.3259018079
+            },
+            {
+                "color": "#0000ff",
+                "text": ".2",
+                "x": -296.277741318,
+                "y": -154.225396745
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link1_network}} /{{link1_prefix_len}}",
+                "x": -450.427019617,
+                "y": -143.521861301
+            },
+            {
+                "color": "#323232",
+                "text": "AS {{as2}}",
+                "x": -239.002092042,
+                "y": -61.4974746832
+            },
+            {
+                "color": "#0000ff",
+                "text": ".1",
+                "x": -475.175756958,
+                "y": -71.7989898733
+            },
+            {
+                "color": "#323232",
+                "text": "AS {{as1}}",
+                "x": -622.253967446,
+                "y": -63.8198051535
+            },
+            {
+                "color": "#0000ff",
+                "text": ".3",
+                "x": -301.934595567,
+                "y": 4.67261889604
+            }
+        ],
+        "rectangles": [
+            {
+                "fill_color": "#aaff7f",
+                "height": 292.742207412,
+                "width": 128.693434176,
+                "x": -321.026478659,
+                "y": -197.282791951,
+                "z": -2.0
+            },
+            {
+                "fill_color": "#aaffff",
+                "height": 123.743686708,
+                "width": 170.613744393,
+                "x": -623.869191135,
+                "y": -110.308657865,
+                "z": -2.0
+            }
+        ]
+    },
+    "startup_configs": {
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{community_ip1}} {{community_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown",
+            "ip bgp-community new-format"
+        ],
+        "{{router2_name}}": [
+            "interface Loopback0",
+            "  ip address {{community_ip2}} {{community_mask}}",
+            "interface {{router2_link2_iface}}",
+            "  ip address {{link2_ip1}} {{link2_mask}}",
+            "  no shutdown",
+            "ip bgp-community new-format"
+        ],
+        "{{router3_name}}": [
+            "interface {{router3_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown",
+            "interface {{router3_link2_iface}}",
+            "  ip address {{link2_ip2}} {{link2_mask}}",
+            "  no shutdown",
+            "ip bgp-community new-format"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "router bgp {{as2}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  network {{community_network}} mask {{community_mask}}",
+            "  neighbor {{link1_ip2}} remote-as {{as1}}",
+            "  no auto-summary"
+        ],
+        "{{router2_name}}": [
+            "access-list 1 permit {{community_network}} {{community_wildcard}}",
+            "route-map SEND-COMMUNITY permit 10",
+            "  match ip address 1",
+            "  set community {{community_value}} additive",
+            "router bgp {{as2}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  network {{community_network}} mask {{community_mask}}",
+            "  neighbor {{link2_ip2}} remote-as {{as1}}",
+            "  neighbor {{link2_ip2}} send-community",
+            "  neighbor {{link2_ip2}} route-map SEND-COMMUNITY out",
+            "  no auto-summary"
+        ],
+        "{{router3_name}}": [
+            "ip community-list 1 permit {{community_value}}",
+            "route-map PREFER-COMMUNITY permit 10",
+            "  match community 1",
+            "  set weight 500",
+            "route-map PREFER-COMMUNITY permit 20",
+            "router bgp {{as1}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  neighbor {{link1_ip1}} remote-as {{as2}}",
+            "  neighbor {{link2_ip1}} remote-as {{as2}}",
+            "  neighbor {{link2_ip1}} route-map PREFER-COMMUNITY in",
+            "  no auto-summary"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Configure EBGP between router {{router3_name}} and {{router1_name}}.",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router3_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "neighbor": "{{link1_ip1}}",
+                        "remote_as": "{{as2}}",
+                        "bgp_state": "Established",
+                        "localhost_ip": "{{link1_ip2}}",
+                        "remote_ip": "{{link1_ip1}}"
+                    }
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "neighbor": "{{link1_ip2}}",
+                        "remote_as": "{{as1}}",
+                        "bgp_state": "Established",
+                        "localhost_ip": "{{link1_ip1}}",
+                        "remote_ip": "{{link1_ip2}}"
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Configure EBGP between router {{router3_name}} and {{router2_name}}.",
+            "testcase": [
+                {
+                    "id": "2-1",
+                    "node": "{{router3_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "neighbor": "{{link2_ip1}}",
+                        "remote_as": "{{as2}}",
+                        "bgp_state": "Established",
+                        "localhost_ip": "{{link2_ip2}}",
+                        "remote_ip": "{{link2_ip1}}"
+                    }
+                },
+                {
+                    "id": "2-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "neighbor": "{{link2_ip2}}",
+                        "remote_as": "{{as1}}",
+                        "bgp_state": "Established",
+                        "localhost_ip": "{{link2_ip1}}",
+                        "remote_ip": "{{link2_ip2}}"
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Advertise the loopback0 interface on router {{router1_name}} and {{router2_name}}.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router1_name}}",
+                    "command": "show ip bgp",
+                    "expected_result": {
+                        "network": "{{community_cidr}}"
+                    }
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp",
+                    "expected_result": {
+                        "network": "{{community_cidr}}"
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Configure router {{router2_name}} to send the community value {{community_value}} for network {{community_network}} /{{community_prefix_len}}.",
+            "testcase": [
+                {
+                    "id": "4-1",
+                    "node": "{{router2_name}}",
+                    "command": "show route-map",
+                    "expected_result": {
+                        "action": "permit",
+                        "set_clauses": [
+                            "community {{community_value}}"
+                        ]
+                    },
+                    "output": "name"
+                },
+                {
+                    "id": "4-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "neighbor": "{{link2_ip2}}",
+                        "outbound_routemap": "$4-1_{{router2_name}}_name$",
+                        "send_community": true
+                    }
+                },
+                {
+                    "id": "4-3",
+                    "node": "{{router3_name}}",
+                    "command": "show ip bgp {{community_network}} {{community_mask}}",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "network": "{{community_cidr}}",
+                                "next_hop": "{{link2_ip1}}",
+                                "communities": {
+                                    "op": "contains",
+                                    "value": "{{community_value}}"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Configure router {{router3_name}} to match on the community value {{community_value}} and send traffic for {{community_network}} /{{community_prefix_len}} to router {{router2_name}}.",
+            "testcase": [
+                {
+                    "id": "5-1",
+                    "node": "{{router3_name}}",
+                    "command": "show ip community-list",
+                    "expected_result": {
+                        "community_type": "standard",
+                        "action": "permit",
+                        "community": "{{community_value}}"
+                    },
+                    "output": "list_number"
+                },
+                {
+                    "id": "5-2",
+                    "node": "{{router3_name}}",
+                    "command": "show route-map",
+                    "expected_result": {
+                        "action": "permit",
+                        "match_clauses": [
+                            "community (community-list filter): $5-1_{{router3_name}}_list_number$"
+                        ],
+                        "set_clauses": {
+                            "op": "not_empty"
+                        }
+                    },
+                    "output": "name"
+                },
+                {
+                    "id": "5-3",
+                    "node": "{{router3_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "neighbor": "{{link2_ip1}}",
+                        "inbound_routemap": "$5-2_{{router3_name}}_name$"
+                    }
+                },
+                {
+                    "id": "5-4",
+                    "node": "{{router3_name}}",
+                    "command": "show ip bgp",
+                    "expected_result": {
+                        "network": "{{community_cidr}}",
+                        "next_hop": "{{link2_ip1}}",
+                        "path_selection": ">"
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "All IP addresses have been preconfigured for you.",
+            "testcase": []
+        }
+    ]
+}

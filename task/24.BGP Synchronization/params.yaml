@@ -1,0 +1,25 @@
+r1_names: [Baldwin, Bridges, Keaton, Heston, Fonda]
+r2_names: [Foxx, Freeman, Murray, Gosling, Kilmer]
+r3_names: [Green, Grant, Carrey, Clooney, Crowe]
+r4_names: [Mitchell, Murphy, Norton, Pitt, Pacino]
+r5_names: [Rollins, Russell, Redford, Reynolds, Gibson]
+
+r1_lo0_pool: "1.0.0.0/8"
+r2_lo0_pool: "2.0.0.0/8"
+r3_lo0_pool: "4.0.0.0/8"
+r4_lo0_pool: "3.0.0.0/8"
+r5_lo0_pool: "5.0.0.0/8"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24]
+link4_pool: "192.168.0.0/16"
+link4_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet]
+link2_media_options: [ethernet, fastethernet]
+link3_media_options: [ethernet, fastethernet]
+link4_media_options: [ethernet, fastethernet]

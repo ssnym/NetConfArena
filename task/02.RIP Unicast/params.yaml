@@ -1,0 +1,12 @@
+r1_names: [NewYork, Boston, Chicago, Seattle, Dallas, Miami, Houston, Phoenix, Denver, Detroit]
+r2_names: [Washington, Atlanta, Portland, Philadelphia, Nashville, Baltimore, Memphis, Louisville]
+
+r1_loopback_pool: "1.1.0.0/16"
+r2_loopback_pool: "2.2.0.0/16"
+r1_loopback_prefix_lens: [24, 25, 26]
+r2_loopback_prefix_lens: [24, 25, 26]
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24, 25, 26]
+
+link1_media_options: [ethernet, fastethernet, serial]

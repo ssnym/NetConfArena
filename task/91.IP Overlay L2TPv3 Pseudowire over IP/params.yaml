@@ -1,0 +1,73 @@
+r1_names:
+- Almaty
+- Aspen
+- Auckland
+- Avalon
+- Amber
+- Anvil
+- Arcus
+- Aurora
+r2_names:
+- Bergen
+- Bilbao
+- Boulder
+- Brindle
+- Bronze
+- Basalt
+- Beacon
+- Borealis
+r3_names:
+- Cardiff
+- Catania
+- Cologne
+- Cinder
+- Cobalt
+- Comet
+- Coral
+- Crescent
+r4_names:
+- Dakar
+- Dalian
+- Dortmund
+- Dune
+- Drift
+- Dahlia
+- Dolomite
+- Draco
+r5_names:
+- Ealing
+- Edmonton
+- Esbjerg
+- Ember
+- Estuary
+- Echo
+- Elmwood
+- Everest
+r2_loopback_pool: 2.0.0.0/8
+r3_loopback_pool: 3.0.0.0/8
+r4_loopback_pool: 4.0.0.0/8
+link1_media_options:
+- fastethernet
+link4_media_options:
+- fastethernet
+link2_media_options:
+- fastethernet
+link3_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 30
+link3_pool: 192.168.0.0/16
+link3_prefix_lens:
+- 30
+service_pool: 10.0.0.0/8
+service_prefix_lens:
+- 24
+vc_id_options:
+- 100
+- 500
+- 1200
+pw_class_names:
+- PW-L2TP
+- L2TPV3-CLASS
+- IP-PW

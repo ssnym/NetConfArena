@@ -1,0 +1,25 @@
+as1_options: [1, 10, 100, 200]
+as2_options: [2, 20, 200, 300]
+private_as1_options: [64513, 64523, 65003, 65503]
+private_as2_options: [64514, 64524, 65004, 65504]
+
+r1_names: [Emperor, Monarch, Pharaoh, Sultan, Khan]
+r2_names: [Tsar, Regent, Viceroy, Consul, Marshal]
+r3_names: [Kaiser, Baron, Count, Duke, Earl]
+r4_names: [Caesar, Tribune, Praetor, Legate, Censor]
+
+r3_loopback_pool: "3.0.0.0/8"
+r3_loopback_prefix_lens: [24]
+r4_loopback_pool: "4.0.0.0/8"
+r4_loopback_prefix_lens: [24]
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet]
+link2_media_options: [ethernet, fastethernet]
+link3_media_options: [ethernet, fastethernet]

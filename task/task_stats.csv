@@ -1,0 +1,97 @@
+task_index,scenario,category,subcategory,complexity,protocols,protocol_layers,autonomous_systems,devices,links,device_models,goals,devices_configured,reference_config_commands,startup_config_commands,scoring_groups,test_units,parameters
+1,Static Routing,Static Routing,Basic Routing,L,static,1,0,2,2,C3600,4,2,3,16,4,4,22
+2,RIP Unicast,RIP,Fundamentals,L,rip,1,0,2,1,C3600,2,2,14,10,2,6,16
+3,RIP Summarization,RIP,Policy and Route Control,M,rip,1,0,4,3,C3600,4,4,25,82,4,10,92
+4,RIP Offset List,RIP,Policy and Route Control,M,rip,1,0,4,4,C3600,5,4,22,30,4,11,43
+5,RIP Filtering,RIP,Policy and Route Control,M,rip,1,0,4,4,C3600,5,4,26,32,5,13,48
+6,OSPF Single Area,OSPF,Fundamentals,L,ospf,1,0,3,3,C3600,6,3,16,25,6,8,33
+7,OSPF Stub Area,OSPF,Areas and Route Control,M,ospf,1,0,2,1,C3600,6,2,19,10,4,12,27
+8,OSPF Totally Stub,OSPF,Areas and Route Control,M,ospf,1,0,2,1,C3600,4,2,22,10,3,12,27
+9,OSPF Totally NSSA,OSPF,Areas and Route Control,M,ospf;rip,2,0,3,2,C3600,15,3,37,14,10,26,44
+10,OSPF Summarization Discard Route,OSPF,Areas and Route Control,M,ospf,1,0,3,2,C3600,3,3,13,14,3,5,20
+11,OSPF LSA Type 3 summarization,OSPF,Areas and Route Control,M,ospf,1,0,5,4,C3600,2,5,19,48,2,6,51
+12,OSPF LSA Type 5 summarization,OSPF,Areas and Route Control,M,ospf,1,0,3,2,C3600,3,3,13,28,3,5,29
+13,OSPF Virtual Link,OSPF,Advanced Area Design,H,ospf,1,0,4,3,C3600,3,4,21,24,3,9,34
+14,OSPF Virtual Link and Summarization,OSPF,Advanced Area Design,H,ospf,1,0,3,2,C3600,4,3,15,22,4,9,27
+15,OSPF Suppress Forward Address,OSPF,Advanced Area Design,H,ospf;rip,2,0,5,4,C3600,6,5,28,26,6,14,35
+16,OSPF NSSA LSA Type 7 to 5 Translator Election,OSPF,Advanced Area Design,H,ospf,1,0,4,4,C3600,4,4,21,26,4,9,37
+17,OSPF DR BDR Election,OSPF,Areas and Route Control,M,ospf,1,0,7,6,C3600;EthernetSwitch,5,5,22,18,5,9,27
+18,OSPF Auto Cost Reference Bandwidth,OSPF,Areas and Route Control,M,ospf,1,0,4,6,C7200,2,4,16,36,1,4,46
+19,IBGP-Internal BGP,BGP,"Peering, Propagation, and Scaling",H,ospf;bgp,2,1,4,4,C3600,2,4,64,40,2,7,57
+20,EBGP-External BGP,BGP,"Peering, Propagation, and Scaling",H,bgp;static,2,4,4,3,C3600,4,4,35,26,4,12,38
+21,BGP Update Source,BGP,"Peering, Propagation, and Scaling",H,ospf;bgp,2,1,2,2,C3600,4,2,18,16,4,8,19
+22,BGP Transit AS,BGP,"Peering, Propagation, and Scaling",H,ospf;bgp,2,3,6,6,C3600,4,6,68,48,4,9,63
+23,BGP Traffic Engineering Unsuppress-Map,BGP,Advertisement Control and Aggregation,M,bgp,1,3,5,5,C3600;EthernetSwitch,9,4,43,30,7,8,51
+24,BGP Synchronization,BGP,"Peering, Propagation, and Scaling",H,bgp;ospf,2,3,5,4,C3600,7,5,41,34,7,15,66
+25,BGP Soft Reconfiguration,BGP,"Peering, Propagation, and Scaling",H,bgp,1,2,2,1,C3600,4,2,15,8,4,7,15
+26,BGP Route Reflectors and Clusters,BGP,"Peering, Propagation, and Scaling",H,bgp,1,1,9,12,C3600,7,9,84,90,7,33,127
+27,BGP Remove Private AS,BGP,Routing Policy and Filtering,M,bgp,1,4,4,3,C3600,5,4,26,22,5,6,36
+28,BGP Peer Group,BGP,"Peering, Propagation, and Scaling",H,bgp,1,1,4,3,C3600,3,4,29,26,3,7,44
+29,BGP Next-Hop Self Manual,BGP,"Peering, Propagation, and Scaling",H,bgp,1,2,3,2,C3600,7,3,24,28,6,11,40
+30,BGP Next hop self,BGP,"Peering, Propagation, and Scaling",H,bgp,1,2,3,2,C3600,7,3,21,26,6,9,35
+31,BGP Max AS Limit,BGP,Routing Policy and Filtering,M,bgp,1,4,4,3,C3600,4,4,27,26,4,12,50
+32,BGP Local AS,BGP,Best-Path Selection and Traffic Engineering,H,bgp,1,2,2,1,C3600,4,2,11,6,3,3,10
+33,BGP Local Preference MED,BGP,Best-Path Selection and Traffic Engineering,H,bgp,1,2,4,5,C3600,7,4,49,53,6,18,68
+34,BGP IBGP Blackhole Routing,BGP,Best-Path Selection and Traffic Engineering,H,gre;bgp,2,1,3,2,C3600,5,3,26,29,4,8,43
+35,BGP Filtering Prefix-List,BGP,Routing Policy and Filtering,M,bgp,1,2,2,1,C3600,5,2,21,14,5,9,34
+36,BGP Filtering Extended Access-List,BGP,Routing Policy and Filtering,M,bgp,1,2,2,1,C3600,5,2,21,14,5,11,41
+37,BGP EBGP Multihop,BGP,"Peering, Propagation, and Scaling",H,bgp;static,2,2,2,1,C3600,5,2,16,10,3,6,25
+38,BGP DMZ Link Bandwidth,BGP,Best-Path Selection and Traffic Engineering,H,ospf;bgp,2,2,6,7,C3600;EthernetSwitch,4,5,79,43,4,14,94
+39,BGP Confederations,BGP,"Peering, Propagation, and Scaling",H,ospf;bgp,2,6,6,8,C3600,6,6,103,60,5,20,115
+40,BGP Conditional Advertisement,BGP,Advertisement Control and Aggregation,M,bgp,1,3,3,2,C3600,5,3,26,18,5,13,46
+41,BGP Communities No-Export,BGP,Routing Policy and Filtering,M,bgp,1,3,4,3,C3600,5,4,30,20,5,13,37
+42,BGP Communities No-Advertise,BGP,Routing Policy and Filtering,M,bgp,1,3,4,3,C3600,5,4,28,20,5,12,37
+43,BGP Communities Local-AS,BGP,Routing Policy and Filtering,M,bgp,1,3,5,5,C3600,4,5,51,40,4,15,79
+44,BGP Communities Delete and Additive,BGP,Routing Policy and Filtering,M,bgp,1,3,3,2,C3600,5,3,27,17,5,14,32
+45,BGP Communities,BGP,Routing Policy and Filtering,M,bgp,1,2,3,2,C3600,6,3,30,19,5,13,25
+46,BGP Backdoor,BGP,Best-Path Selection and Traffic Engineering,H,eigrp;bgp;ospf,3,3,4,4,C7200,13,4,48,32,12,24,63
+47,BGP Attribute Weight,BGP,Best-Path Selection and Traffic Engineering,H,bgp,1,2,4,4,C3600,11,4,58,40,10,44,86
+48,BGP Attribute Router ID,BGP,Best-Path Selection and Traffic Engineering,H,bgp,1,4,4,4,C3600,6,1,7,46,3,10,47
+49,BGP Attribute Origin,BGP,Best-Path Selection and Traffic Engineering,H,bgp,1,2,3,2,C3600,4,3,24,16,4,12,28
+50,BGP Attribute MED,BGP,Best-Path Selection and Traffic Engineering,H,ospf;bgp,2,2,4,5,C3600,4,4,58,38,4,10,71
+51,BGP Attribute Local Preference,BGP,Best-Path Selection and Traffic Engineering,H,ospf;bgp,2,4,7,8,C3600,12,7,103,64,10,22,127
+52,BGP Attribute AS Path Ignore,BGP,Best-Path Selection and Traffic Engineering,H,bgp,1,4,4,4,C3600,5,4,30,32,5,8,65
+53,BGP Attribute AS Path,BGP,Best-Path Selection and Traffic Engineering,H,bgp,1,2,4,5,C3600,5,4,36,49,5,9,71
+54,BGP AS Path Access List,BGP,Routing Policy and Filtering,M,bgp,1,4,4,4,C3600,6,4,52,40,5,20,88
+55,BGP Always compare MED,BGP,Best-Path Selection and Traffic Engineering,H,bgp;ospf,2,3,4,4,C3600,13,4,67,36,9,14,77
+56,BGP Allow AS In,BGP,Routing Policy and Filtering,M,ospf;bgp,2,2,4,4,C3600,5,4,57,34,5,13,68
+57,BGP Aggregation Unsuppress Map,BGP,Advertisement Control and Aggregation,M,bgp,1,2,2,1,C3600,4,2,19,14,4,8,36
+58,BGP Aggregation AS SET,BGP,Advertisement Control and Aggregation,M,bgp,1,3,3,3,C3600,6,3,21,22,6,9,41
+59,BGP Aggregation,BGP,Advertisement Control and Aggregation,M,bgp;static,2,2,2,1,C3600,4,2,17,14,4,10,40
+60,MPLS LDP Basic Enablement,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,4,3,14,31,3,10,37
+61,MPLS LDP Router ID and Transport Address,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,4,3,3,42,3,8,37
+62,MPLS LDP Label Advertisement Filtering,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,4,1,6,45,3,9,38
+63,MPLS LDP Neighbor Authentication,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,4,3,4,45,2,8,38
+64,MPLS LDP Targeted Remote Session,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,5,2,2,45,3,7,37
+65,MPLS LDP Session Protection,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,3,C7200,4,3,3,57,3,9,46
+66,MPLS LDP IGP Autoconfiguration and Synchronization,MPLS,LDP and Label Forwarding,M,mpls_ldp;ospf,2,0,3,2,C7200,5,3,15,31,3,11,37
+67,MPLS LDP Explicit Null,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,5,1,1,45,3,9,37
+68,MPLS Static LSP Binding,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,4,1,1,48,4,8,42
+69,MPLS TTL Propagation Control,MPLS,LDP and Label Forwarding,M,,0,0,4,3,C7200,5,3,3,58,3,9,52
+70,MPLS LDP Triangle Core,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,3,C7200,4,3,18,39,3,8,45
+71,MPLS Label Range and Local Label Space,MPLS,LDP and Label Forwarding,M,mpls_ldp,1,0,3,2,C7200,5,3,17,31,4,11,39
+72,MPLS TE Basic Dynamic Tunnel,MPLS,Traffic Engineering,H,mpls_te;ospf;gre,3,0,4,4,C7200,5,4,45,76,4,13,63
+73,MPLS TE Explicit Path Tunnel,MPLS,Traffic Engineering,H,mpls_te;gre,2,0,4,4,C7200,6,1,9,121,3,7,63
+74,MPLS TE Bandwidth Reservation and Admission Control,MPLS,Traffic Engineering,H,mpls_te;gre,2,0,4,4,C7200,4,1,12,120,3,8,66
+75,MPLS TE Affinity and Link Attribute Flags,MPLS,Traffic Engineering,H,mpls_te;gre,2,0,4,4,C7200,5,3,14,120,4,10,64
+76,MPLS TE Autoroute Announce and Tunnel Metric,MPLS,Traffic Engineering,H,mpls_te,1,0,4,4,C7200,5,1,3,130,3,10,65
+77,MPLS TE Fast Reroute Link Protection,MPLS,Traffic Engineering,H,mpls_te;gre,2,0,4,5,C7200,5,1,12,147,3,10,74
+78,MPLS L3VPN VRF and VPNv4 Basics,MPLS,L3VPN,H,l3vpn;bgp,2,1,5,4,C7200,7,2,46,63,5,16,84
+79,MPLS L3VPN BGP PE-CE Routing,MPLS,L3VPN,H,bgp,1,3,5,4,C7200,6,2,12,103,4,11,86
+80,MPLS L3VPN OSPF PE-CE Routing,MPLS,L3VPN,H,ospf;bgp,2,1,5,4,C7200,6,2,16,101,3,10,86
+81,MPLS L3VPN RIP PE-CE Routing,MPLS,L3VPN,H,rip;bgp,2,1,5,4,C7200,6,2,26,101,3,10,85
+82,MPLS L3VPN Hub and Spoke Route Targets,MPLS,L3VPN,H,l3vpn;bgp,2,1,6,5,C7200,6,2,42,92,4,15,111
+83,MPLS L3VPN VPNv4 Route Reflector,MPLS,L3VPN,H,bgp;l3vpn,2,1,4,3,C7200,7,4,64,85,4,13,77
+84,MPLS L3VPN Inter-AS Option A,MPLS,L3VPN,H,l3vpn;bgp,2,2,4,3,C7200,8,2,28,120,4,13,72
+85,MPLS L3VPN Inter-AS Option B,MPLS,L3VPN,H,l3vpn;bgp,2,2,4,3,C7200,10,4,20,120,5,17,72
+86,MPLS L3VPN over a GRE Core,MPLS,L3VPN,H,gre;mpls_ldp;ospf,3,1,4,3,C7200,6,2,22,90,5,16,90
+87,MPLS L2VPN EoMPLS Port Mode Pseudowire,MPLS,L2VPN,M,l2vpn,1,0,5,4,C7200,6,2,4,57,3,10,48
+88,MPLS L2VPN EoMPLS VLAN Mode Pseudowire,MPLS,L2VPN,M,l2vpn,1,0,5,4,C7200,6,2,6,63,3,11,49
+89,MPLS L2VPN AToM Pseudowire Class and Ethernet Interworking,MPLS,L2VPN,M,l2vpn,1,0,5,4,C7200,6,2,12,61,3,10,49
+90,MPLS L2VPN EoMPLS Multi-Service Aggregation,MPLS,L2VPN,M,l2vpn,1,0,6,5,C7200,6,2,12,50,4,17,41
+91,IP Overlay L2TPv3 Pseudowire over IP,IP Overlay,IP Tunnels,M,l2vpn,1,0,5,4,C7200,5,2,10,43,4,11,49
+92,IP Overlay GRE Tunnel Routing,IP Overlay,IP Tunnels,M,gre;ospf,2,0,3,2,C7200,7,2,16,26,4,13,57
+93,IP Overlay GRE Keepalive and MTU Adjustment,IP Overlay,IP Tunnels,M,,0,0,3,2,C7200,7,2,8,40,3,10,62
+94,IP Overlay DMVPN Phase 1 Hub and Spoke,IP Overlay,Dynamic Multipoint Overlay,H,dmvpn;gre;eigrp,3,0,4,3,C7200,6,3,39,35,4,15,82
+95,IP Overlay DMVPN Phase 2 Spoke to Spoke,IP Overlay,Dynamic Multipoint Overlay,H,gre;dmvpn,2,0,4,3,C7200,8,3,12,72,4,13,82
+96,IP Overlay IPsec-Protected GRE Tunnel,IP Overlay,IP Tunnels,M,ipsec,1,0,3,2,C7200,6,2,24,40,4,15,64

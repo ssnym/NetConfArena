@@ -1,0 +1,13 @@
+r1_names: [Shapeir, Ballast, Alpha, North, Aria]
+r2_names: [Spielburg, Beam, Beta, East, Brio]
+r3_names: [Tarna, Brick, Gamma, South, Coda]
+
+r2_loopback_pool: "3.0.0.0/8"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24, 25, 26]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24, 25, 26]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]

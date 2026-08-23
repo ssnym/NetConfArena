@@ -1,0 +1,14 @@
+r1_names: [Huey, Flint, Cedar, Atlas, North]
+r2_names: [Dewey, Slate, Harbor, Delta, Ridge]
+r3_names: [Louie, Ember, Maple, Sierra, Vale]
+
+r1_loopback_pool: "1.0.0.0/8"
+r3_loopback_pool: "172.16.0.0/16"
+
+link1_pool: "192.168.0.0/17"
+link1_prefix_lens: [24]
+link2_pool: "192.168.128.0/17"
+link2_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]

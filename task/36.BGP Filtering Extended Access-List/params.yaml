@@ -1,0 +1,64 @@
+r1_names:
+- Tristram
+- Atlas
+- Beacon
+- Cobalt
+- Delta
+- Ember
+- Falcon
+- Glacier
+- Harbor
+r2_names:
+- Sanctuary
+- Ivory
+- Jasper
+- Kepler
+- Lagoon
+- Matrix
+- Nimbus
+- Orion
+- Prairie
+as_options:
+- 1
+- 2
+- 10
+- 20
+- 100
+- 200
+- 65001
+- 65002
+extended_acl_numbers:
+- 100
+- 101
+- 102
+- 110
+- 120
+- 130
+- 150
+- 160
+- 170
+- 180
+- 190
+summary_networks:
+- 10.0.0.0
+summary_masks:
+- 255.0.0.0
+summary_prefix_lens:
+- 8
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 24
+r1_loopback0_pool: 1.0.0.0/8
+r1_loopback0_prefix_lens:
+- 32
+r1_loopback1_pool: 10.0.0.0/8
+r1_loopback1_prefix_lens:
+- 24
+r2_loopback0_pool: 2.0.0.0/8
+r2_loopback0_prefix_lens:
+- 32
+r2_loopback1_pool: 10.0.0.0/8
+r2_loopback1_prefix_lens:
+- 24

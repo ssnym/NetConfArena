@@ -1,0 +1,21 @@
+r1_names: [Alan, Flint, Cedar, Atlas, North]
+r2_names: [Berta, Maple, Sierra, Delta, Vale]
+r3_names: [Charlie, Ridge, Harbor, Ember, Slate]
+r4_names: [Evelyn, Aurora, Willow, Ivy, Luna]
+r5_names: [Jake, Summit, Canyon, Reed, Orion]
+
+r4_loopback_pool: "1.0.0.0/8"
+
+link1_pool: "192.168.0.0/18"
+link1_prefix_lens: [24]
+link2_pool: "192.168.64.0/18"
+link2_prefix_lens: [24]
+link3_pool: "192.168.128.0/18"
+link3_prefix_lens: [24]
+link4_pool: "192.168.192.0/18"
+link4_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]
+link3_media_options: [ethernet, fastethernet, serial]
+link4_media_options: [ethernet, fastethernet, serial]

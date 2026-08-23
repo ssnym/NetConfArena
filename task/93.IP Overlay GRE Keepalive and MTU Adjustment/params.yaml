@@ -1,0 +1,67 @@
+r1_names:
+- Almaty
+- Aspen
+- Auckland
+- Avalon
+- Amber
+- Anvil
+- Arcus
+- Aurora
+r2_names:
+- Bergen
+- Bilbao
+- Boulder
+- Brindle
+- Bronze
+- Basalt
+- Beacon
+- Borealis
+r3_names:
+- Cardiff
+- Catania
+- Cologne
+- Cinder
+- Cobalt
+- Comet
+- Coral
+- Crescent
+r1_loopback_pool: 1.0.0.0/8
+r2_loopback_pool: 2.0.0.0/8
+r3_loopback_pool: 3.0.0.0/8
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 30
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 30
+r1_private_pool: 10.1.0.0/16
+r3_private_pool: 10.3.0.0/16
+tunnel_pool: 172.31.0.0/16
+tunnel_id_options:
+- 0
+- 1
+- 12
+keepalive_interval_options:
+- 5
+- 10
+- 15
+keepalive_retries_options:
+- 3
+- 4
+- 5
+tunnel_mtu_options:
+- 1400
+- 1416
+- 1424
+tcp_mss_table:
+  "1400": 1360
+  "1416": 1376
+  "1424": 1384
+ping_size_table:
+  "1400": 1380
+  "1416": 1400
+  "1424": 1400

@@ -1,0 +1,35 @@
+# NetConfArena — core runtime dependencies
+#
+# Python 3.10+ (developed and tested on 3.13)
+#
+# Install in TWO steps — gns3fy must come last, and without its dependencies:
+#
+#   pip install -r requirements.txt
+#   pip install --no-deps "gns3fy>=0.8.0,<0.9"
+#
+# gns3fy 0.8.0 declares pydantic<2, but it works against GNS3 2.2.x with
+# pydantic 2.x, which the rest of the stack (and the optional MCP server)
+# requires. Installing gns3fy with its dependencies would downgrade pydantic
+# and break those packages, so it is deliberately not listed below.
+
+# LLM client (OpenAI-compatible; also used for vLLM / local endpoints)
+openai>=1.40
+
+# Task template rendering and configuration handling
+PyYAML>=6.0
+python-dotenv>=1.0
+ciscoconfparse2>=0.7
+
+# CLI output parsing (test-case evaluation)
+ntc_templates>=4.0
+anytree>=2.12
+
+# HTTP (GNS3 API helpers)
+requests>=2.31
+
+# Optional task-collection helper (not used by benchmark execution)
+beautifulsoup4>=4.12
+
+# Pinned explicitly so that a later `pip install gns3fy` cannot silently
+# downgrade it to the 1.x line.
+pydantic>=2.0

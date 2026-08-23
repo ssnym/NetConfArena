@@ -1,0 +1,526 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "router3_name": {
+            "type": "choice",
+            "options": "r3_names",
+            "different_from": [
+                "router1_name",
+                "router2_name"
+            ]
+        },
+        "router4_name": {
+            "type": "choice",
+            "options": "r4_names",
+            "different_from": [
+                "router1_name",
+                "router2_name",
+                "router3_name"
+            ]
+        },
+        "router5_name": {
+            "type": "choice",
+            "options": "r5_names",
+            "different_from": [
+                "router1_name",
+                "router2_name",
+                "router3_name",
+                "router4_name"
+            ]
+        },
+        "switch1_name": {
+            "type": "choice",
+            "options": "sw1_names"
+        },
+        "switch2_name": {
+            "type": "choice",
+            "options": "sw2_names",
+            "different_from": [
+                "switch1_name"
+            ]
+        },
+        "_lan1": {
+            "type": "random_subnet",
+            "pool": "lan1_pool",
+            "prefix_len": "lan1_prefix_lens",
+            "default": "192.168.1.0/24"
+        },
+        "lan1_network": {
+            "type": "subnet_attr",
+            "subnet": "_lan1",
+            "attr": "network"
+        },
+        "lan1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_lan1",
+            "attr": "netmask"
+        },
+        "lan1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_lan1",
+            "attr": "prefixlen"
+        },
+        "lan1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_lan1",
+            "attr": "wildcard"
+        },
+        "lan1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_lan1",
+            "attr": "host",
+            "index": 1
+        },
+        "lan1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_lan1",
+            "attr": "host",
+            "index": 2
+        },
+        "lan1_ip3": {
+            "type": "subnet_attr",
+            "subnet": "_lan1",
+            "attr": "host",
+            "index": 3
+        },
+        "lan1_media": {
+            "type": "choice",
+            "options": "lan1_media_options"
+        },
+        "_lan2": {
+            "type": "random_subnet",
+            "pool": "lan2_pool",
+            "prefix_len": "lan2_prefix_lens",
+            "default": "192.168.2.0/24"
+        },
+        "lan2_network": {
+            "type": "subnet_attr",
+            "subnet": "_lan2",
+            "attr": "network"
+        },
+        "lan2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_lan2",
+            "attr": "netmask"
+        },
+        "lan2_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_lan2",
+            "attr": "prefixlen"
+        },
+        "lan2_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_lan2",
+            "attr": "wildcard"
+        },
+        "lan2_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_lan2",
+            "attr": "host",
+            "index": 1
+        },
+        "lan2_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_lan2",
+            "attr": "host",
+            "index": 2
+        },
+        "lan2_ip3": {
+            "type": "subnet_attr",
+            "subnet": "_lan2",
+            "attr": "host",
+            "index": 3
+        },
+        "lan2_media": {
+            "type": "choice",
+            "options": "lan2_media_options"
+        },
+        "router3_lan1_priority": {
+            "type": "choice",
+            "options": "r3_lan1_priorities",
+            "default": "90"
+        },
+        "router5_lan1_priority": {
+            "type": "choice",
+            "options": "r5_lan1_priorities",
+            "default": "100"
+        },
+        "router1_ospf_router_id": {
+            "type": "choice",
+            "options": "r1_ospf_router_ids",
+            "default": "222.222.222.222"
+        },
+        "router4_ospf_router_id": {
+            "type": "choice",
+            "options": "r4_ospf_router_ids",
+            "default": "211.211.211.211"
+        }
+    },
+    "scenario": "OSPF DR BDR Election",
+    "goals": "• Configure OSPF on all routers, achieve full connectivity.\n• Ensure router {{router5_name}} is the DR for network {{lan1_network}} /{{lan1_prefix_len}}.\n• Ensure router {{router3_name}} is the BDR for network {{lan1_network}} /{{lan1_prefix_len}}.\n• Ensure router {{router1_name}} is the DR for network {{lan2_network}} /{{lan2_prefix_len}}. You are not allowed to change the priority.\n• Ensure router {{router4_name}} is the BDR for network {{lan2_network}} /{{lan2_prefix_len}}. You are not allowed to change the priority.",
+    "startup_configs": {
+        "{{router3_name}}": [
+            "interface {{router3_link1_iface}}",
+            "  ip address {{lan1_ip3}} {{lan1_mask}}",
+            "  no shutdown"
+        ],
+        "{{router1_name}}": [
+            "interface {{router1_link2_iface}}",
+            "  ip address {{lan1_ip1}} {{lan1_mask}}",
+            "  no shutdown",
+            "interface {{router1_link3_iface}}",
+            "  ip address {{lan2_ip1}} {{lan2_mask}}",
+            "  no shutdown"
+        ],
+        "{{router2_name}}": [
+            "interface {{router2_link4_iface}}",
+            "  ip address {{lan2_ip3}} {{lan2_mask}}",
+            "  no shutdown"
+        ],
+        "{{router4_name}}": [
+            "interface {{router4_link5_iface}}",
+            "  ip address {{lan2_ip2}} {{lan2_mask}}",
+            "  no shutdown"
+        ],
+        "{{router5_name}}": [
+            "interface {{router5_link6_iface}}",
+            "  ip address {{lan1_ip2}} {{lan1_mask}}",
+            "  no shutdown"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router3_name}}": [
+            "interface {{router3_link1_iface}}",
+            "  ip ospf priority {{router3_lan1_priority}}",
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  network {{lan1_network}} {{lan1_wildcard}} area 0"
+        ],
+        "{{router1_name}}": [
+            "router ospf 1",
+            "  router-id {{router1_ospf_router_id}}",
+            "  log-adjacency-changes",
+            "  network {{lan1_network}} {{lan1_wildcard}} area 0",
+            "  network {{lan2_network}} {{lan2_wildcard}} area 0"
+        ],
+        "{{router2_name}}": [
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  network {{lan2_network}} {{lan2_wildcard}} area 0"
+        ],
+        "{{router4_name}}": [
+            "router ospf 1",
+            "  router-id {{router4_ospf_router_id}}",
+            "  log-adjacency-changes",
+            "  network {{lan2_network}} {{lan2_wildcard}} area 0"
+        ],
+        "{{router5_name}}": [
+            "interface {{router5_link6_iface}}",
+            "  ip ospf priority {{router5_lan1_priority}}",
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  network {{lan1_network}} {{lan1_wildcard}} area 0"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Configure OSPF on all routers, achieve full connectivity.",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router3_name}}",
+                    "command": "show ip protocols | section ospf",
+                    "expected_result": {},
+                    "output": "router_id"
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip protocols | section ospf",
+                    "expected_result": {},
+                    "output": "router_id"
+                },
+                {
+                    "id": "1-3",
+                    "node": "{{router2_name}}",
+                    "command": "show ip protocols | section ospf",
+                    "expected_result": {},
+                    "output": "router_id"
+                },
+                {
+                    "id": "1-4",
+                    "node": "{{router4_name}}",
+                    "command": "show ip protocols | section ospf",
+                    "expected_result": {},
+                    "output": "router_id"
+                },
+                {
+                    "id": "1-5",
+                    "node": "{{router5_name}}",
+                    "command": "show ip protocols | section ospf",
+                    "expected_result": {},
+                    "output": "router_id"
+                }
+            ]
+        },
+        {
+            "goal": "Ensure router {{router5_name}} is the DR for network {{lan1_network}} /{{lan1_prefix_len}}.",
+            "testcase": [
+                {
+                    "id": "2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip ospf neighbor",
+                    "expected_result": {
+                        "neighbor_id": {
+                            "op": "==",
+                            "value": "$1-5_{{router5_name}}_router_id$"
+                        },
+                        "state": {
+                            "op": "==",
+                            "value": "FULL/DR"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Ensure router {{router3_name}} is the BDR for network {{lan1_network}} /{{lan1_prefix_len}}.",
+            "testcase": [
+                {
+                    "id": "3",
+                    "node": "{{router1_name}}",
+                    "command": "show ip ospf neighbor",
+                    "expected_result": {
+                        "neighbor_id": {
+                            "op": "==",
+                            "value": "$1-1_{{router3_name}}_router_id$"
+                        },
+                        "state": {
+                            "op": "==",
+                            "value": "FULL/BDR"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Ensure router {{router1_name}} is the DR for network {{lan2_network}} /{{lan2_prefix_len}}. You are not allowed to change the priority.",
+            "testcase": [
+                {
+                    "id": "4",
+                    "node": "{{router2_name}}",
+                    "command": "show ip ospf neighbor",
+                    "expected_result": {
+                        "neighbor_id": {
+                            "op": "==",
+                            "value": "$1-2_{{router1_name}}_router_id$"
+                        },
+                        "priority": {
+                            "op": "==",
+                            "value": "1"
+                        },
+                        "state": {
+                            "op": "==",
+                            "value": "FULL/DR"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Ensure router {{router4_name}} is the BDR for network {{lan2_network}} /{{lan2_prefix_len}}. You are not allowed to change the priority.",
+            "testcase": [
+                {
+                    "id": "5",
+                    "node": "{{router2_name}}",
+                    "command": "show ip ospf neighbor",
+                    "expected_result": {
+                        "neighbor_id": {
+                            "op": "==",
+                            "value": "$1-4_{{router4_name}}_router_id$"
+                        },
+                        "priority": {
+                            "op": "==",
+                            "value": "1"
+                        },
+                        "state": {
+                            "op": "==",
+                            "value": "FULL/BDR"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5",
+            "sw1",
+            "sw2"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r3",
+                    "sw1"
+                ],
+                "media": "{{lan1_media}}"
+            },
+            {
+                "id": "link2",
+                "nodes": [
+                    "r1",
+                    "sw1"
+                ],
+                "media": "{{lan1_media}}"
+            },
+            {
+                "id": "link3",
+                "nodes": [
+                    "r1",
+                    "sw2"
+                ],
+                "media": "{{lan2_media}}"
+            },
+            {
+                "id": "link4",
+                "nodes": [
+                    "r2",
+                    "sw2"
+                ],
+                "media": "{{lan2_media}}"
+            },
+            {
+                "id": "link5",
+                "nodes": [
+                    "r4",
+                    "sw2"
+                ],
+                "media": "{{lan2_media}}"
+            },
+            {
+                "id": "link6",
+                "nodes": [
+                    "r5",
+                    "sw1"
+                ],
+                "media": "{{lan1_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 0.6,
+                "y": -55.9
+            },
+            "r2": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 20.2,
+                    "y": 43.6
+                },
+                "x": 160.0,
+                "y": 76.3
+            },
+            "r3": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router3_name}}",
+                    "x": 18.1,
+                    "y": 43.6
+                },
+                "x": -146.8,
+                "y": 78.4
+            },
+            "r4": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router4_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 159.3,
+                "y": -188.2
+            },
+            "r5": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router5_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -147.6,
+                "y": -186.0
+            },
+            "sw1": {
+                "type": "EthernetSwitch",
+                "label": {
+                    "text": "{{switch1_name}}",
+                    "x": -37.3,
+                    "y": 3.3
+                },
+                "x": -150.8,
+                "y": -49.9
+            },
+            "sw2": {
+                "type": "EthernetSwitch",
+                "label": {
+                    "text": "{{switch2_name}}",
+                    "x": 67.8,
+                    "y": -1.0
+                },
+                "x": 156.1,
+                "y": -49.2
+            }
+        },
+        "notes": [
+            {
+                "color": "#0000ff",
+                "text": "{{lan1_network}}/{{lan1_prefix_len}}",
+                "x": -184.6,
+                "y": -103.9
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{lan2_network}}/{{lan2_prefix_len}}",
+                "x": 128.7,
+                "y": -104.1
+            },
+            {
+                "color": "#0000ff",
+                "text": "DR: {{router5_name}}, BDR: {{router3_name}}",
+                "x": -214.6,
+                "y": -128.9
+            },
+            {
+                "color": "#0000ff",
+                "text": "DR: {{router1_name}}, BDR: {{router4_name}}",
+                "x": 99.0,
+                "y": -129.1
+            }
+        ]
+    }
+}

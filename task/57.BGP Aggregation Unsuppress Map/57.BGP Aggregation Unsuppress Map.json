@@ -1,0 +1,512 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "router1_as": {
+            "type": "choice",
+            "options": "r1_as_options"
+        },
+        "router2_as": {
+            "type": "choice",
+            "options": "r2_as_options",
+            "different_from": [
+                "router1_as"
+            ]
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.12.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "wildcard"
+        },
+        "link1_cidr": {
+            "type": "format",
+            "template": "{link1_network}/{link1_prefix_len}"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "_router1_loopback_summary": {
+            "type": "random_subnet",
+            "pool": "r1_loopback_summary_pool",
+            "prefix_len": "r1_loopback_summary_prefix_lens",
+            "default": "172.16.0.0/22",
+            "no_overlap": [
+                "_link1"
+            ]
+        },
+        "router1_loopback_summary_network": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback_summary",
+            "attr": "network"
+        },
+        "router1_loopback_summary_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback_summary",
+            "attr": "netmask"
+        },
+        "router1_loopback_summary_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback_summary",
+            "attr": "prefixlen"
+        },
+        "router1_loopback_summary_cidr": {
+            "type": "format",
+            "template": "{router1_loopback_summary_network}/{router1_loopback_summary_prefix_len}"
+        },
+        "router1_loopback0_network": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 0,
+            "attr": "network"
+        },
+        "router1_loopback0_mask": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 0,
+            "attr": "netmask"
+        },
+        "router1_loopback0_prefix_len": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 0,
+            "attr": "prefixlen"
+        },
+        "router1_loopback0_cidr": {
+            "type": "format",
+            "template": "{router1_loopback0_network}/{router1_loopback0_prefix_len}"
+        },
+        "router1_loopback0_ip": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 0,
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback1_network": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 1,
+            "attr": "network"
+        },
+        "router1_loopback1_mask": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 1,
+            "attr": "netmask"
+        },
+        "router1_loopback1_prefix_len": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 1,
+            "attr": "prefixlen"
+        },
+        "router1_loopback1_cidr": {
+            "type": "format",
+            "template": "{router1_loopback1_network}/{router1_loopback1_prefix_len}"
+        },
+        "router1_loopback1_ip": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 1,
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback2_network": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 2,
+            "attr": "network"
+        },
+        "router1_loopback2_mask": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 2,
+            "attr": "netmask"
+        },
+        "router1_loopback2_prefix_len": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 2,
+            "attr": "prefixlen"
+        },
+        "router1_loopback2_cidr": {
+            "type": "format",
+            "template": "{router1_loopback2_network}/{router1_loopback2_prefix_len}"
+        },
+        "router1_loopback2_ip": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 2,
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback3_network": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 3,
+            "attr": "network"
+        },
+        "router1_loopback3_mask": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 3,
+            "attr": "netmask"
+        },
+        "router1_loopback3_prefix_len": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 3,
+            "attr": "prefixlen"
+        },
+        "router1_loopback3_cidr": {
+            "type": "format",
+            "template": "{router1_loopback3_network}/{router1_loopback3_prefix_len}"
+        },
+        "router1_loopback3_ip": {
+            "type": "subnet_nth",
+            "subnet": "_router1_loopback_summary",
+            "new_prefix": 24,
+            "n": 3,
+            "attr": "host",
+            "index": 1
+        }
+    },
+    "scenario": "BGP Aggregation Unsuppress Map",
+    "goals": "• Configure EBGP between router {{router2_name}} and {{router1_name}}. Pick whatever AS you like.\n• Advertise all loopback interfaces on router {{router1_name}} in BGP.\n• Create a summary for the loopback interfaces on router {{router1_name}}. Ensure you don’t have any overlapping address space.\n• Ensure you only see the summary on router {{router2_name}} with the exception of network {{router1_loopback2_network}} /{{router1_loopback2_prefix_len}}.",
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -144.722871427,
+                "y": -93.4177848998
+            },
+            "r2": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -436.852813742,
+                "y": -93.8319984622
+            }
+        },
+        "notes": [
+            {
+                "color": "#0000ff",
+                "text": ".2",
+                "x": -181.726442765,
+                "y": -94.4264068712
+            },
+            {
+                "color": "#0000ff",
+                "text": ".1",
+                "x": -369.816846561,
+                "y": -96.346717088
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link1_network}} /{{link1_prefix_len}}",
+                "x": -321.026478659,
+                "y": -92.6101730553
+            }
+        ],
+        "ellipses": [
+            {
+                "border_style": 2,
+                "fill_color": "#ffff00",
+                "height": 149.19953083,
+                "width": 141.421356237,
+                "x": -464.063058585,
+                "y": -152.228968082,
+                "z": -2.0
+            },
+            {
+                "border_style": 2,
+                "fill_color": "#55ff7f",
+                "height": 149.19953083,
+                "width": 141.421356237,
+                "x": -188.797510577,
+                "y": -151.320851174,
+                "z": -2.0
+            }
+        ]
+    },
+    "startup_configs": {
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{router1_loopback0_ip}} {{router1_loopback0_mask}}",
+            "interface Loopback1",
+            "  ip address {{router1_loopback1_ip}} {{router1_loopback1_mask}}",
+            "interface Loopback2",
+            "  ip address {{router1_loopback2_ip}} {{router1_loopback2_mask}}",
+            "interface Loopback3",
+            "  ip address {{router1_loopback3_ip}} {{router1_loopback3_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown"
+        ],
+        "{{router2_name}}": [
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "router bgp {{router1_as}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  network {{router1_loopback0_network}} mask {{router1_loopback0_mask}}",
+            "  network {{router1_loopback1_network}} mask {{router1_loopback1_mask}}",
+            "  network {{router1_loopback2_network}} mask {{router1_loopback2_mask}}",
+            "  network {{router1_loopback3_network}} mask {{router1_loopback3_mask}}",
+            "  aggregate-address {{router1_loopback_summary_network}} {{router1_loopback_summary_mask}} summary-only",
+            "  neighbor {{link1_ip2}} remote-as {{router2_as}}",
+            "  neighbor {{link1_ip2}} unsuppress-map GETMEOUT",
+            "  no auto-summary",
+            "ip prefix-list NOTTHISONE seq 5 permit {{router1_loopback2_network}}/{{router1_loopback2_prefix_len}}",
+            "route-map GETMEOUT permit 10",
+            "  match ip address prefix-list NOTTHISONE"
+        ],
+        "{{router2_name}}": [
+            "router bgp {{router2_as}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  neighbor {{link1_ip1}} remote-as {{router1_as}}",
+            "  no auto-summary"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Configure EBGP between router {{router2_name}} and {{router1_name}}. Pick whatever AS you like.",
+            "testcase": [
+                {
+                    "id": "1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "neighbor": "{{link1_ip1}}",
+                                "bgp_state": "Established",
+                                "localhost_ip": "{{link1_ip2}}",
+                                "remote_ip": "{{link1_ip1}}"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Advertise all loopback interfaces on router {{router1_name}} in BGP.",
+            "testcase": [
+                {
+                    "id": "2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip bgp",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "network": "{{router1_loopback0_network}}/{{router1_loopback0_prefix_len}}"
+                            },
+                            {
+                                "network": "{{router1_loopback1_network}}/{{router1_loopback1_prefix_len}}"
+                            },
+                            {
+                                "network": "{{router1_loopback2_network}}/{{router1_loopback2_prefix_len}}"
+                            },
+                            {
+                                "network": "{{router1_loopback3_network}}/{{router1_loopback3_prefix_len}}"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Create a summary for the loopback interfaces on router {{router1_name}}. Ensure you don’t have any overlapping address space.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router1_name}}",
+                    "command": "show running-config | include aggregate-address",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "aggregate-address {{router1_loopback_summary_network}} {{router1_loopback_summary_mask}} summary-only"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router1_name}}",
+                    "command": "show running-config | include ^ip prefix-list|^access-list",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": {
+                                    "op": "regex",
+                                    "value": "^(ip prefix-list \\S+ .*permit {{router1_loopback2_network}}/{{router1_loopback2_prefix_len}}|access-list \\S+ permit {{router1_loopback2_network}}(?: \\S+)?)$"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-3",
+                    "node": "{{router1_name}}",
+                    "command": "show route-map",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "match_clauses": {
+                                    "op": "regex",
+                                    "value": "ip address (?:prefix-lists:|\\(access-lists\\):) \\S+"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-4",
+                    "node": "{{router1_name}}",
+                    "command": "show running-config | include unsuppress-map",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": {
+                                    "op": "regex",
+                                    "value": "^neighbor {{link1_ip2}} unsuppress-map \\S+$"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Ensure you only see the summary on router {{router2_name}} with the exception of network {{router1_loopback2_network}} /{{router1_loopback2_prefix_len}}.",
+            "testcase": [
+                {
+                    "id": "4-1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "network": "{{router1_loopback_summary_network}}/{{router1_loopback_summary_prefix_len}}"
+                            },
+                            {
+                                "network": "{{router1_loopback2_network}}/{{router1_loopback2_prefix_len}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "4-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp",
+                    "expected_result": {
+                        "op": "all_match",
+                        "value": [
+                            {
+                                "network": "{{router1_loopback_summary_network}}/{{router1_loopback_summary_prefix_len}}"
+                            },
+                            {
+                                "network": "{{router1_loopback2_network}}/{{router1_loopback2_prefix_len}}"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

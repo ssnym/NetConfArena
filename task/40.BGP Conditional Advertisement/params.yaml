@@ -1,0 +1,86 @@
+router2_as_options:
+- 1
+- 11
+- 21
+router1_as_options:
+- 2
+- 12
+- 22
+router3_as_options:
+- 3
+- 13
+- 23
+advertise_acl_numbers:
+- 1
+- 10
+- 20
+exist_acl_numbers:
+- 2
+- 30
+- 40
+advertise_route_map_names:
+- ADVERTISE
+- SEND_PRIMARY
+- EXPORT_LOOPBACK
+exist_route_map_names:
+- EXIST
+- REQUIRE_BACKUP
+- TRACK_REMOTE
+advertise_route_map_seqs:
+- 10
+- 15
+- 25
+exist_route_map_seqs:
+- 20
+- 30
+- 40
+
+r1_names:
+- Pegasus
+- Atlas
+- Beacon
+- Cobalt
+- Delta
+- Ember
+- Falcon
+- Glacier
+- Harbor
+r2_names:
+- Phoenix
+- Ivory
+- Jasper
+- Kepler
+- Lagoon
+- Matrix
+- Nimbus
+- Orion
+- Prairie
+r3_names:
+- Pixie
+- Quartz
+- Rocket
+- Summit
+- Titan
+- Union
+- Vector
+- Willow
+- Xray
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 24
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 24
+r1_loopback0_pool: 2.0.0.0/8
+r1_loopback0_prefix_lens:
+- 24
+r2_loopback0_pool: 1.0.0.0/8
+r2_loopback0_prefix_lens:
+- 24
+r3_loopback0_pool: 3.0.0.0/8
+r3_loopback0_prefix_lens:
+- 24

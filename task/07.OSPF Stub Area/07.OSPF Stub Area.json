@@ -1,0 +1,498 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names"
+        },
+        "_loopback1": {
+            "type": "random_subnet",
+            "pool": "r1_loopback_pool",
+            "prefix_len": 24,
+            "default": "1.1.1.0/24"
+        },
+        "router1_loopback_ip": {
+            "type": "subnet_attr",
+            "subnet": "_loopback1",
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback_mask": {
+            "type": "subnet_attr",
+            "subnet": "_loopback1",
+            "attr": "netmask"
+        },
+        "router1_loopback_network": {
+            "type": "subnet_attr",
+            "subnet": "_loopback1",
+            "attr": "network"
+        },
+        "_loopback2": {
+            "type": "random_subnet",
+            "pool": "r2_loopback_pool",
+            "prefix_len": 24,
+            "default": "2.2.2.0/24"
+        },
+        "router2_loopback_ip": {
+            "type": "subnet_attr",
+            "subnet": "_loopback2",
+            "attr": "host",
+            "index": 1
+        },
+        "router2_loopback_mask": {
+            "type": "subnet_attr",
+            "subnet": "_loopback2",
+            "attr": "netmask"
+        },
+        "router2_loopback_network": {
+            "type": "subnet_attr",
+            "subnet": "_loopback2",
+            "attr": "network"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.12.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "wildcard"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        },
+        "_extra_lo1": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "default": "172.16.0.0/24"
+        },
+        "extra_lo1_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo1",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo1",
+            "attr": "netmask"
+        },
+        "extra_lo1_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo1",
+            "attr": "network"
+        },
+        "_extra_lo2": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1"
+            ],
+            "default": "172.16.1.0/24"
+        },
+        "extra_lo2_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo2",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo2",
+            "attr": "netmask"
+        },
+        "extra_lo2_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo2",
+            "attr": "network"
+        },
+        "_extra_lo3": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2"
+            ],
+            "default": "172.16.2.0/24"
+        },
+        "extra_lo3_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo3",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo3_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo3",
+            "attr": "netmask"
+        },
+        "extra_lo3_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo3",
+            "attr": "network"
+        },
+        "_extra_lo4": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2",
+                "_extra_lo3"
+            ],
+            "default": "172.16.3.0/24"
+        },
+        "extra_lo4_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo4",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo4_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo4",
+            "attr": "netmask"
+        },
+        "extra_lo4_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo4",
+            "attr": "network"
+        }
+    },
+    "scenario": "OSPF Stub Area",
+    "goals": "• Configure OSPF on both routers, with the areas specified as follows:\n    Area 0:\n        {{router1_name}}'s Loopback0\n    Area 1:\n        {{router1_name}}'s {{router1_link1_iface}}\n        {{router2_name}}'s {{router2_link1_iface}}\n        {{router2_name}}'s Loopback0\n• Router {{router1_name}}: create additional loopbacks:\n    L1: {{extra_lo1_ip}} /24\n    L2: {{extra_lo2_ip}} /24\n    L3: {{extra_lo3_ip}} /24\n    L4: {{extra_lo4_ip}} /24\n• Advertise these networks into OSPF, do not use the “network” command to achieve this.\n• Take a look at the routing table of Router {{router2_name}}, you should see all 4 networks. Make sure you can ping them.\n• Change the area type of Area 1 so you don’t see the 4 networks anymore but only 1 default route.\n• Make sure you can still ping the 4 networks.",
+    "startup_configs": {
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{router1_loopback_ip}} {{router1_loopback_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown"
+        ],
+        "{{router2_name}}": [
+            "interface Loopback0",
+            "  ip address {{router2_loopback_ip}} {{router2_loopback_mask}}",
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "interface Loopback1",
+            "  ip address {{extra_lo1_ip}} {{extra_lo1_mask}}",
+            "interface Loopback2",
+            "  ip address {{extra_lo2_ip}} {{extra_lo2_mask}}",
+            "interface Loopback3",
+            "  ip address {{extra_lo3_ip}} {{extra_lo3_mask}}",
+            "interface Loopback4",
+            "  ip address {{extra_lo4_ip}} {{extra_lo4_mask}}",
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  area 1 stub",
+            "  redistribute connected subnets",
+            "  network {{router1_loopback_network}} 0.0.0.255 area 0",
+            "  network {{link1_network}} {{link1_wildcard}} area 1"
+        ],
+        "{{router2_name}}": [
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  area 1 stub",
+            "  network {{router2_loopback_network}} 0.0.0.255 area 1",
+            "  network {{link1_network}} {{link1_wildcard}} area 1"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Configure OSPF on both routers, with the areas specified as follows:\n    Area 0:\n        {{router1_name}}'s Loopback0\n    Area 1:\n        {{router1_name}}'s {{router1_link1_iface}}\n        {{router2_name}}'s {{router2_link1_iface}}\n        {{router2_name}}'s Loopback0",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router1_name}}",
+                    "command": "show ip ospf interface brief",
+                    "expected_result": [
+                        {
+                            "interface": "Loopback0",
+                            "area": "0"
+                        },
+                        {
+                            "interface": "{{router1_link1_iface}}",
+                            "area": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip ospf interface brief",
+                    "expected_result": [
+                        {
+                            "interface": "Loopback0",
+                            "area": "1"
+                        },
+                        {
+                            "interface": "{{router2_link1_iface}}",
+                            "area": "1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "goal": "Router {{router1_name}}: create additional loopbacks:\n    L1: {{extra_lo1_ip}} /24\n    L2: {{extra_lo2_ip}} /24\n    L3: {{extra_lo3_ip}} /24\n    L4: {{extra_lo4_ip}} /24",
+            "testcase": []
+        },
+        {
+            "goal": "Advertise these networks into OSPF, do not use the “network” command to achieve this.",
+            "testcase": [
+                {
+                    "id": "2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip ospf interface brief",
+                    "expected_result": [
+                        {
+                            "interface": "Loopback0",
+                            "area": "0"
+                        },
+                        {
+                            "interface": "{{router1_link1_iface}}",
+                            "area": "1"
+                        }
+                    ],
+                    "mode": "strict"
+                }
+            ]
+        },
+        {
+            "goal": "Take a look at the routing table of Router {{router2_name}}, you should see all 4 networks. Make sure you can ping them.",
+            "testcase": []
+        },
+        {
+            "goal": "Change the area type of Area 1 so you don’t see the 4 networks anymore but only 1 default route.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip route {{extra_lo1_network}} 255.255.255.0",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip route {{extra_lo2_network}} 255.255.255.0",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-3",
+                    "node": "{{router2_name}}",
+                    "command": "show ip route {{extra_lo3_network}} 255.255.255.0",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-4",
+                    "node": "{{router2_name}}",
+                    "command": "show ip route {{extra_lo4_network}} 255.255.255.0",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-5",
+                    "node": "{{router2_name}}",
+                    "command": "show ip route 0.0.0.0 0.0.0.0",
+                    "expected_result": {
+                        "nexthop_ip": "{{link1_ip1}}"
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Make sure you can still ping the 4 networks.",
+            "testcase": [
+                {
+                    "id": "4-1",
+                    "node": "{{router2_name}}",
+                    "command": "ping {{extra_lo1_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "4-2",
+                    "node": "{{router2_name}}",
+                    "command": "ping {{extra_lo2_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "4-3",
+                    "node": "{{router2_name}}",
+                    "command": "ping {{extra_lo3_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "4-4",
+                    "node": "{{router2_name}}",
+                    "command": "ping {{extra_lo4_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -304.585786438,
+                "y": -107.426406871
+            },
+            "r2": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -113.473088065,
+                "y": -106.597979746
+            }
+        },
+        "notes": [
+            {
+                "text": "{{link1_ip1}}",
+                "x": -240.416305603,
+                "y": -112.823376491
+            },
+            {
+                "text": "{{link1_ip2}}",
+                "x": -134.350288425,
+                "y": -112.823376491
+            },
+            {
+                "text": "{{link1_network}}/{{link1_prefix_len}}",
+                "x": -236.173664916,
+                "y": -62.6187950266
+            },
+            {
+                "text": "Area 0",
+                "x": -431.335136524,
+                "y": -209.697005513
+            },
+            {
+                "text": "Area 1",
+                "x": -152.027957955,
+                "y": -206.868578389
+            },
+            {
+                "text": "L0: {{router1_loopback_ip}} /24",
+                "x": -406.586399182,
+                "y": -65.4472221514
+            },
+            {
+                "text": "L0: {{router2_loopback_ip}} /24",
+                "x": -94.0452018978,
+                "y": -62.6187950266
+            }
+        ],
+        "ellipses": [
+            {
+                "border_style": 2,
+                "fill_color": "#ffff7f",
+                "height": 265.839141137,
+                "width": 266.572726577,
+                "x": -538.108260483,
+                "y": -217.788888605,
+                "z": -1.0
+            },
+            {
+                "border_style": 2,
+                "fill_color": "#aaffff",
+                "height": 263.960461481,
+                "width": 285.67766953,
+                "x": -269.414213562,
+                "y": -217.081781824,
+                "z": -1.0
+            }
+        ]
+    }
+}

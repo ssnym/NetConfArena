@@ -1,0 +1,26 @@
+{
+  "description": "Category, broad functional subcategory, and complexity-tier assignments for the 96 NetConfArena task templates. The readable taxonomy and counting rules are in task/TASK_TAXONOMY.md. L means one protocol layer with reference changes on at most two devices; M means one protocol family coordinated across at least three devices or two interacting protocols; H means at least three stacked protocol layers or multi-AS, multi-domain, or overlay coordination.",
+  "subcategories": [
+    {"category": "Static Routing", "subcategory": "Basic Routing", "complexity": "L", "tasks": [1]},
+
+    {"category": "RIP", "subcategory": "Fundamentals", "complexity": "L", "tasks": [2]},
+    {"category": "RIP", "subcategory": "Policy and Route Control", "complexity": "M", "tasks": [3, 4, 5]},
+
+    {"category": "OSPF", "subcategory": "Fundamentals", "complexity": "L", "tasks": [6]},
+    {"category": "OSPF", "subcategory": "Areas and Route Control", "complexity": "M", "tasks": [7, 8, 9, 10, 11, 12, 17, 18]},
+    {"category": "OSPF", "subcategory": "Advanced Area Design", "complexity": "H", "tasks": [13, 14, 15, 16]},
+
+    {"category": "BGP", "subcategory": "Peering, Propagation, and Scaling", "complexity": "H", "tasks": [19, 20, 21, 22, 24, 25, 26, 28, 29, 30, 37, 39]},
+    {"category": "BGP", "subcategory": "Routing Policy and Filtering", "complexity": "M", "tasks": [27, 31, 35, 36, 41, 42, 43, 44, 45, 54, 56]},
+    {"category": "BGP", "subcategory": "Best-Path Selection and Traffic Engineering", "complexity": "H", "tasks": [32, 33, 34, 38, 46, 47, 48, 49, 50, 51, 52, 53, 55]},
+    {"category": "BGP", "subcategory": "Advertisement Control and Aggregation", "complexity": "M", "tasks": [23, 40, 57, 58, 59]},
+
+    {"category": "MPLS", "subcategory": "LDP and Label Forwarding", "complexity": "M", "tasks": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71]},
+    {"category": "MPLS", "subcategory": "Traffic Engineering", "complexity": "H", "tasks": [72, 73, 74, 75, 76, 77]},
+    {"category": "MPLS", "subcategory": "L3VPN", "complexity": "H", "tasks": [78, 79, 80, 81, 82, 83, 84, 85, 86]},
+    {"category": "MPLS", "subcategory": "L2VPN", "complexity": "M", "tasks": [87, 88, 89, 90]},
+
+    {"category": "IP Overlay", "subcategory": "IP Tunnels", "complexity": "M", "tasks": [91, 92, 93, 96]},
+    {"category": "IP Overlay", "subcategory": "Dynamic Multipoint Overlay", "complexity": "H", "tasks": [94, 95]}
+  ]
+}

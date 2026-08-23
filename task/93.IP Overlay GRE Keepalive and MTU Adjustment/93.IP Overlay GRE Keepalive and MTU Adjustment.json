@@ -1,0 +1,706 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "router3_name": {
+            "type": "choice",
+            "options": "r3_names",
+            "different_from": [
+                "router1_name",
+                "router2_name"
+            ]
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.1.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "wildcard"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_cidr": {
+            "type": "format",
+            "template": "{link1_network}/{link1_prefix_len}"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "link2_media": {
+            "type": "choice",
+            "options": "link2_media_options"
+        },
+        "_link2": {
+            "type": "random_subnet",
+            "pool": "link2_pool",
+            "prefix_len": "link2_prefix_lens",
+            "default": "192.168.2.0/24",
+            "no_overlap": [
+                "_link1"
+            ]
+        },
+        "link2_network": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "network"
+        },
+        "link2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "netmask"
+        },
+        "link2_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "wildcard"
+        },
+        "link2_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "prefixlen"
+        },
+        "link2_cidr": {
+            "type": "format",
+            "template": "{link2_network}/{link2_prefix_len}"
+        },
+        "link2_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 1
+        },
+        "link2_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 2
+        },
+        "_router1_loopback0": {
+            "type": "random_subnet",
+            "pool": "r1_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "1.1.1.1/32"
+        },
+        "router1_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "network"
+        },
+        "router1_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "netmask"
+        },
+        "router1_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "wildcard"
+        },
+        "router1_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "prefixlen"
+        },
+        "router1_loopback0_cidr": {
+            "type": "format",
+            "template": "{router1_loopback0_network}/{router1_loopback0_prefix_len}"
+        },
+        "_router2_loopback0": {
+            "type": "random_subnet",
+            "pool": "r2_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "2.2.2.2/32"
+        },
+        "router2_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router2_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "network"
+        },
+        "router2_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "netmask"
+        },
+        "router2_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "wildcard"
+        },
+        "router2_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "prefixlen"
+        },
+        "router2_loopback0_cidr": {
+            "type": "format",
+            "template": "{router2_loopback0_network}/{router2_loopback0_prefix_len}"
+        },
+        "_router3_loopback0": {
+            "type": "random_subnet",
+            "pool": "r3_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "3.3.3.3/32"
+        },
+        "router3_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router3_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "network"
+        },
+        "router3_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "netmask"
+        },
+        "router3_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "wildcard"
+        },
+        "router3_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "prefixlen"
+        },
+        "router3_loopback0_cidr": {
+            "type": "format",
+            "template": "{router3_loopback0_network}/{router3_loopback0_prefix_len}"
+        },
+        "_router1_loopback1": {
+            "type": "random_subnet",
+            "pool": "r1_private_pool",
+            "prefix_len": [
+                24
+            ],
+            "default": "1.1.1.1/24"
+        },
+        "router1_loopback1_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback1_network": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "network"
+        },
+        "router1_loopback1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "netmask"
+        },
+        "router1_loopback1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "wildcard"
+        },
+        "router1_loopback1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "prefixlen"
+        },
+        "router1_loopback1_cidr": {
+            "type": "format",
+            "template": "{router1_loopback1_network}/{router1_loopback1_prefix_len}"
+        },
+        "_router3_loopback1": {
+            "type": "random_subnet",
+            "pool": "r3_private_pool",
+            "prefix_len": [
+                24
+            ],
+            "default": "3.3.3.3/24"
+        },
+        "router3_loopback1_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback1",
+            "attr": "host",
+            "index": 1
+        },
+        "router3_loopback1_network": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback1",
+            "attr": "network"
+        },
+        "router3_loopback1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback1",
+            "attr": "netmask"
+        },
+        "router3_loopback1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback1",
+            "attr": "wildcard"
+        },
+        "router3_loopback1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback1",
+            "attr": "prefixlen"
+        },
+        "router3_loopback1_cidr": {
+            "type": "format",
+            "template": "{router3_loopback1_network}/{router3_loopback1_prefix_len}"
+        },
+        "_tunnel": {
+            "type": "random_subnet",
+            "pool": "tunnel_pool",
+            "prefix_len": [
+                30
+            ],
+            "default": "172.31.0.0/30"
+        },
+        "tunnel_network": {
+            "type": "subnet_attr",
+            "subnet": "_tunnel",
+            "attr": "network"
+        },
+        "tunnel_mask": {
+            "type": "subnet_attr",
+            "subnet": "_tunnel",
+            "attr": "netmask"
+        },
+        "tunnel_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_tunnel",
+            "attr": "wildcard"
+        },
+        "tunnel_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_tunnel",
+            "attr": "prefixlen"
+        },
+        "tunnel_cidr": {
+            "type": "format",
+            "template": "{tunnel_network}/{tunnel_prefix_len}"
+        },
+        "tunnel_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_tunnel",
+            "attr": "host",
+            "index": 1
+        },
+        "tunnel_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_tunnel",
+            "attr": "host",
+            "index": 2
+        },
+        "tunnel_id": {
+            "type": "choice",
+            "options": "tunnel_id_options"
+        },
+        "keepalive_interval": {
+            "type": "choice",
+            "options": "keepalive_interval_options"
+        },
+        "keepalive_retries": {
+            "type": "choice",
+            "options": "keepalive_retries_options"
+        },
+        "tunnel_mtu": {
+            "type": "choice",
+            "options": "tunnel_mtu_options"
+        },
+        "tcp_mss": {
+            "type": "lookup",
+            "table": "tcp_mss_table",
+            "key": "tunnel_mtu"
+        },
+        "ping_size": {
+            "type": "lookup",
+            "table": "ping_size_table",
+            "key": "tunnel_mtu"
+        }
+    },
+    "scenario": "IP Overlay GRE Keepalive and MTU Adjustment",
+    "goals": "• {{router2_name}} is a transit provider router. {{router1_name}} and {{router3_name}} are two customer sites that only reach each other through it, and each has a default route towards {{router2_name}}:\n    {{router1_name}}: public address {{link1_ip1}} on {{link1_cidr}}, private network {{router1_loopback1_cidr}} on Loopback1\n    {{router3_name}}: public address {{link2_ip2}} on {{link2_cidr}}, private network {{router3_loopback1_cidr}} on Loopback1\n• {{router2_name}} only knows its two directly connected public subnets and must never learn the private networks.\n• A GRE tunnel Tunnel{{tunnel_id}} between {{router1_name}} and {{router3_name}} is already up over the transit, addressed out of {{tunnel_cidr}}, and OSPF process 1 area 0 already runs over it and carries both private networks.\n• Two problems remain. First, the tunnel interface stays up as long as its own source interface is up, even when the remote end has disappeared, so OSPF keeps using a black hole. Second, large packets sent into the tunnel are dropped once the GRE overhead is added.\n• Make the tunnel detect a dead remote end on both routers, by probing the far end every {{keepalive_interval}} seconds and declaring the tunnel down after {{keepalive_retries}} unanswered probes.\n• Set the IP MTU of the tunnel to {{tunnel_mtu}} bytes on both routers, and clamp the TCP maximum segment size of sessions crossing the tunnel to {{tcp_mss}} bytes so that TCP connections are not black-holed.\n• Do not change the tunnel addressing, the tunnel source or destination, or the OSPF configuration: the adjacency must stay up and a {{ping_size}} byte packet must still get through between the two private networks.",
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2",
+            "r3"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            },
+            {
+                "id": "link2",
+                "nodes": [
+                    "r2",
+                    "r3"
+                ],
+                "media": "{{link2_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -400.0,
+                "y": -60.0
+            },
+            "r2": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 0.0,
+                "y": -60.0
+            },
+            "r3": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router3_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 400.0,
+                "y": -60.0
+            }
+        },
+        "notes": [
+            {
+                "color": "#0000ff",
+                "text": "{{link1_network}} /{{link1_prefix_len}}",
+                "x": -200.0,
+                "y": -90.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link2_network}} /{{link2_prefix_len}}",
+                "x": 200.0,
+                "y": -90.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "transit provider: no private routes allowed",
+                "x": 0.0,
+                "y": -130.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{router1_loopback1_cidr}}",
+                "x": -400.0,
+                "y": 20.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{router3_loopback1_cidr}}",
+                "x": 400.0,
+                "y": 20.0
+            }
+        ]
+    },
+    "startup_configs": {
+        "{{router2_name}}": [
+            "interface Loopback0",
+            "  ip address {{router2_loopback0_ip}} {{router2_loopback0_mask}}",
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown",
+            "interface {{router2_link2_iface}}",
+            "  ip address {{link2_ip1}} {{link2_mask}}",
+            "  no shutdown"
+        ],
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{router1_loopback0_ip}} {{router1_loopback0_mask}}",
+            "interface Loopback1",
+            "  ip address {{router1_loopback1_ip}} {{router1_loopback1_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown",
+            "ip route 0.0.0.0 0.0.0.0 {{link1_ip2}}",
+            "interface Tunnel{{tunnel_id}}",
+            "  ip address {{tunnel_ip1}} {{tunnel_mask}}",
+            "  tunnel source {{router1_link1_iface}}",
+            "  tunnel destination {{link2_ip2}}",
+            "router ospf 1",
+            "  router-id {{router1_loopback0_ip}}",
+            "  network {{tunnel_network}} {{tunnel_wildcard}} area 0",
+            "  network {{router1_loopback1_network}} {{router1_loopback1_wildcard}} area 0"
+        ],
+        "{{router3_name}}": [
+            "interface Loopback0",
+            "  ip address {{router3_loopback0_ip}} {{router3_loopback0_mask}}",
+            "interface Loopback1",
+            "  ip address {{router3_loopback1_ip}} {{router3_loopback1_mask}}",
+            "interface {{router3_link2_iface}}",
+            "  ip address {{link2_ip2}} {{link2_mask}}",
+            "  no shutdown",
+            "ip route 0.0.0.0 0.0.0.0 {{link2_ip1}}",
+            "interface Tunnel{{tunnel_id}}",
+            "  ip address {{tunnel_ip2}} {{tunnel_mask}}",
+            "  tunnel source {{router3_link2_iface}}",
+            "  tunnel destination {{link1_ip1}}",
+            "router ospf 1",
+            "  router-id {{router3_loopback0_ip}}",
+            "  network {{tunnel_network}} {{tunnel_wildcard}} area 0",
+            "  network {{router3_loopback1_network}} {{router3_loopback1_wildcard}} area 0"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "interface Tunnel{{tunnel_id}}",
+            "  keepalive {{keepalive_interval}} {{keepalive_retries}}",
+            "  ip mtu {{tunnel_mtu}}",
+            "  ip tcp adjust-mss {{tcp_mss}}"
+        ],
+        "{{router3_name}}": [
+            "interface Tunnel{{tunnel_id}}",
+            "  keepalive {{keepalive_interval}} {{keepalive_retries}}",
+            "  ip mtu {{tunnel_mtu}}",
+            "  ip tcp adjust-mss {{tcp_mss}}"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Make the tunnel detect a dead remote end on both routers, probing every {{keepalive_interval}} seconds and declaring it down after {{keepalive_retries}} unanswered probes.",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router1_name}}",
+                    "command": "show running-config | include keepalive",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "keepalive {{keepalive_interval}} {{keepalive_retries}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router3_name}}",
+                    "command": "show running-config | include keepalive",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "keepalive {{keepalive_interval}} {{keepalive_retries}}"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Set the IP MTU of the tunnel to {{tunnel_mtu}} bytes on both routers, and clamp the TCP maximum segment size to {{tcp_mss}} bytes.",
+            "testcase": [
+                {
+                    "id": "2-1",
+                    "node": "{{router1_name}}",
+                    "command": "show running-config | include ip mtu|adjust-mss",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "ip mtu {{tunnel_mtu}}"
+                            },
+                            {
+                                "line": "ip tcp adjust-mss {{tcp_mss}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "2-2",
+                    "node": "{{router3_name}}",
+                    "command": "show running-config | include ip mtu|adjust-mss",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "ip mtu {{tunnel_mtu}}"
+                            },
+                            {
+                                "line": "ip tcp adjust-mss {{tcp_mss}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "2-3",
+                    "node": "{{router1_name}}",
+                    "command": "show ip interface Tunnel{{tunnel_id}} | include MTU",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": {
+                                    "op": "contains",
+                                    "value": "{{tunnel_mtu}}"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "2-4",
+                    "node": "{{router3_name}}",
+                    "command": "show ip interface Tunnel{{tunnel_id}} | include MTU",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": {
+                                    "op": "contains",
+                                    "value": "{{tunnel_mtu}}"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Do not change the tunnel addressing, the tunnel source or destination, or the OSPF configuration: the adjacency must stay up and a {{ping_size}} byte packet must still get through.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router1_name}}",
+                    "command": "show running-config | include tunnel source|tunnel destination",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "tunnel source {{router1_link1_iface}}"
+                            },
+                            {
+                                "line": "tunnel destination {{link2_ip2}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip ospf neighbor",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "neighbor_id": "{{router3_loopback0_ip}}",
+                                "interface": "Tunnel{{tunnel_id}}",
+                                "state": {
+                                    "op": "regex",
+                                    "value": "FULL"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-3",
+                    "node": "{{router1_name}}",
+                    "command": "ping {{router3_loopback1_ip}} source Loopback1",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "success_pct": {
+                                    "op": ">=",
+                                    "value": "80"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-4",
+                    "node": "{{router1_name}}",
+                    "command": "ping ip {{router3_loopback1_ip}} source Loopback1 size {{ping_size}}",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "success_pct": {
+                                    "op": ">=",
+                                    "value": "80"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

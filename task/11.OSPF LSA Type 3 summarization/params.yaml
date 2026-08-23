@@ -1,0 +1,22 @@
+r1_names: [Diamond, Beryl, Carbon, Jade, Pearl]
+r2_names: [Fluorite, Amber, Coral, Marble, Onyx]
+r3_names: [Quartz, Garnet, Jasper, Opal, Pyrite]
+r4_names: [Talc, Basalt, Chalk, Flint, Shale]
+r5_names: [Topaz, Citrine, Feldspar, Gneiss, Mica]
+
+r4_loopback_pool: "172.16.0.0/12"
+r2_loopback_pool: "10.0.0.0/8"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24, 25, 26]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24, 25, 26]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24, 25, 26]
+link4_pool: "192.168.0.0/16"
+link4_prefix_lens: [24, 25, 26]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]
+link3_media_options: [ethernet, fastethernet, serial]
+link4_media_options: [ethernet, fastethernet, serial]

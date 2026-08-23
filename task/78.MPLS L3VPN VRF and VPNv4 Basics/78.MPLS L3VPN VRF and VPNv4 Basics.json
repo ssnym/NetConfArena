@@ -1,0 +1,1054 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "router3_name": {
+            "type": "choice",
+            "options": "r3_names",
+            "different_from": [
+                "router1_name",
+                "router2_name"
+            ]
+        },
+        "router4_name": {
+            "type": "choice",
+            "options": "r4_names",
+            "different_from": [
+                "router1_name",
+                "router2_name",
+                "router3_name"
+            ]
+        },
+        "router5_name": {
+            "type": "choice",
+            "options": "r5_names",
+            "different_from": [
+                "router1_name",
+                "router2_name",
+                "router3_name",
+                "router4_name"
+            ]
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.1.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "wildcard"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_cidr": {
+            "type": "format",
+            "template": "{link1_network}/{link1_prefix_len}"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "link2_media": {
+            "type": "choice",
+            "options": "link2_media_options"
+        },
+        "_link2": {
+            "type": "random_subnet",
+            "pool": "link2_pool",
+            "prefix_len": "link2_prefix_lens",
+            "default": "192.168.2.0/24",
+            "no_overlap": [
+                "_link1"
+            ]
+        },
+        "link2_network": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "network"
+        },
+        "link2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "netmask"
+        },
+        "link2_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "wildcard"
+        },
+        "link2_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "prefixlen"
+        },
+        "link2_cidr": {
+            "type": "format",
+            "template": "{link2_network}/{link2_prefix_len}"
+        },
+        "link2_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 1
+        },
+        "link2_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 2
+        },
+        "link3_media": {
+            "type": "choice",
+            "options": "link3_media_options"
+        },
+        "_link3": {
+            "type": "random_subnet",
+            "pool": "link3_pool",
+            "prefix_len": "link3_prefix_lens",
+            "default": "192.168.3.0/24",
+            "no_overlap": [
+                "_link1",
+                "_link2"
+            ]
+        },
+        "link3_network": {
+            "type": "subnet_attr",
+            "subnet": "_link3",
+            "attr": "network"
+        },
+        "link3_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link3",
+            "attr": "netmask"
+        },
+        "link3_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link3",
+            "attr": "wildcard"
+        },
+        "link3_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link3",
+            "attr": "prefixlen"
+        },
+        "link3_cidr": {
+            "type": "format",
+            "template": "{link3_network}/{link3_prefix_len}"
+        },
+        "link3_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link3",
+            "attr": "host",
+            "index": 1
+        },
+        "link3_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link3",
+            "attr": "host",
+            "index": 2
+        },
+        "link4_media": {
+            "type": "choice",
+            "options": "link4_media_options"
+        },
+        "_link4": {
+            "type": "random_subnet",
+            "pool": "link4_pool",
+            "prefix_len": "link4_prefix_lens",
+            "default": "192.168.4.0/24",
+            "no_overlap": [
+                "_link1",
+                "_link2",
+                "_link3"
+            ]
+        },
+        "link4_network": {
+            "type": "subnet_attr",
+            "subnet": "_link4",
+            "attr": "network"
+        },
+        "link4_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link4",
+            "attr": "netmask"
+        },
+        "link4_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link4",
+            "attr": "wildcard"
+        },
+        "link4_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link4",
+            "attr": "prefixlen"
+        },
+        "link4_cidr": {
+            "type": "format",
+            "template": "{link4_network}/{link4_prefix_len}"
+        },
+        "link4_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link4",
+            "attr": "host",
+            "index": 1
+        },
+        "link4_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link4",
+            "attr": "host",
+            "index": 2
+        },
+        "_router1_loopback0": {
+            "type": "random_subnet",
+            "pool": "r1_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "1.1.1.1/32"
+        },
+        "router1_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "network"
+        },
+        "router1_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "netmask"
+        },
+        "router1_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "wildcard"
+        },
+        "router1_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "prefixlen"
+        },
+        "router1_loopback0_cidr": {
+            "type": "format",
+            "template": "{router1_loopback0_network}/{router1_loopback0_prefix_len}"
+        },
+        "_router2_loopback0": {
+            "type": "random_subnet",
+            "pool": "r2_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "2.2.2.2/32"
+        },
+        "router2_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router2_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "network"
+        },
+        "router2_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "netmask"
+        },
+        "router2_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "wildcard"
+        },
+        "router2_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "prefixlen"
+        },
+        "router2_loopback0_cidr": {
+            "type": "format",
+            "template": "{router2_loopback0_network}/{router2_loopback0_prefix_len}"
+        },
+        "_router3_loopback0": {
+            "type": "random_subnet",
+            "pool": "r3_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "3.3.3.3/32"
+        },
+        "router3_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router3_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "network"
+        },
+        "router3_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "netmask"
+        },
+        "router3_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "wildcard"
+        },
+        "router3_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "prefixlen"
+        },
+        "router3_loopback0_cidr": {
+            "type": "format",
+            "template": "{router3_loopback0_network}/{router3_loopback0_prefix_len}"
+        },
+        "_router4_loopback0": {
+            "type": "random_subnet",
+            "pool": "r4_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "4.4.4.4/32"
+        },
+        "router4_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router4_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router4_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router4_loopback0",
+            "attr": "network"
+        },
+        "router4_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router4_loopback0",
+            "attr": "netmask"
+        },
+        "router4_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router4_loopback0",
+            "attr": "wildcard"
+        },
+        "router4_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router4_loopback0",
+            "attr": "prefixlen"
+        },
+        "router4_loopback0_cidr": {
+            "type": "format",
+            "template": "{router4_loopback0_network}/{router4_loopback0_prefix_len}"
+        },
+        "_router5_loopback0": {
+            "type": "random_subnet",
+            "pool": "r5_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "5.5.5.5/32"
+        },
+        "router5_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router5_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback0",
+            "attr": "network"
+        },
+        "router5_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback0",
+            "attr": "netmask"
+        },
+        "router5_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback0",
+            "attr": "wildcard"
+        },
+        "router5_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback0",
+            "attr": "prefixlen"
+        },
+        "router5_loopback0_cidr": {
+            "type": "format",
+            "template": "{router5_loopback0_network}/{router5_loopback0_prefix_len}"
+        },
+        "_router1_loopback1": {
+            "type": "random_subnet",
+            "pool": "r1_customer_pool",
+            "prefix_len": [
+                24
+            ],
+            "default": "1.1.1.1/24"
+        },
+        "router1_loopback1_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback1_network": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "network"
+        },
+        "router1_loopback1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "netmask"
+        },
+        "router1_loopback1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "wildcard"
+        },
+        "router1_loopback1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback1",
+            "attr": "prefixlen"
+        },
+        "router1_loopback1_cidr": {
+            "type": "format",
+            "template": "{router1_loopback1_network}/{router1_loopback1_prefix_len}"
+        },
+        "_router5_loopback1": {
+            "type": "random_subnet",
+            "pool": "r5_customer_pool",
+            "prefix_len": [
+                24
+            ],
+            "default": "5.5.5.5/24"
+        },
+        "router5_loopback1_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback1",
+            "attr": "host",
+            "index": 1
+        },
+        "router5_loopback1_network": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback1",
+            "attr": "network"
+        },
+        "router5_loopback1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback1",
+            "attr": "netmask"
+        },
+        "router5_loopback1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback1",
+            "attr": "wildcard"
+        },
+        "router5_loopback1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router5_loopback1",
+            "attr": "prefixlen"
+        },
+        "router5_loopback1_cidr": {
+            "type": "format",
+            "template": "{router5_loopback1_network}/{router5_loopback1_prefix_len}"
+        },
+        "vrf_name": {
+            "type": "choice",
+            "options": "vrf_names"
+        },
+        "as_number": {
+            "type": "choice",
+            "options": "as_number_options"
+        },
+        "vpn_id": {
+            "type": "choice",
+            "options": "vpn_id_options"
+        },
+        "rd": {
+            "type": "format",
+            "template": "{as_number}:{vpn_id}"
+        },
+        "rt": {
+            "type": "format",
+            "template": "{as_number}:{vpn_id}"
+        }
+    },
+    "scenario": "MPLS L3VPN VRF and VPNv4 Basics",
+    "goals": "• {{router2_name}}, {{router3_name}} and {{router4_name}} form an MPLS backbone where OSPF area 0, the Loopback0 addresses and LDP are already configured and operational on the two core links {{link2_cidr}} and {{link3_cidr}}.\n    customer site A: {{router1_name}}, Loopback1 {{router1_loopback1_cidr}}, attached to {{router2_name}} over {{link1_cidr}}\n    MPLS backbone: {{router2_name}} (PE), {{router3_name}} (P), {{router4_name}} (PE)\n    customer site B: {{router5_name}}, Loopback1 {{router5_loopback1_cidr}}, attached to {{router4_name}} over {{link4_cidr}}\n• The two customer routers only have a default route towards their PE. The PE interfaces facing them are addressed but still belong to the global routing table.\n• Create the VPN routing instance {{vrf_name}} on {{router2_name}} and {{router4_name}} with route distinguisher {{rd}}, and with {{rt}} as both the exported and the imported route target.\n• Move the CE-facing interface of each PE into {{vrf_name}} while keeping its current address ({{link1_ip2}} on {{router2_name}}, {{link4_ip1}} on {{router4_name}}).\n• Build one iBGP VPNv4 session between the two PE Loopback0 addresses ({{router2_loopback0_ip}} and {{router4_loopback0_ip}}) in AS {{as_number}}, sourced from Loopback0, and make sure extended communities are exchanged on it.\n• Inside {{vrf_name}} reach each customer network with a static route towards the local CE and advertise those routes into the VPN.\n• Result: {{router1_name}} must reach {{router5_loopback1_cidr}} and {{router5_name}} must reach {{router1_loopback1_cidr}}. The customer prefixes must stay out of the global routing table of the PEs.",
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            },
+            {
+                "id": "link2",
+                "nodes": [
+                    "r2",
+                    "r3"
+                ],
+                "media": "{{link2_media}}"
+            },
+            {
+                "id": "link3",
+                "nodes": [
+                    "r3",
+                    "r4"
+                ],
+                "media": "{{link3_media}}"
+            },
+            {
+                "id": "link4",
+                "nodes": [
+                    "r4",
+                    "r5"
+                ],
+                "media": "{{link4_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -520.0,
+                "y": 60.0
+            },
+            "r2": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -280.0,
+                "y": -60.0
+            },
+            "r3": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router3_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 0.0,
+                "y": -140.0
+            },
+            "r4": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router4_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 280.0,
+                "y": -60.0
+            },
+            "r5": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router5_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 520.0,
+                "y": 60.0
+            }
+        },
+        "notes": [
+            {
+                "color": "#0000ff",
+                "text": "{{link1_network}} /{{link1_prefix_len}}",
+                "x": -400.0,
+                "y": -30.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link2_network}} /{{link2_prefix_len}}",
+                "x": -140.0,
+                "y": -130.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link3_network}} /{{link3_prefix_len}}",
+                "x": 140.0,
+                "y": -130.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link4_network}} /{{link4_prefix_len}}",
+                "x": 400.0,
+                "y": -30.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "customer site A",
+                "x": -520.0,
+                "y": 130.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "MPLS backbone",
+                "x": 0.0,
+                "y": -210.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "customer site B",
+                "x": 520.0,
+                "y": 130.0
+            }
+        ]
+    },
+    "startup_configs": {
+        "{{router3_name}}": [
+            "interface Loopback0",
+            "  ip address {{router3_loopback0_ip}} {{router3_loopback0_mask}}",
+            "interface {{router3_link2_iface}}",
+            "  ip address {{link2_ip2}} {{link2_mask}}",
+            "  no shutdown",
+            "interface {{router3_link3_iface}}",
+            "  ip address {{link3_ip1}} {{link3_mask}}",
+            "  no shutdown",
+            "router ospf 1",
+            "  router-id {{router3_loopback0_ip}}",
+            "  network {{router3_loopback0_ip}} 0.0.0.0 area 0",
+            "  network {{link2_network}} {{link2_wildcard}} area 0",
+            "  network {{link3_network}} {{link3_wildcard}} area 0",
+            "mpls label protocol ldp",
+            "mpls ldp router-id Loopback0 force",
+            "interface {{router3_link2_iface}}",
+            "  mpls ip",
+            "interface {{router3_link3_iface}}",
+            "  mpls ip"
+        ],
+        "{{router2_name}}": [
+            "interface Loopback0",
+            "  ip address {{router2_loopback0_ip}} {{router2_loopback0_mask}}",
+            "interface {{router2_link2_iface}}",
+            "  ip address {{link2_ip1}} {{link2_mask}}",
+            "  no shutdown",
+            "router ospf 1",
+            "  router-id {{router2_loopback0_ip}}",
+            "  network {{router2_loopback0_ip}} 0.0.0.0 area 0",
+            "  network {{link2_network}} {{link2_wildcard}} area 0",
+            "mpls label protocol ldp",
+            "mpls ldp router-id Loopback0 force",
+            "interface {{router2_link2_iface}}",
+            "  mpls ip",
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown"
+        ],
+        "{{router4_name}}": [
+            "interface Loopback0",
+            "  ip address {{router4_loopback0_ip}} {{router4_loopback0_mask}}",
+            "interface {{router4_link3_iface}}",
+            "  ip address {{link3_ip2}} {{link3_mask}}",
+            "  no shutdown",
+            "router ospf 1",
+            "  router-id {{router4_loopback0_ip}}",
+            "  network {{router4_loopback0_ip}} 0.0.0.0 area 0",
+            "  network {{link3_network}} {{link3_wildcard}} area 0",
+            "mpls label protocol ldp",
+            "mpls ldp router-id Loopback0 force",
+            "interface {{router4_link3_iface}}",
+            "  mpls ip",
+            "interface {{router4_link4_iface}}",
+            "  ip address {{link4_ip1}} {{link4_mask}}",
+            "  no shutdown"
+        ],
+        "{{router1_name}}": [
+            "interface Loopback1",
+            "  ip address {{router1_loopback1_ip}} {{router1_loopback1_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown",
+            "ip route 0.0.0.0 0.0.0.0 {{link1_ip2}}"
+        ],
+        "{{router5_name}}": [
+            "interface Loopback1",
+            "  ip address {{router5_loopback1_ip}} {{router5_loopback1_mask}}",
+            "interface {{router5_link4_iface}}",
+            "  ip address {{link4_ip2}} {{link4_mask}}",
+            "  no shutdown",
+            "ip route 0.0.0.0 0.0.0.0 {{link4_ip1}}"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router2_name}}": [
+            "ip vrf {{vrf_name}}",
+            "  rd {{rd}}",
+            "  route-target export {{rt}}",
+            "  route-target import {{rt}}",
+            "interface {{router2_link1_iface}}",
+            "  ip vrf forwarding {{vrf_name}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown",
+            "ip route vrf {{vrf_name}} {{router1_loopback1_network}} {{router1_loopback1_mask}} {{link1_ip1}}",
+            "router bgp {{as_number}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  neighbor {{router4_loopback0_ip}} remote-as {{as_number}}",
+            "  neighbor {{router4_loopback0_ip}} update-source Loopback0",
+            "  no auto-summary",
+            "  address-family vpnv4",
+            "    neighbor {{router4_loopback0_ip}} activate",
+            "    neighbor {{router4_loopback0_ip}} send-community extended",
+            "  exit-address-family",
+            "  address-family ipv4 vrf {{vrf_name}}",
+            "    redistribute static",
+            "    no synchronization",
+            "  exit-address-family"
+        ],
+        "{{router4_name}}": [
+            "ip vrf {{vrf_name}}",
+            "  rd {{rd}}",
+            "  route-target export {{rt}}",
+            "  route-target import {{rt}}",
+            "interface {{router4_link4_iface}}",
+            "  ip vrf forwarding {{vrf_name}}",
+            "  ip address {{link4_ip1}} {{link4_mask}}",
+            "  no shutdown",
+            "ip route vrf {{vrf_name}} {{router5_loopback1_network}} {{router5_loopback1_mask}} {{link4_ip2}}",
+            "router bgp {{as_number}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  neighbor {{router2_loopback0_ip}} remote-as {{as_number}}",
+            "  neighbor {{router2_loopback0_ip}} update-source Loopback0",
+            "  no auto-summary",
+            "  address-family vpnv4",
+            "    neighbor {{router2_loopback0_ip}} activate",
+            "    neighbor {{router2_loopback0_ip}} send-community extended",
+            "  exit-address-family",
+            "  address-family ipv4 vrf {{vrf_name}}",
+            "    redistribute static",
+            "    no synchronization",
+            "  exit-address-family"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Create the VPN routing instance {{vrf_name}} on {{router2_name}} and {{router4_name}} with route distinguisher {{rd}}, and with {{rt}} as both the exported and the imported route target.",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router2_name}}",
+                    "command": "show running-config | include ^ rd",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "rd {{rd}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router2_name}}",
+                    "command": "show running-config | include route-target",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "route-target export {{rt}}"
+                            },
+                            {
+                                "line": "route-target import {{rt}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "1-3",
+                    "node": "{{router4_name}}",
+                    "command": "show running-config | include ^ rd",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "rd {{rd}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "1-4",
+                    "node": "{{router4_name}}",
+                    "command": "show running-config | include route-target",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "route-target export {{rt}}"
+                            },
+                            {
+                                "line": "route-target import {{rt}}"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Move the CE-facing interface of each PE into {{vrf_name}} while keeping its current address.",
+            "testcase": [
+                {
+                    "id": "2-1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip vrf interfaces",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "interface": "{{router2_link1_iface}}",
+                                "ip_address": "{{link1_ip2}}",
+                                "vrf": "{{vrf_name}}",
+                                "proto_state": "up"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "2-2",
+                    "node": "{{router4_name}}",
+                    "command": "show ip vrf interfaces",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "interface": "{{router4_link4_iface}}",
+                                "ip_address": "{{link4_ip1}}",
+                                "vrf": "{{vrf_name}}",
+                                "proto_state": "up"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Build one iBGP VPNv4 session between the two PE Loopback0 addresses in AS {{as_number}}, sourced from Loopback0, and make sure extended communities are exchanged on it.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "neighbor": "{{router4_loopback0_ip}}",
+                                "bgp_state": "Established",
+                                "localhost_ip": "{{router2_loopback0_ip}}",
+                                "remote_ip": "{{router4_loopback0_ip}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router2_name}}",
+                    "command": "show running-config | include send-community",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "neighbor {{router4_loopback0_ip}} send-community extended"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "3-3",
+                    "node": "{{router4_name}}",
+                    "command": "show running-config | include send-community",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "neighbor {{router2_loopback0_ip}} send-community extended"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Inside {{vrf_name}} reach each customer network with a static route towards the local CE and advertise those routes into the VPN.",
+            "testcase": [
+                {
+                    "id": "4-1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp vpnv4 all",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "rd": "{{rd}}",
+                                "prefix": "{{router1_loopback1_cidr}}"
+                            },
+                            {
+                                "rd": "{{rd}}",
+                                "prefix": "{{router5_loopback1_cidr}}",
+                                "next_hop": "{{router4_loopback0_ip}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "4-2",
+                    "node": "{{router4_name}}",
+                    "command": "show ip bgp vpnv4 all",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "rd": "{{rd}}",
+                                "prefix": "{{router5_loopback1_cidr}}"
+                            },
+                            {
+                                "rd": "{{rd}}",
+                                "prefix": "{{router1_loopback1_cidr}}",
+                                "next_hop": "{{router2_loopback0_ip}}"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "4-3",
+                    "node": "{{router2_name}}",
+                    "command": "show ip route vrf {{vrf_name}} {{router5_loopback1_network}} {{router5_loopback1_mask}}",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "network": "{{router5_loopback1_cidr}}",
+                                "protocol": "bgp",
+                                "nexthop_ip": "{{router4_loopback0_ip}}"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Result: {{router1_name}} must reach {{router5_loopback1_cidr}} and {{router5_name}} must reach {{router1_loopback1_cidr}}. The customer prefixes must stay out of the global routing table of the PEs.",
+            "testcase": [
+                {
+                    "id": "5-1",
+                    "node": "{{router1_name}}",
+                    "command": "ping {{router5_loopback1_ip}} source Loopback1",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "success_pct": {
+                                    "op": ">=",
+                                    "value": "80"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "5-2",
+                    "node": "{{router5_name}}",
+                    "command": "ping {{router1_loopback1_ip}} source Loopback1",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "success_pct": {
+                                    "op": ">=",
+                                    "value": "80"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "5-3",
+                    "node": "{{router2_name}}",
+                    "command": "show ip route {{router5_loopback1_network}} {{router5_loopback1_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "5-4",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{router1_loopback1_network}} {{router1_loopback1_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Local configuration (API keys, GNS3 endpoint)
+.env
+
+# Run artifacts
+results/
+logs/*/
+!logs/__init__.py
+!logs/mylogger.py
+task/task_data_dumps/
+task/*/seed_*_rendered_task.txt
+analysis/
+pipeline_work/
+
+# Editor / OS
+.agents/
+.codex/
+.vscode/
+.idea/
+.DS_Store

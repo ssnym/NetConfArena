@@ -1,0 +1,790 @@
+{
+  "params": {
+    "router1_name": {
+      "type": "choice",
+      "options": "r1_names"
+    },
+    "router2_name": {
+      "type": "choice",
+      "options": "r2_names",
+      "different_from": [
+        "router1_name"
+      ]
+    },
+    "router3_name": {
+      "type": "choice",
+      "options": "r3_names",
+      "different_from": [
+        "router1_name",
+        "router2_name"
+      ]
+    },
+    "router4_name": {
+      "type": "choice",
+      "options": "r4_names",
+      "different_from": [
+        "router1_name",
+        "router2_name",
+        "router3_name"
+      ]
+    },
+    "router5_name": {
+      "type": "choice",
+      "options": "r5_names",
+      "different_from": [
+        "router1_name",
+        "router2_name",
+        "router3_name",
+        "router4_name"
+      ]
+    },
+    "router6_name": {
+      "type": "choice",
+      "options": "r6_names",
+      "different_from": [
+        "router1_name",
+        "router2_name",
+        "router3_name",
+        "router4_name",
+        "router5_name"
+      ]
+    },
+    "link1_media": {
+      "type": "choice",
+      "options": "link1_media_options"
+    },
+    "link2_media": {
+      "type": "choice",
+      "options": "link2_media_options"
+    },
+    "link4_media": {
+      "type": "choice",
+      "options": "link4_media_options"
+    },
+    "link5_media": {
+      "type": "choice",
+      "options": "link5_media_options"
+    },
+    "link3_media": {
+      "type": "choice",
+      "options": "link3_media_options"
+    },
+    "_link3": {
+      "type": "random_subnet",
+      "pool": "link3_pool",
+      "prefix_len": "link3_prefix_lens",
+      "default": "192.168.3.0/24"
+    },
+    "link3_network": {
+      "type": "subnet_attr",
+      "subnet": "_link3",
+      "attr": "network"
+    },
+    "link3_mask": {
+      "type": "subnet_attr",
+      "subnet": "_link3",
+      "attr": "netmask"
+    },
+    "link3_wildcard": {
+      "type": "subnet_attr",
+      "subnet": "_link3",
+      "attr": "wildcard"
+    },
+    "link3_prefix_len": {
+      "type": "subnet_attr",
+      "subnet": "_link3",
+      "attr": "prefixlen"
+    },
+    "link3_cidr": {
+      "type": "format",
+      "template": "{link3_network}/{link3_prefix_len}"
+    },
+    "link3_ip1": {
+      "type": "subnet_attr",
+      "subnet": "_link3",
+      "attr": "host",
+      "index": 1
+    },
+    "link3_ip2": {
+      "type": "subnet_attr",
+      "subnet": "_link3",
+      "attr": "host",
+      "index": 2
+    },
+    "_router3_loopback0": {
+      "type": "random_subnet",
+      "pool": "r3_loopback_pool",
+      "prefix_len": [
+        32
+      ],
+      "default": "3.3.3.3/32"
+    },
+    "router3_loopback0_ip": {
+      "type": "subnet_attr",
+      "subnet": "_router3_loopback0",
+      "attr": "host",
+      "index": 1
+    },
+    "router3_loopback0_network": {
+      "type": "subnet_attr",
+      "subnet": "_router3_loopback0",
+      "attr": "network"
+    },
+    "router3_loopback0_mask": {
+      "type": "subnet_attr",
+      "subnet": "_router3_loopback0",
+      "attr": "netmask"
+    },
+    "router3_loopback0_wildcard": {
+      "type": "subnet_attr",
+      "subnet": "_router3_loopback0",
+      "attr": "wildcard"
+    },
+    "router3_loopback0_prefix_len": {
+      "type": "subnet_attr",
+      "subnet": "_router3_loopback0",
+      "attr": "prefixlen"
+    },
+    "router3_loopback0_cidr": {
+      "type": "format",
+      "template": "{router3_loopback0_network}/{router3_loopback0_prefix_len}"
+    },
+    "_router4_loopback0": {
+      "type": "random_subnet",
+      "pool": "r4_loopback_pool",
+      "prefix_len": [
+        32
+      ],
+      "default": "4.4.4.4/32"
+    },
+    "router4_loopback0_ip": {
+      "type": "subnet_attr",
+      "subnet": "_router4_loopback0",
+      "attr": "host",
+      "index": 1
+    },
+    "router4_loopback0_network": {
+      "type": "subnet_attr",
+      "subnet": "_router4_loopback0",
+      "attr": "network"
+    },
+    "router4_loopback0_mask": {
+      "type": "subnet_attr",
+      "subnet": "_router4_loopback0",
+      "attr": "netmask"
+    },
+    "router4_loopback0_wildcard": {
+      "type": "subnet_attr",
+      "subnet": "_router4_loopback0",
+      "attr": "wildcard"
+    },
+    "router4_loopback0_prefix_len": {
+      "type": "subnet_attr",
+      "subnet": "_router4_loopback0",
+      "attr": "prefixlen"
+    },
+    "router4_loopback0_cidr": {
+      "type": "format",
+      "template": "{router4_loopback0_network}/{router4_loopback0_prefix_len}"
+    },
+    "_service": {
+      "type": "random_subnet",
+      "pool": "service_pool",
+      "prefix_len": "service_prefix_lens",
+      "default": "10.10.10.0/24"
+    },
+    "service_network": {
+      "type": "subnet_attr",
+      "subnet": "_service",
+      "attr": "network"
+    },
+    "service_mask": {
+      "type": "subnet_attr",
+      "subnet": "_service",
+      "attr": "netmask"
+    },
+    "service_prefix_len": {
+      "type": "subnet_attr",
+      "subnet": "_service",
+      "attr": "prefixlen"
+    },
+    "service_cidr": {
+      "type": "format",
+      "template": "{service_network}/{service_prefix_len}"
+    },
+    "service_ip1": {
+      "type": "subnet_attr",
+      "subnet": "_service",
+      "attr": "host",
+      "index": 1
+    },
+    "service_ip2": {
+      "type": "subnet_attr",
+      "subnet": "_service",
+      "attr": "host",
+      "index": 2
+    },
+    "service_ip3": {
+      "type": "subnet_attr",
+      "subnet": "_service",
+      "attr": "host",
+      "index": 3
+    },
+    "service_ip4": {
+      "type": "subnet_attr",
+      "subnet": "_service",
+      "attr": "host",
+      "index": 4
+    },
+    "vc_id_a": {
+      "type": "choice",
+      "options": "vc_id_a_options"
+    },
+    "vc_id_b": {
+      "type": "choice",
+      "options": "vc_id_b_options"
+    },
+    "pw_class": {
+      "type": "choice",
+      "options": "pw_class_names"
+    }
+  },
+  "scenario": "MPLS L2VPN EoMPLS Multi-Service Aggregation",
+  "goals": "• {{router3_name}} and {{router4_name}} are two provider edge routers joined by the single MPLS core link {{link3_cidr}}, where OSPF area 0, the Loopback0 addresses and LDP are already configured and operational.\n• Four customer routers hang off them over layer 2 attachment circuits whose PE side has no IP address, and none of them runs a routing protocol. They belong to two different customers who happen to use the same address range {{service_cidr}}:\n    service A: {{router1_name}} ({{service_ip1}}) on {{router3_name}} and {{router5_name}} ({{service_ip2}}) on {{router4_name}}\n    service B: {{router2_name}} ({{service_ip3}}) on {{router3_name}} and {{router6_name}} ({{service_ip4}}) on {{router4_name}}\n• Carry both services as Ethernet over MPLS pseudowires in port mode over the same pair of PEs, keeping them strictly separate:\n    service A uses virtual circuit identifier {{vc_id_a}}\n    service B uses virtual circuit identifier {{vc_id_b}}\n• Keep the pseudowire settings in one reusable pseudowire class named {{pw_class}} on both PEs, using MPLS encapsulation, and use that class for both services instead of writing the encapsulation on each cross connect.\n• Every customer-facing interface must be bound to exactly one pseudowire, and each PE must end up with exactly two virtual circuits.\n• Result: {{router1_name}} must reach {{service_ip2}} and {{router2_name}} must reach {{service_ip4}}, while the two services stay isolated: {{router1_name}} must not be able to reach {{service_ip3}} or {{service_ip4}} even though they are in the same subnet.",
+  "topology_model": {
+    "nodes": [
+      "r1",
+      "r2",
+      "r3",
+      "r4",
+      "r5",
+      "r6"
+    ],
+    "links": [
+      {
+        "id": "link1",
+        "nodes": [
+          "r1",
+          "r3"
+        ],
+        "media": "{{link1_media}}"
+      },
+      {
+        "id": "link2",
+        "nodes": [
+          "r2",
+          "r3"
+        ],
+        "media": "{{link2_media}}"
+      },
+      {
+        "id": "link3",
+        "nodes": [
+          "r3",
+          "r4"
+        ],
+        "media": "{{link3_media}}"
+      },
+      {
+        "id": "link4",
+        "nodes": [
+          "r4",
+          "r5"
+        ],
+        "media": "{{link4_media}}"
+      },
+      {
+        "id": "link5",
+        "nodes": [
+          "r4",
+          "r6"
+        ],
+        "media": "{{link5_media}}"
+      }
+    ]
+  },
+  "topology_attributes": {
+    "nodes": {
+      "r1": {
+        "type": "C7200",
+        "label": {
+          "text": "{{router1_name}}",
+          "x": 19.5,
+          "y": -25.0
+        },
+        "x": -520.0,
+        "y": -180.0
+      },
+      "r2": {
+        "type": "C7200",
+        "label": {
+          "text": "{{router2_name}}",
+          "x": 19.5,
+          "y": -25.0
+        },
+        "x": -520.0,
+        "y": 80.0
+      },
+      "r3": {
+        "type": "C7200",
+        "label": {
+          "text": "{{router3_name}}",
+          "x": 19.5,
+          "y": -25.0
+        },
+        "x": -200.0,
+        "y": -50.0
+      },
+      "r4": {
+        "type": "C7200",
+        "label": {
+          "text": "{{router4_name}}",
+          "x": 19.5,
+          "y": -25.0
+        },
+        "x": 160.0,
+        "y": -50.0
+      },
+      "r5": {
+        "type": "C7200",
+        "label": {
+          "text": "{{router5_name}}",
+          "x": 19.5,
+          "y": -25.0
+        },
+        "x": 480.0,
+        "y": -180.0
+      },
+      "r6": {
+        "type": "C7200",
+        "label": {
+          "text": "{{router6_name}}",
+          "x": 19.5,
+          "y": -25.0
+        },
+        "x": 480.0,
+        "y": 80.0
+      }
+    },
+    "notes": [
+      {
+        "color": "#0000ff",
+        "text": "attachment circuit (layer 2)",
+        "x": -380.0,
+        "y": -220.0
+      },
+      {
+        "color": "#0000ff",
+        "text": "attachment circuit (layer 2)",
+        "x": -380.0,
+        "y": 120.0
+      },
+      {
+        "color": "#0000ff",
+        "text": "{{link3_network}} /{{link3_prefix_len}}",
+        "x": -20.0,
+        "y": -110.0
+      },
+      {
+        "color": "#0000ff",
+        "text": "attachment circuit (layer 2)",
+        "x": 340.0,
+        "y": -220.0
+      },
+      {
+        "color": "#0000ff",
+        "text": "attachment circuit (layer 2)",
+        "x": 340.0,
+        "y": 120.0
+      },
+      {
+        "color": "#0000ff",
+        "text": "customer subnet {{service_cidr}} is shared by both services",
+        "x": -20.0,
+        "y": 190.0
+      }
+    ]
+  },
+  "startup_configs": {
+    "{{router3_name}}": [
+      "interface Loopback0",
+      "  ip address {{router3_loopback0_ip}} {{router3_loopback0_mask}}",
+      "interface {{router3_link3_iface}}",
+      "  ip address {{link3_ip1}} {{link3_mask}}",
+      "  no shutdown",
+      "router ospf 1",
+      "  router-id {{router3_loopback0_ip}}",
+      "  network {{router3_loopback0_ip}} 0.0.0.0 area 0",
+      "  network {{link3_network}} {{link3_wildcard}} area 0",
+      "mpls label protocol ldp",
+      "mpls ldp router-id Loopback0 force",
+      "interface {{router3_link3_iface}}",
+      "  mpls ip",
+      "interface {{router3_link1_iface}}",
+      "  no ip address",
+      "  no shutdown",
+      "interface {{router3_link2_iface}}",
+      "  no ip address",
+      "  no shutdown"
+    ],
+    "{{router4_name}}": [
+      "interface Loopback0",
+      "  ip address {{router4_loopback0_ip}} {{router4_loopback0_mask}}",
+      "interface {{router4_link3_iface}}",
+      "  ip address {{link3_ip2}} {{link3_mask}}",
+      "  no shutdown",
+      "router ospf 1",
+      "  router-id {{router4_loopback0_ip}}",
+      "  network {{router4_loopback0_ip}} 0.0.0.0 area 0",
+      "  network {{link3_network}} {{link3_wildcard}} area 0",
+      "mpls label protocol ldp",
+      "mpls ldp router-id Loopback0 force",
+      "interface {{router4_link3_iface}}",
+      "  mpls ip",
+      "interface {{router4_link4_iface}}",
+      "  no ip address",
+      "  no shutdown",
+      "interface {{router4_link5_iface}}",
+      "  no ip address",
+      "  no shutdown"
+    ],
+    "{{router1_name}}": [
+      "interface {{router1_link1_iface}}",
+      "  ip address {{service_ip1}} {{service_mask}}",
+      "  no shutdown"
+    ],
+    "{{router5_name}}": [
+      "interface {{router5_link4_iface}}",
+      "  ip address {{service_ip2}} {{service_mask}}",
+      "  no shutdown"
+    ],
+    "{{router2_name}}": [
+      "interface {{router2_link2_iface}}",
+      "  ip address {{service_ip3}} {{service_mask}}",
+      "  no shutdown"
+    ],
+    "{{router6_name}}": [
+      "interface {{router6_link5_iface}}",
+      "  ip address {{service_ip4}} {{service_mask}}",
+      "  no shutdown"
+    ]
+  },
+  "groundtruth_configs": {
+    "{{router3_name}}": [
+      "pseudowire-class {{pw_class}}",
+      "  encapsulation mpls",
+      "interface {{router3_link1_iface}}",
+      "  xconnect {{router4_loopback0_ip}} {{vc_id_a}} pw-class {{pw_class}}",
+      "interface {{router3_link2_iface}}",
+      "  xconnect {{router4_loopback0_ip}} {{vc_id_b}} pw-class {{pw_class}}"
+    ],
+    "{{router4_name}}": [
+      "pseudowire-class {{pw_class}}",
+      "  encapsulation mpls",
+      "interface {{router4_link4_iface}}",
+      "  xconnect {{router3_loopback0_ip}} {{vc_id_a}} pw-class {{pw_class}}",
+      "interface {{router4_link5_iface}}",
+      "  xconnect {{router3_loopback0_ip}} {{vc_id_b}} pw-class {{pw_class}}"
+    ]
+  },
+  "testcases": [
+    {
+      "goal": "Keep the pseudowire settings in one reusable pseudowire class named {{pw_class}} on both PEs, using MPLS encapsulation and Loopback0 as the pseudowire source, and use that class for both services.",
+      "testcase": [
+        {
+          "id": "1-1",
+          "node": "{{router3_name}}",
+          "command": "show running-config | include pseudowire-class|encapsulation",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "line": "pseudowire-class {{pw_class}}"
+              },
+              {
+                "line": "encapsulation mpls"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1-2",
+          "node": "{{router4_name}}",
+          "command": "show running-config | include pseudowire-class|encapsulation",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "line": "pseudowire-class {{pw_class}}"
+              },
+              {
+                "line": "encapsulation mpls"
+              }
+            ]
+          }
+        },
+        {
+          "id": "1-3",
+          "node": "{{router3_name}}",
+          "command": "show running-config | include pseudowire-class",
+          "expected_result": {
+            "op": "count_match",
+            "match": {
+              "line": "pseudowire-class {{pw_class}}"
+            },
+            "count": {
+              "op": "==",
+              "value": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "goal": "Carry both services as Ethernet over MPLS pseudowires in port mode over the same pair of PEs: service A with virtual circuit identifier {{vc_id_a}}, service B with {{vc_id_b}}.",
+      "testcase": [
+        {
+          "id": "2-1",
+          "node": "{{router3_name}}",
+          "command": "show running-config | include xconnect",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "line": "xconnect {{router4_loopback0_ip}} {{vc_id_a}} pw-class {{pw_class}}"
+              },
+              {
+                "line": "xconnect {{router4_loopback0_ip}} {{vc_id_b}} pw-class {{pw_class}}"
+              }
+            ]
+          }
+        },
+        {
+          "id": "2-2",
+          "node": "{{router4_name}}",
+          "command": "show running-config | include xconnect",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "line": "xconnect {{router3_loopback0_ip}} {{vc_id_a}} pw-class {{pw_class}}"
+              },
+              {
+                "line": "xconnect {{router3_loopback0_ip}} {{vc_id_b}} pw-class {{pw_class}}"
+              }
+            ]
+          }
+        },
+        {
+          "id": "2-3",
+          "node": "{{router3_name}}",
+          "command": "show mpls l2transport vc",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "interface": "{{router3_link1_iface}}",
+                "dest_address": "{{router4_loopback0_ip}}",
+                "vc_id": "{{vc_id_a}}",
+                "status": {
+                  "op": "regex",
+                  "value": "UP"
+                }
+              },
+              {
+                "interface": "{{router3_link2_iface}}",
+                "dest_address": "{{router4_loopback0_ip}}",
+                "vc_id": "{{vc_id_b}}",
+                "status": {
+                  "op": "regex",
+                  "value": "UP"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "2-4",
+          "node": "{{router4_name}}",
+          "command": "show mpls l2transport vc",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "interface": "{{router4_link4_iface}}",
+                "vc_id": "{{vc_id_a}}",
+                "status": {
+                  "op": "regex",
+                  "value": "UP"
+                }
+              },
+              {
+                "interface": "{{router4_link5_iface}}",
+                "vc_id": "{{vc_id_b}}",
+                "status": {
+                  "op": "regex",
+                  "value": "UP"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "goal": "Every customer-facing interface must be bound to exactly one pseudowire, and each PE must end up with exactly two virtual circuits.",
+      "testcase": [
+        {
+          "id": "3-1",
+          "node": "{{router3_name}}",
+          "command": "show mpls l2transport vc",
+          "expected_result": {
+            "op": "count_match",
+            "match": {},
+            "distinct": "vc_id",
+            "count": {
+              "op": "==",
+              "value": 2
+            }
+          }
+        },
+        {
+          "id": "3-2",
+          "node": "{{router4_name}}",
+          "command": "show mpls l2transport vc",
+          "expected_result": {
+            "op": "count_match",
+            "match": {},
+            "distinct": "vc_id",
+            "count": {
+              "op": "==",
+              "value": 2
+            }
+          }
+        },
+        {
+          "id": "3-3",
+          "node": "{{router3_name}}",
+          "command": "show xconnect all",
+          "expected_result": {
+            "op": "all_match",
+            "value": {
+              "xc_state": "UP",
+              "s1_state": "UP",
+              "s2_state": "UP"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "goal": "{{router1_name}} must reach {{service_ip2}} and {{router2_name}} must reach {{service_ip4}}, while the two services stay isolated.",
+      "testcase": [
+        {
+          "id": "4-1",
+          "node": "{{router1_name}}",
+          "command": "ping {{service_ip2}}",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "success_pct": {
+                  "op": ">=",
+                  "value": "80"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "4-2",
+          "node": "{{router5_name}}",
+          "command": "ping {{service_ip1}}",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "success_pct": {
+                  "op": ">=",
+                  "value": "80"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "4-3",
+          "node": "{{router2_name}}",
+          "command": "ping {{service_ip4}}",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "success_pct": {
+                  "op": ">=",
+                  "value": "80"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "4-4",
+          "node": "{{router6_name}}",
+          "command": "ping {{service_ip3}}",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "success_pct": {
+                  "op": ">=",
+                  "value": "80"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "4-5",
+          "node": "{{router1_name}}",
+          "command": "ping {{service_ip3}}",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "success_pct": {
+                  "op": "==",
+                  "value": "0"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "4-6",
+          "node": "{{router1_name}}",
+          "command": "ping {{service_ip4}}",
+          "expected_result": {
+            "op": "contains_all",
+            "value": [
+              {
+                "success_pct": {
+                  "op": "==",
+                  "value": "0"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "4-7",
+          "node": "{{router3_name}}",
+          "command": "show ip route {{service_network}} {{service_mask}}",
+          "expected_result": {
+            "op": "empty"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+    "params": {
+        "as1": {
+            "type": "fixed",
+            "default": "1"
+        },
+        "as2": {
+            "type": "fixed",
+            "default": "2"
+        },
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "_r1_lo0": {
+            "type": "random_subnet",
+            "pool": "r1_lo0_pool",
+            "prefix_len": 24,
+            "default": "2.2.2.0/24"
+        },
+        "router1_lo0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_r1_lo0",
+            "attr": "host",
+            "index": 2
+        },
+        "router1_lo0_network": {
+            "type": "subnet_attr",
+            "subnet": "_r1_lo0",
+            "attr": "network"
+        },
+        "router1_lo0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_r1_lo0",
+            "attr": "netmask"
+        },
+        "router1_lo0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_r1_lo0",
+            "attr": "prefixlen"
+        },
+        "router1_lo0_cidr": {
+            "type": "format",
+            "template": "{router1_lo0_network}/{router1_lo0_prefix_len}"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.12.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        }
+    },
+    "scenario": "BGP Soft Reconfiguration",
+    "goals": "• Configure EBGP between {{router1_name}} (AS {{as2}}) and {{router2_name}} (AS {{as1}}) over their directly connected {{link1_media}} link.\n• Advertise the network of {{router1_name}}'s Loopback0 ({{router1_lo0_cidr}}) into BGP.\n• Configure a prefix-list on router {{router2_name}} that filters {{router1_lo0_cidr}} and apply it inbound to its neighbor {{router1_name}}.\n• Ensure the prefix-list change becomes effective on {{router2_name}} without resetting the BGP peering.",
+    "topology_model": {
+        "nodes": [
+            {
+                "id": "r1"
+            },
+            {
+                "id": "r2"
+            }
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -91.6898628385,
+                "y": -143.622366364
+            },
+            "r2": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -388.0,
+                "y": -145.0
+            }
+        },
+        "notes": [
+            {
+                "color": "#0000ff",
+                "text": ".1",
+                "x": -318.905158315,
+                "y": -146.350288425
+            },
+            {
+                "color": "#0000ff",
+                "text": ".2",
+                "x": -115.965512115,
+                "y": -144.429978209
+            },
+            {
+                "color": "#323232",
+                "text": "AS {{as1}}",
+                "x": -364.867099092,
+                "y": -79.1751442127
+            },
+            {
+                "color": "#323232",
+                "text": "AS {{as2}}",
+                "x": -81.3172798365,
+                "y": -77.2548339959
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link1_network}} /{{link1_prefix_len}}",
+                "x": -272.943217538,
+                "y": -143.521861301
+            }
+        ],
+        "ellipses": [
+            {
+                "border_style": 2,
+                "fill_color": "#ffff7f",
+                "height": 147.674098192,
+                "width": 141.421356237,
+                "x": -132.228968082,
+                "y": -196.57568517,
+                "z": -2.0
+            },
+            {
+                "border_style": 2,
+                "fill_color": "#aaffff",
+                "height": 147.674098192,
+                "width": 141.421356237,
+                "x": -415.979797465,
+                "y": -196.776695297,
+                "z": -2.0
+            }
+        ]
+    },
+    "startup_configs": {
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{router1_lo0_ip}} {{router1_lo0_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown"
+        ],
+        "{{router2_name}}": [
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "router bgp {{as2}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  network {{router1_lo0_network}} mask {{router1_lo0_mask}}",
+            "  neighbor {{link1_ip2}} remote-as {{as1}}",
+            "  no auto-summary"
+        ],
+        "{{router2_name}}": [
+            "router bgp {{as1}}",
+            "  no synchronization",
+            "  bgp log-neighbor-changes",
+            "  neighbor {{link1_ip1}} remote-as {{as2}}",
+            "  neighbor {{link1_ip1}} soft-reconfiguration inbound",
+            "  neighbor {{link1_ip1}} prefix-list FILTER in",
+            "  no auto-summary",
+            "ip prefix-list FILTER seq 5 deny {{router1_lo0_cidr}}",
+            "ip prefix-list FILTER seq 10 permit 0.0.0.0/0 le 32"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Configure EBGP between {{router1_name}} (AS {{as2}}) and {{router2_name}} (AS {{as1}}) over their directly connected {{link1_media}} link.",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router1_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "neighbor": "{{link1_ip2}}",
+                                "remote_as": "{{as1}}",
+                                "bgp_state": "Established"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "neighbor": "{{link1_ip1}}",
+                                "remote_as": "{{as2}}",
+                                "bgp_state": "Established"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Advertise the network of {{router1_name}}'s Loopback0 ({{router1_lo0_cidr}}) into BGP.",
+            "testcase": [
+                {
+                    "id": "2-1",
+                    "node": "{{router1_name}}",
+                    "command": "show ip bgp",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "network": "{{router1_lo0_cidr}}",
+                                "origin": "i"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Configure a prefix-list on router {{router2_name}} that filters {{router1_lo0_cidr}} and apply it inbound to its neighbor {{router1_name}}.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip prefix-list",
+                    "expected_result": {
+                        "action": "deny",
+                        "network": "{{router1_lo0_network}}",
+                        "netmask": "{{router1_lo0_prefix_len}}"
+                    },
+                    "output": "name"
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors {{link1_ip1}}",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "incoming_filter": "$3-1_{{router2_name}}_name$"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Ensure the prefix-list change becomes effective on {{router2_name}} without resetting the BGP peering.",
+            "testcase": [
+                {
+                    "id": "4-1",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "neighbor": "{{link1_ip1}}",
+                                "remote_as": "{{as2}}",
+                                "bgp_state": "Established"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "4-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip bgp neighbors {{link1_ip1}}",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "inbound_soft_reconfiguration": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

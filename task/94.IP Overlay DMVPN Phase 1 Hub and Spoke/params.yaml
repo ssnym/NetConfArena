@@ -1,0 +1,76 @@
+r1_names:
+- Almaty
+- Aspen
+- Auckland
+- Avalon
+- Amber
+- Anvil
+- Arcus
+- Aurora
+r2_names:
+- Bergen
+- Bilbao
+- Boulder
+- Brindle
+- Bronze
+- Basalt
+- Beacon
+- Borealis
+r3_names:
+- Cardiff
+- Catania
+- Cologne
+- Cinder
+- Cobalt
+- Comet
+- Coral
+- Crescent
+r4_names:
+- Dakar
+- Dalian
+- Dortmund
+- Dune
+- Drift
+- Dahlia
+- Dolomite
+- Draco
+r1_loopback_pool: 1.0.0.0/8
+r2_loopback_pool: 2.0.0.0/8
+r3_loopback_pool: 3.0.0.0/8
+r4_loopback_pool: 4.0.0.0/8
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 30
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 30
+link3_media_options:
+- fastethernet
+link3_pool: 192.168.0.0/16
+link3_prefix_lens:
+- 30
+r1_private_pool: 10.1.0.0/16
+r2_private_pool: 10.2.0.0/16
+r3_private_pool: 10.3.0.0/16
+nbma_pool: 172.30.0.0/16
+tunnel_id_options:
+- 0
+- 1
+- 10
+nhrp_network_id_options:
+- 100
+- 200
+- 999
+# IOS accepts NHRP authentication strings of at most eight characters.
+nhrp_auth_options:
+- DMVPNKEY
+- NhrpPas1
+- OvrlyKey
+eigrp_asn_options:
+- 10
+- 100
+- 200

@@ -1,0 +1,13 @@
+r1_names: [Harry, Eliot, Victor, Morgan, Taylor]
+r2_names: [Jack, Felix, Austin, Nolan, Wesley]
+r3_names: [Sam, Mason, Lucas, Owen, Carter]
+
+r3_loopback_pool: "172.16.0.0/12"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24, 25, 26]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24, 25, 26]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]

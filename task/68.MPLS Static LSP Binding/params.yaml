@@ -1,0 +1,60 @@
+r1_names:
+- Almaty
+- Aspen
+- Auckland
+- Avalon
+- Amber
+- Anvil
+- Arcus
+- Aurora
+r2_names:
+- Bergen
+- Bilbao
+- Boulder
+- Brindle
+- Bronze
+- Basalt
+- Beacon
+- Borealis
+r3_names:
+- Cardiff
+- Catania
+- Cologne
+- Cinder
+- Cobalt
+- Comet
+- Coral
+- Crescent
+r1_loopback_pool: 1.0.0.0/8
+r2_loopback_pool: 2.0.0.0/8
+r3_loopback_pool: 3.0.0.0/8
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 30
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 30
+static_label_in_options:
+- 300
+- 310
+- 320
+- 330
+# Static labels require a dedicated range that does not overlap the dynamic pool.
+# Default IOS uses 16-100000 dynamically and has no static range, so it rejects
+# local static bindings unless the ranges are changed.
+#
+# The dynamic range must not overlap the default 16-100000 range at all, or IOS
+# requires a reload and disables LDP until then. Move the dynamic pool to
+# 100001-1048575 (2^20-1, the IOS label limit) and reserve 16-999 for static use.
+static_label_range_min_options:
+- 16
+static_label_range_max_options:
+- 999
+dynamic_label_min_options:
+- 100001
+dynamic_label_max_options:
+- 1048575

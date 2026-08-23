@@ -1,0 +1,19 @@
+r1_names: [Beef, Lamb, Turkey, Duck, Goose]
+r2_names: [Chicken, Falcon, Heron, Crane, Eagle]
+r3_names: [Fish, Salmon, Tuna, Trout, Carp]
+r4_names: [Pork, Bacon, Ham, Boar, Hog]
+
+r2_loopback_pool: "1.0.0.0/8"
+r3_loopback_pool: "4.0.0.0/8"
+r4_loopback_pool: "3.0.0.0/8"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]
+link3_media_options: [ethernet, fastethernet, serial]

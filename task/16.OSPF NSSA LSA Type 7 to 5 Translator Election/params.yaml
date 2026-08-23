@@ -1,0 +1,28 @@
+r1_names: [Kevin, Flynn, Clu, Dyson, Gibson]
+r2_names: [Quorra, Lora, Ada, Rhea, Nova]
+r3_names: [Sam, Beck, Jet, Kira, Pax]
+r4_names: [Tron, Yori, Ram, Ares, Castor]
+
+r3_loopback_pool: "4.0.0.0/8"
+r3_loopback_prefix_lens: [24]
+
+r4_ospf_router_ids:
+  - "222.222.222.222"
+  - "223.223.223.223"
+  - "224.224.224.224"
+  - "225.225.225.225"
+  - "226.226.226.226"
+
+link1_pool: "192.168.0.0/18"
+link1_prefix_lens: [24]
+link2_pool: "192.168.64.0/18"
+link2_prefix_lens: [24]
+link3_pool: "192.168.128.0/18"
+link3_prefix_lens: [24]
+link4_pool: "192.168.192.0/18"
+link4_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]
+link3_media_options: [ethernet, fastethernet, serial]
+link4_media_options: [ethernet, fastethernet, serial]

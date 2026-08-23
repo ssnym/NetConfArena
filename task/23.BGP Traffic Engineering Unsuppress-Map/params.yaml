@@ -1,0 +1,22 @@
+r1_names: [Banshee, Chimera, Harpy, Siren, Medusa]
+r2_names: [Behemoth, Kraken, Leviathan, Minotaur, Hydra]
+r3_names: [BigFoot, Yeti, Mothman, Ogre, Cyclops]
+r4_names: [Blob, Golem, Specter, Wraith, Ghoul]
+
+sw1_names: [SW1, LAN-A, Access-A]
+
+lan1_pool: "192.168.0.0/16"
+lan1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24]
+link4_pool: "192.168.0.0/16"
+link4_prefix_lens: [24]
+
+lan1_media_options: [ethernet, fastethernet]
+link2_media_options: [ethernet, fastethernet]
+link3_media_options: [ethernet, fastethernet]
+link4_media_options: [ethernet, fastethernet]
+
+r4_summary_pool: "172.16.0.0/12"

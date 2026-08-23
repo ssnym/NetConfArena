@@ -1,0 +1,24 @@
+r1_names: [Amy, Aria, Aspen, Amber, Azure]
+r2_names: [Emily, Ember, Echo, Eden, Elm]
+r3_names: [Mila, Maple, Mica, Mist, Moss]
+r4_names: [Selena, Sage, Sienna, Sierra, Sky]
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24]
+link4_pool: "192.168.0.0/16"
+link4_prefix_lens: [24]
+link5_pool: "192.168.0.0/16"
+link5_prefix_lens: [24]
+link6_pool: "192.168.0.0/16"
+link6_prefix_lens: [24]
+
+link1_media_options: [fastethernet]
+link2_media_options: [fastethernet]
+link3_media_options: [gigabitethernet]
+link4_media_options: [fastethernet]
+link5_media_options: [fastethernet]
+link6_media_options: [gigabitethernet]

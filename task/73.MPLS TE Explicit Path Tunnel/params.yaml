@@ -1,0 +1,68 @@
+r1_names:
+- Almaty
+- Aspen
+- Auckland
+- Avalon
+- Amber
+- Anvil
+- Arcus
+- Aurora
+r2_names:
+- Bergen
+- Bilbao
+- Boulder
+- Brindle
+- Bronze
+- Basalt
+- Beacon
+- Borealis
+r3_names:
+- Cardiff
+- Catania
+- Cologne
+- Cinder
+- Cobalt
+- Comet
+- Coral
+- Crescent
+r4_names:
+- Dakar
+- Dalian
+- Dortmund
+- Dune
+- Drift
+- Dahlia
+- Dolomite
+- Draco
+r1_loopback_pool: 1.0.0.0/8
+r2_loopback_pool: 2.0.0.0/8
+r3_loopback_pool: 3.0.0.0/8
+r4_loopback_pool: 4.0.0.0/8
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 30
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 30
+link3_media_options:
+- fastethernet
+link3_pool: 192.168.0.0/16
+link3_prefix_lens:
+- 30
+link4_media_options:
+- fastethernet
+link4_pool: 192.168.0.0/16
+link4_prefix_lens:
+- 30
+tunnel_id_options:
+- 1
+- 11
+- 31
+explicit_path_names:
+- VIA-SOUTH
+- PATH-LOWER
+- TE-PRIMARY

@@ -1,0 +1,9 @@
+r1_names: [Scorpion, Reptile, Smoke, Cyrax, Sektor]
+r2_names: [SubZero, Raiden, LiuKang, KungLao, JohnnyCage]
+
+r1_lo0_pool: "2.0.0.0/8"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet]

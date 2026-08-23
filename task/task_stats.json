@@ -1,0 +1,2349 @@
+{
+  "seed": 1,
+  "templates": 96,
+  "complexity_source": "task/task_taxonomy.json",
+  "note": "Topology size and evaluation size are seed-independent; interface names and IP addressing vary per instantiation and are not reported here. Complexity tier follows task/TASK_TAXONOMY.md.",
+  "tasks": [
+    {
+      "task_index": 1,
+      "scenario": "Static Routing",
+      "category": "Static Routing",
+      "subcategory": "Basic Routing",
+      "complexity": "L",
+      "protocols": [
+        "static"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 2,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 2,
+      "reference_config_commands": 3,
+      "startup_config_commands": 16,
+      "scoring_groups": 4,
+      "test_units": 4,
+      "parameters": 22
+    },
+    {
+      "task_index": 2,
+      "scenario": "RIP Unicast",
+      "category": "RIP",
+      "subcategory": "Fundamentals",
+      "complexity": "L",
+      "protocols": [
+        "rip"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 2,
+      "devices_configured": 2,
+      "reference_config_commands": 14,
+      "startup_config_commands": 10,
+      "scoring_groups": 2,
+      "test_units": 6,
+      "parameters": 16
+    },
+    {
+      "task_index": 3,
+      "scenario": "RIP Summarization",
+      "category": "RIP",
+      "subcategory": "Policy and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "rip"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 4,
+      "reference_config_commands": 25,
+      "startup_config_commands": 82,
+      "scoring_groups": 4,
+      "test_units": 10,
+      "parameters": 92
+    },
+    {
+      "task_index": 4,
+      "scenario": "RIP Offset List",
+      "category": "RIP",
+      "subcategory": "Policy and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "rip"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 22,
+      "startup_config_commands": 30,
+      "scoring_groups": 4,
+      "test_units": 11,
+      "parameters": 43
+    },
+    {
+      "task_index": 5,
+      "scenario": "RIP Filtering",
+      "category": "RIP",
+      "subcategory": "Policy and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "rip"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 26,
+      "startup_config_commands": 32,
+      "scoring_groups": 5,
+      "test_units": 13,
+      "parameters": 48
+    },
+    {
+      "task_index": 6,
+      "scenario": "OSPF Single Area",
+      "category": "OSPF",
+      "subcategory": "Fundamentals",
+      "complexity": "L",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 3,
+      "reference_config_commands": 16,
+      "startup_config_commands": 25,
+      "scoring_groups": 6,
+      "test_units": 8,
+      "parameters": 33
+    },
+    {
+      "task_index": 7,
+      "scenario": "OSPF Stub Area",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 19,
+      "startup_config_commands": 10,
+      "scoring_groups": 4,
+      "test_units": 12,
+      "parameters": 27
+    },
+    {
+      "task_index": 8,
+      "scenario": "OSPF Totally Stub",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 2,
+      "reference_config_commands": 22,
+      "startup_config_commands": 10,
+      "scoring_groups": 3,
+      "test_units": 12,
+      "parameters": 27
+    },
+    {
+      "task_index": 9,
+      "scenario": "OSPF Totally NSSA",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf",
+        "rip"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 15,
+      "devices_configured": 3,
+      "reference_config_commands": 37,
+      "startup_config_commands": 14,
+      "scoring_groups": 10,
+      "test_units": 26,
+      "parameters": 44
+    },
+    {
+      "task_index": 10,
+      "scenario": "OSPF Summarization Discard Route",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 3,
+      "devices_configured": 3,
+      "reference_config_commands": 13,
+      "startup_config_commands": 14,
+      "scoring_groups": 3,
+      "test_units": 5,
+      "parameters": 20
+    },
+    {
+      "task_index": 11,
+      "scenario": "OSPF LSA Type 3 summarization",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 2,
+      "devices_configured": 5,
+      "reference_config_commands": 19,
+      "startup_config_commands": 48,
+      "scoring_groups": 2,
+      "test_units": 6,
+      "parameters": 51
+    },
+    {
+      "task_index": 12,
+      "scenario": "OSPF LSA Type 5 summarization",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 3,
+      "devices_configured": 3,
+      "reference_config_commands": 13,
+      "startup_config_commands": 28,
+      "scoring_groups": 3,
+      "test_units": 5,
+      "parameters": 29
+    },
+    {
+      "task_index": 13,
+      "scenario": "OSPF Virtual Link",
+      "category": "OSPF",
+      "subcategory": "Advanced Area Design",
+      "complexity": "H",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 3,
+      "devices_configured": 4,
+      "reference_config_commands": 21,
+      "startup_config_commands": 24,
+      "scoring_groups": 3,
+      "test_units": 9,
+      "parameters": 34
+    },
+    {
+      "task_index": 14,
+      "scenario": "OSPF Virtual Link and Summarization",
+      "category": "OSPF",
+      "subcategory": "Advanced Area Design",
+      "complexity": "H",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 3,
+      "reference_config_commands": 15,
+      "startup_config_commands": 22,
+      "scoring_groups": 4,
+      "test_units": 9,
+      "parameters": 27
+    },
+    {
+      "task_index": 15,
+      "scenario": "OSPF Suppress Forward Address",
+      "category": "OSPF",
+      "subcategory": "Advanced Area Design",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "rip"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 5,
+      "reference_config_commands": 28,
+      "startup_config_commands": 26,
+      "scoring_groups": 6,
+      "test_units": 14,
+      "parameters": 35
+    },
+    {
+      "task_index": 16,
+      "scenario": "OSPF NSSA LSA Type 7 to 5 Translator Election",
+      "category": "OSPF",
+      "subcategory": "Advanced Area Design",
+      "complexity": "H",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 4,
+      "reference_config_commands": 21,
+      "startup_config_commands": 26,
+      "scoring_groups": 4,
+      "test_units": 9,
+      "parameters": 37
+    },
+    {
+      "task_index": 17,
+      "scenario": "OSPF DR BDR Election",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 7,
+      "links": 6,
+      "device_models": [
+        "C3600",
+        "EthernetSwitch"
+      ],
+      "goals": 5,
+      "devices_configured": 5,
+      "reference_config_commands": 22,
+      "startup_config_commands": 18,
+      "scoring_groups": 5,
+      "test_units": 9,
+      "parameters": 27
+    },
+    {
+      "task_index": 18,
+      "scenario": "OSPF Auto Cost Reference Bandwidth",
+      "category": "OSPF",
+      "subcategory": "Areas and Route Control",
+      "complexity": "M",
+      "protocols": [
+        "ospf"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 6,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 2,
+      "devices_configured": 4,
+      "reference_config_commands": 16,
+      "startup_config_commands": 36,
+      "scoring_groups": 1,
+      "test_units": 4,
+      "parameters": 46
+    },
+    {
+      "task_index": 19,
+      "scenario": "IBGP-Internal BGP",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 2,
+      "devices_configured": 4,
+      "reference_config_commands": 64,
+      "startup_config_commands": 40,
+      "scoring_groups": 2,
+      "test_units": 7,
+      "parameters": 57
+    },
+    {
+      "task_index": 20,
+      "scenario": "EBGP-External BGP",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp",
+        "static"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 4,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 4,
+      "reference_config_commands": 35,
+      "startup_config_commands": 26,
+      "scoring_groups": 4,
+      "test_units": 12,
+      "parameters": 38
+    },
+    {
+      "task_index": 21,
+      "scenario": "BGP Update Source",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 2,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 2,
+      "reference_config_commands": 18,
+      "startup_config_commands": 16,
+      "scoring_groups": 4,
+      "test_units": 8,
+      "parameters": 19
+    },
+    {
+      "task_index": 22,
+      "scenario": "BGP Transit AS",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 3,
+      "devices": 6,
+      "links": 6,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 6,
+      "reference_config_commands": 68,
+      "startup_config_commands": 48,
+      "scoring_groups": 4,
+      "test_units": 9,
+      "parameters": 63
+    },
+    {
+      "task_index": 23,
+      "scenario": "BGP Traffic Engineering Unsuppress-Map",
+      "category": "BGP",
+      "subcategory": "Advertisement Control and Aggregation",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 5,
+      "links": 5,
+      "device_models": [
+        "C3600",
+        "EthernetSwitch"
+      ],
+      "goals": 9,
+      "devices_configured": 4,
+      "reference_config_commands": 43,
+      "startup_config_commands": 30,
+      "scoring_groups": 7,
+      "test_units": 8,
+      "parameters": 51
+    },
+    {
+      "task_index": 24,
+      "scenario": "BGP Synchronization",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp",
+        "ospf"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 3,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 7,
+      "devices_configured": 5,
+      "reference_config_commands": 41,
+      "startup_config_commands": 34,
+      "scoring_groups": 7,
+      "test_units": 15,
+      "parameters": 66
+    },
+    {
+      "task_index": 25,
+      "scenario": "BGP Soft Reconfiguration",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 2,
+      "reference_config_commands": 15,
+      "startup_config_commands": 8,
+      "scoring_groups": 4,
+      "test_units": 7,
+      "parameters": 15
+    },
+    {
+      "task_index": 26,
+      "scenario": "BGP Route Reflectors and Clusters",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 1,
+      "devices": 9,
+      "links": 12,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 7,
+      "devices_configured": 9,
+      "reference_config_commands": 84,
+      "startup_config_commands": 90,
+      "scoring_groups": 7,
+      "test_units": 33,
+      "parameters": 127
+    },
+    {
+      "task_index": 27,
+      "scenario": "BGP Remove Private AS",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 4,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 26,
+      "startup_config_commands": 22,
+      "scoring_groups": 5,
+      "test_units": 6,
+      "parameters": 36
+    },
+    {
+      "task_index": 28,
+      "scenario": "BGP Peer Group",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 1,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 3,
+      "devices_configured": 4,
+      "reference_config_commands": 29,
+      "startup_config_commands": 26,
+      "scoring_groups": 3,
+      "test_units": 7,
+      "parameters": 44
+    },
+    {
+      "task_index": 29,
+      "scenario": "BGP Next-Hop Self Manual",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 7,
+      "devices_configured": 3,
+      "reference_config_commands": 24,
+      "startup_config_commands": 28,
+      "scoring_groups": 6,
+      "test_units": 11,
+      "parameters": 40
+    },
+    {
+      "task_index": 30,
+      "scenario": "BGP Next hop self",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 7,
+      "devices_configured": 3,
+      "reference_config_commands": 21,
+      "startup_config_commands": 26,
+      "scoring_groups": 6,
+      "test_units": 9,
+      "parameters": 35
+    },
+    {
+      "task_index": 31,
+      "scenario": "BGP Max AS Limit",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 4,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 4,
+      "reference_config_commands": 27,
+      "startup_config_commands": 26,
+      "scoring_groups": 4,
+      "test_units": 12,
+      "parameters": 50
+    },
+    {
+      "task_index": 32,
+      "scenario": "BGP Local AS",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 2,
+      "reference_config_commands": 11,
+      "startup_config_commands": 6,
+      "scoring_groups": 3,
+      "test_units": 3,
+      "parameters": 10
+    },
+    {
+      "task_index": 33,
+      "scenario": "BGP Local Preference MED",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 4,
+      "links": 5,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 7,
+      "devices_configured": 4,
+      "reference_config_commands": 49,
+      "startup_config_commands": 53,
+      "scoring_groups": 6,
+      "test_units": 18,
+      "parameters": 68
+    },
+    {
+      "task_index": 34,
+      "scenario": "BGP IBGP Blackhole Routing",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "gre",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 3,
+      "reference_config_commands": 26,
+      "startup_config_commands": 29,
+      "scoring_groups": 4,
+      "test_units": 8,
+      "parameters": 43
+    },
+    {
+      "task_index": 35,
+      "scenario": "BGP Filtering Prefix-List",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 2,
+      "reference_config_commands": 21,
+      "startup_config_commands": 14,
+      "scoring_groups": 5,
+      "test_units": 9,
+      "parameters": 34
+    },
+    {
+      "task_index": 36,
+      "scenario": "BGP Filtering Extended Access-List",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 2,
+      "reference_config_commands": 21,
+      "startup_config_commands": 14,
+      "scoring_groups": 5,
+      "test_units": 11,
+      "parameters": 41
+    },
+    {
+      "task_index": 37,
+      "scenario": "BGP EBGP Multihop",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "bgp",
+        "static"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 2,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 2,
+      "reference_config_commands": 16,
+      "startup_config_commands": 10,
+      "scoring_groups": 3,
+      "test_units": 6,
+      "parameters": 25
+    },
+    {
+      "task_index": 38,
+      "scenario": "BGP DMZ Link Bandwidth",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 2,
+      "devices": 6,
+      "links": 7,
+      "device_models": [
+        "C3600",
+        "EthernetSwitch"
+      ],
+      "goals": 4,
+      "devices_configured": 5,
+      "reference_config_commands": 79,
+      "startup_config_commands": 43,
+      "scoring_groups": 4,
+      "test_units": 14,
+      "parameters": 94
+    },
+    {
+      "task_index": 39,
+      "scenario": "BGP Confederations",
+      "category": "BGP",
+      "subcategory": "Peering, Propagation, and Scaling",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 6,
+      "devices": 6,
+      "links": 8,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 6,
+      "reference_config_commands": 103,
+      "startup_config_commands": 60,
+      "scoring_groups": 5,
+      "test_units": 20,
+      "parameters": 115
+    },
+    {
+      "task_index": 40,
+      "scenario": "BGP Conditional Advertisement",
+      "category": "BGP",
+      "subcategory": "Advertisement Control and Aggregation",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 3,
+      "reference_config_commands": 26,
+      "startup_config_commands": 18,
+      "scoring_groups": 5,
+      "test_units": 13,
+      "parameters": 46
+    },
+    {
+      "task_index": 41,
+      "scenario": "BGP Communities No-Export",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 30,
+      "startup_config_commands": 20,
+      "scoring_groups": 5,
+      "test_units": 13,
+      "parameters": 37
+    },
+    {
+      "task_index": 42,
+      "scenario": "BGP Communities No-Advertise",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 28,
+      "startup_config_commands": 20,
+      "scoring_groups": 5,
+      "test_units": 12,
+      "parameters": 37
+    },
+    {
+      "task_index": 43,
+      "scenario": "BGP Communities Local-AS",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 5,
+      "links": 5,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 5,
+      "reference_config_commands": 51,
+      "startup_config_commands": 40,
+      "scoring_groups": 4,
+      "test_units": 15,
+      "parameters": 79
+    },
+    {
+      "task_index": 44,
+      "scenario": "BGP Communities Delete and Additive",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 3,
+      "reference_config_commands": 27,
+      "startup_config_commands": 17,
+      "scoring_groups": 5,
+      "test_units": 14,
+      "parameters": 32
+    },
+    {
+      "task_index": 45,
+      "scenario": "BGP Communities",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 3,
+      "reference_config_commands": 30,
+      "startup_config_commands": 19,
+      "scoring_groups": 5,
+      "test_units": 13,
+      "parameters": 25
+    },
+    {
+      "task_index": 46,
+      "scenario": "BGP Backdoor",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "eigrp",
+        "bgp",
+        "ospf"
+      ],
+      "protocol_layers": 3,
+      "autonomous_systems": 3,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 13,
+      "devices_configured": 4,
+      "reference_config_commands": 48,
+      "startup_config_commands": 32,
+      "scoring_groups": 12,
+      "test_units": 24,
+      "parameters": 63
+    },
+    {
+      "task_index": 47,
+      "scenario": "BGP Attribute Weight",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 11,
+      "devices_configured": 4,
+      "reference_config_commands": 58,
+      "startup_config_commands": 40,
+      "scoring_groups": 10,
+      "test_units": 44,
+      "parameters": 86
+    },
+    {
+      "task_index": 48,
+      "scenario": "BGP Attribute Router ID",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 4,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 1,
+      "reference_config_commands": 7,
+      "startup_config_commands": 46,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 47
+    },
+    {
+      "task_index": 49,
+      "scenario": "BGP Attribute Origin",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 3,
+      "reference_config_commands": 24,
+      "startup_config_commands": 16,
+      "scoring_groups": 4,
+      "test_units": 12,
+      "parameters": 28
+    },
+    {
+      "task_index": 50,
+      "scenario": "BGP Attribute MED",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 2,
+      "devices": 4,
+      "links": 5,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 4,
+      "reference_config_commands": 58,
+      "startup_config_commands": 38,
+      "scoring_groups": 4,
+      "test_units": 10,
+      "parameters": 71
+    },
+    {
+      "task_index": 51,
+      "scenario": "BGP Attribute Local Preference",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 4,
+      "devices": 7,
+      "links": 8,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 12,
+      "devices_configured": 7,
+      "reference_config_commands": 103,
+      "startup_config_commands": 64,
+      "scoring_groups": 10,
+      "test_units": 22,
+      "parameters": 127
+    },
+    {
+      "task_index": 52,
+      "scenario": "BGP Attribute AS Path Ignore",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 4,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 30,
+      "startup_config_commands": 32,
+      "scoring_groups": 5,
+      "test_units": 8,
+      "parameters": 65
+    },
+    {
+      "task_index": 53,
+      "scenario": "BGP Attribute AS Path",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 4,
+      "links": 5,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 36,
+      "startup_config_commands": 49,
+      "scoring_groups": 5,
+      "test_units": 9,
+      "parameters": 71
+    },
+    {
+      "task_index": 54,
+      "scenario": "BGP AS Path Access List",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 4,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 4,
+      "reference_config_commands": 52,
+      "startup_config_commands": 40,
+      "scoring_groups": 5,
+      "test_units": 20,
+      "parameters": 88
+    },
+    {
+      "task_index": 55,
+      "scenario": "BGP Always compare MED",
+      "category": "BGP",
+      "subcategory": "Best-Path Selection and Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "bgp",
+        "ospf"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 3,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 13,
+      "devices_configured": 4,
+      "reference_config_commands": 67,
+      "startup_config_commands": 36,
+      "scoring_groups": 9,
+      "test_units": 14,
+      "parameters": 77
+    },
+    {
+      "task_index": 56,
+      "scenario": "BGP Allow AS In",
+      "category": "BGP",
+      "subcategory": "Routing Policy and Filtering",
+      "complexity": "M",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 2,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 57,
+      "startup_config_commands": 34,
+      "scoring_groups": 5,
+      "test_units": 13,
+      "parameters": 68
+    },
+    {
+      "task_index": 57,
+      "scenario": "BGP Aggregation Unsuppress Map",
+      "category": "BGP",
+      "subcategory": "Advertisement Control and Aggregation",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 2,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 2,
+      "reference_config_commands": 19,
+      "startup_config_commands": 14,
+      "scoring_groups": 4,
+      "test_units": 8,
+      "parameters": 36
+    },
+    {
+      "task_index": 58,
+      "scenario": "BGP Aggregation AS SET",
+      "category": "BGP",
+      "subcategory": "Advertisement Control and Aggregation",
+      "complexity": "M",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 3,
+      "links": 3,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 6,
+      "devices_configured": 3,
+      "reference_config_commands": 21,
+      "startup_config_commands": 22,
+      "scoring_groups": 6,
+      "test_units": 9,
+      "parameters": 41
+    },
+    {
+      "task_index": 59,
+      "scenario": "BGP Aggregation",
+      "category": "BGP",
+      "subcategory": "Advertisement Control and Aggregation",
+      "complexity": "M",
+      "protocols": [
+        "bgp",
+        "static"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 2,
+      "devices": 2,
+      "links": 1,
+      "device_models": [
+        "C3600"
+      ],
+      "goals": 4,
+      "devices_configured": 2,
+      "reference_config_commands": 17,
+      "startup_config_commands": 14,
+      "scoring_groups": 4,
+      "test_units": 10,
+      "parameters": 40
+    },
+    {
+      "task_index": 60,
+      "scenario": "MPLS LDP Basic Enablement",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 3,
+      "reference_config_commands": 14,
+      "startup_config_commands": 31,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 37
+    },
+    {
+      "task_index": 61,
+      "scenario": "MPLS LDP Router ID and Transport Address",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 3,
+      "reference_config_commands": 3,
+      "startup_config_commands": 42,
+      "scoring_groups": 3,
+      "test_units": 8,
+      "parameters": 37
+    },
+    {
+      "task_index": 62,
+      "scenario": "MPLS LDP Label Advertisement Filtering",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 1,
+      "reference_config_commands": 6,
+      "startup_config_commands": 45,
+      "scoring_groups": 3,
+      "test_units": 9,
+      "parameters": 38
+    },
+    {
+      "task_index": 63,
+      "scenario": "MPLS LDP Neighbor Authentication",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 3,
+      "reference_config_commands": 4,
+      "startup_config_commands": 45,
+      "scoring_groups": 2,
+      "test_units": 8,
+      "parameters": 38
+    },
+    {
+      "task_index": 64,
+      "scenario": "MPLS LDP Targeted Remote Session",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 2,
+      "reference_config_commands": 2,
+      "startup_config_commands": 45,
+      "scoring_groups": 3,
+      "test_units": 7,
+      "parameters": 37
+    },
+    {
+      "task_index": 65,
+      "scenario": "MPLS LDP Session Protection",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 3,
+      "reference_config_commands": 3,
+      "startup_config_commands": 57,
+      "scoring_groups": 3,
+      "test_units": 9,
+      "parameters": 46
+    },
+    {
+      "task_index": 66,
+      "scenario": "MPLS LDP IGP Autoconfiguration and Synchronization",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp",
+        "ospf"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 3,
+      "reference_config_commands": 15,
+      "startup_config_commands": 31,
+      "scoring_groups": 3,
+      "test_units": 11,
+      "parameters": 37
+    },
+    {
+      "task_index": 67,
+      "scenario": "MPLS LDP Explicit Null",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 1,
+      "reference_config_commands": 1,
+      "startup_config_commands": 45,
+      "scoring_groups": 3,
+      "test_units": 9,
+      "parameters": 37
+    },
+    {
+      "task_index": 68,
+      "scenario": "MPLS Static LSP Binding",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 1,
+      "reference_config_commands": 1,
+      "startup_config_commands": 48,
+      "scoring_groups": 4,
+      "test_units": 8,
+      "parameters": 42
+    },
+    {
+      "task_index": 69,
+      "scenario": "MPLS TTL Propagation Control",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [],
+      "protocol_layers": 0,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 3,
+      "reference_config_commands": 3,
+      "startup_config_commands": 58,
+      "scoring_groups": 3,
+      "test_units": 9,
+      "parameters": 52
+    },
+    {
+      "task_index": 70,
+      "scenario": "MPLS LDP Triangle Core",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 3,
+      "reference_config_commands": 18,
+      "startup_config_commands": 39,
+      "scoring_groups": 3,
+      "test_units": 8,
+      "parameters": 45
+    },
+    {
+      "task_index": 71,
+      "scenario": "MPLS Label Range and Local Label Space",
+      "category": "MPLS",
+      "subcategory": "LDP and Label Forwarding",
+      "complexity": "M",
+      "protocols": [
+        "mpls_ldp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 3,
+      "reference_config_commands": 17,
+      "startup_config_commands": 31,
+      "scoring_groups": 4,
+      "test_units": 11,
+      "parameters": 39
+    },
+    {
+      "task_index": 72,
+      "scenario": "MPLS TE Basic Dynamic Tunnel",
+      "category": "MPLS",
+      "subcategory": "Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "mpls_te",
+        "ospf",
+        "gre"
+      ],
+      "protocol_layers": 3,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 4,
+      "reference_config_commands": 45,
+      "startup_config_commands": 76,
+      "scoring_groups": 4,
+      "test_units": 13,
+      "parameters": 63
+    },
+    {
+      "task_index": 73,
+      "scenario": "MPLS TE Explicit Path Tunnel",
+      "category": "MPLS",
+      "subcategory": "Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "mpls_te",
+        "gre"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 1,
+      "reference_config_commands": 9,
+      "startup_config_commands": 121,
+      "scoring_groups": 3,
+      "test_units": 7,
+      "parameters": 63
+    },
+    {
+      "task_index": 74,
+      "scenario": "MPLS TE Bandwidth Reservation and Admission Control",
+      "category": "MPLS",
+      "subcategory": "Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "mpls_te",
+        "gre"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 4,
+      "devices_configured": 1,
+      "reference_config_commands": 12,
+      "startup_config_commands": 120,
+      "scoring_groups": 3,
+      "test_units": 8,
+      "parameters": 66
+    },
+    {
+      "task_index": 75,
+      "scenario": "MPLS TE Affinity and Link Attribute Flags",
+      "category": "MPLS",
+      "subcategory": "Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "mpls_te",
+        "gre"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 3,
+      "reference_config_commands": 14,
+      "startup_config_commands": 120,
+      "scoring_groups": 4,
+      "test_units": 10,
+      "parameters": 64
+    },
+    {
+      "task_index": 76,
+      "scenario": "MPLS TE Autoroute Announce and Tunnel Metric",
+      "category": "MPLS",
+      "subcategory": "Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "mpls_te"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 1,
+      "reference_config_commands": 3,
+      "startup_config_commands": 130,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 65
+    },
+    {
+      "task_index": 77,
+      "scenario": "MPLS TE Fast Reroute Link Protection",
+      "category": "MPLS",
+      "subcategory": "Traffic Engineering",
+      "complexity": "H",
+      "protocols": [
+        "mpls_te",
+        "gre"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 5,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 1,
+      "reference_config_commands": 12,
+      "startup_config_commands": 147,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 74
+    },
+    {
+      "task_index": 78,
+      "scenario": "MPLS L3VPN VRF and VPNv4 Basics",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "l3vpn",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 7,
+      "devices_configured": 2,
+      "reference_config_commands": 46,
+      "startup_config_commands": 63,
+      "scoring_groups": 5,
+      "test_units": 16,
+      "parameters": 84
+    },
+    {
+      "task_index": 79,
+      "scenario": "MPLS L3VPN BGP PE-CE Routing",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "bgp"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 3,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 12,
+      "startup_config_commands": 103,
+      "scoring_groups": 4,
+      "test_units": 11,
+      "parameters": 86
+    },
+    {
+      "task_index": 80,
+      "scenario": "MPLS L3VPN OSPF PE-CE Routing",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "ospf",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 16,
+      "startup_config_commands": 101,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 86
+    },
+    {
+      "task_index": 81,
+      "scenario": "MPLS L3VPN RIP PE-CE Routing",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "rip",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 26,
+      "startup_config_commands": 101,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 85
+    },
+    {
+      "task_index": 82,
+      "scenario": "MPLS L3VPN Hub and Spoke Route Targets",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "l3vpn",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 6,
+      "links": 5,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 42,
+      "startup_config_commands": 92,
+      "scoring_groups": 4,
+      "test_units": 15,
+      "parameters": 111
+    },
+    {
+      "task_index": 83,
+      "scenario": "MPLS L3VPN VPNv4 Route Reflector",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "bgp",
+        "l3vpn"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 1,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 7,
+      "devices_configured": 4,
+      "reference_config_commands": 64,
+      "startup_config_commands": 85,
+      "scoring_groups": 4,
+      "test_units": 13,
+      "parameters": 77
+    },
+    {
+      "task_index": 84,
+      "scenario": "MPLS L3VPN Inter-AS Option A",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "l3vpn",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 2,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 8,
+      "devices_configured": 2,
+      "reference_config_commands": 28,
+      "startup_config_commands": 120,
+      "scoring_groups": 4,
+      "test_units": 13,
+      "parameters": 72
+    },
+    {
+      "task_index": 85,
+      "scenario": "MPLS L3VPN Inter-AS Option B",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "l3vpn",
+        "bgp"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 2,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 10,
+      "devices_configured": 4,
+      "reference_config_commands": 20,
+      "startup_config_commands": 120,
+      "scoring_groups": 5,
+      "test_units": 17,
+      "parameters": 72
+    },
+    {
+      "task_index": 86,
+      "scenario": "MPLS L3VPN over a GRE Core",
+      "category": "MPLS",
+      "subcategory": "L3VPN",
+      "complexity": "H",
+      "protocols": [
+        "gre",
+        "mpls_ldp",
+        "ospf"
+      ],
+      "protocol_layers": 3,
+      "autonomous_systems": 1,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 22,
+      "startup_config_commands": 90,
+      "scoring_groups": 5,
+      "test_units": 16,
+      "parameters": 90
+    },
+    {
+      "task_index": 87,
+      "scenario": "MPLS L2VPN EoMPLS Port Mode Pseudowire",
+      "category": "MPLS",
+      "subcategory": "L2VPN",
+      "complexity": "M",
+      "protocols": [
+        "l2vpn"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 4,
+      "startup_config_commands": 57,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 48
+    },
+    {
+      "task_index": 88,
+      "scenario": "MPLS L2VPN EoMPLS VLAN Mode Pseudowire",
+      "category": "MPLS",
+      "subcategory": "L2VPN",
+      "complexity": "M",
+      "protocols": [
+        "l2vpn"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 6,
+      "startup_config_commands": 63,
+      "scoring_groups": 3,
+      "test_units": 11,
+      "parameters": 49
+    },
+    {
+      "task_index": 89,
+      "scenario": "MPLS L2VPN AToM Pseudowire Class and Ethernet Interworking",
+      "category": "MPLS",
+      "subcategory": "L2VPN",
+      "complexity": "M",
+      "protocols": [
+        "l2vpn"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 12,
+      "startup_config_commands": 61,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 49
+    },
+    {
+      "task_index": 90,
+      "scenario": "MPLS L2VPN EoMPLS Multi-Service Aggregation",
+      "category": "MPLS",
+      "subcategory": "L2VPN",
+      "complexity": "M",
+      "protocols": [
+        "l2vpn"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 6,
+      "links": 5,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 12,
+      "startup_config_commands": 50,
+      "scoring_groups": 4,
+      "test_units": 17,
+      "parameters": 41
+    },
+    {
+      "task_index": 91,
+      "scenario": "IP Overlay L2TPv3 Pseudowire over IP",
+      "category": "IP Overlay",
+      "subcategory": "IP Tunnels",
+      "complexity": "M",
+      "protocols": [
+        "l2vpn"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 5,
+      "links": 4,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 5,
+      "devices_configured": 2,
+      "reference_config_commands": 10,
+      "startup_config_commands": 43,
+      "scoring_groups": 4,
+      "test_units": 11,
+      "parameters": 49
+    },
+    {
+      "task_index": 92,
+      "scenario": "IP Overlay GRE Tunnel Routing",
+      "category": "IP Overlay",
+      "subcategory": "IP Tunnels",
+      "complexity": "M",
+      "protocols": [
+        "gre",
+        "ospf"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 7,
+      "devices_configured": 2,
+      "reference_config_commands": 16,
+      "startup_config_commands": 26,
+      "scoring_groups": 4,
+      "test_units": 13,
+      "parameters": 57
+    },
+    {
+      "task_index": 93,
+      "scenario": "IP Overlay GRE Keepalive and MTU Adjustment",
+      "category": "IP Overlay",
+      "subcategory": "IP Tunnels",
+      "complexity": "M",
+      "protocols": [],
+      "protocol_layers": 0,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 7,
+      "devices_configured": 2,
+      "reference_config_commands": 8,
+      "startup_config_commands": 40,
+      "scoring_groups": 3,
+      "test_units": 10,
+      "parameters": 62
+    },
+    {
+      "task_index": 94,
+      "scenario": "IP Overlay DMVPN Phase 1 Hub and Spoke",
+      "category": "IP Overlay",
+      "subcategory": "Dynamic Multipoint Overlay",
+      "complexity": "H",
+      "protocols": [
+        "dmvpn",
+        "gre",
+        "eigrp"
+      ],
+      "protocol_layers": 3,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 3,
+      "reference_config_commands": 39,
+      "startup_config_commands": 35,
+      "scoring_groups": 4,
+      "test_units": 15,
+      "parameters": 82
+    },
+    {
+      "task_index": 95,
+      "scenario": "IP Overlay DMVPN Phase 2 Spoke to Spoke",
+      "category": "IP Overlay",
+      "subcategory": "Dynamic Multipoint Overlay",
+      "complexity": "H",
+      "protocols": [
+        "gre",
+        "dmvpn"
+      ],
+      "protocol_layers": 2,
+      "autonomous_systems": 0,
+      "devices": 4,
+      "links": 3,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 8,
+      "devices_configured": 3,
+      "reference_config_commands": 12,
+      "startup_config_commands": 72,
+      "scoring_groups": 4,
+      "test_units": 13,
+      "parameters": 82
+    },
+    {
+      "task_index": 96,
+      "scenario": "IP Overlay IPsec-Protected GRE Tunnel",
+      "category": "IP Overlay",
+      "subcategory": "IP Tunnels",
+      "complexity": "M",
+      "protocols": [
+        "ipsec"
+      ],
+      "protocol_layers": 1,
+      "autonomous_systems": 0,
+      "devices": 3,
+      "links": 2,
+      "device_models": [
+        "C7200"
+      ],
+      "goals": 6,
+      "devices_configured": 2,
+      "reference_config_commands": 24,
+      "startup_config_commands": 40,
+      "scoring_groups": 4,
+      "test_units": 15,
+      "parameters": 64
+    }
+  ]
+}

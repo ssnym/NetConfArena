@@ -1,0 +1,888 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names"
+        },
+        "router3_name": {
+            "type": "choice",
+            "options": "r3_names"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.12.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "wildcard"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        },
+        "_link2": {
+            "type": "random_subnet",
+            "pool": "link2_pool",
+            "prefix_len": "link2_prefix_lens",
+            "no_overlap": [
+                "_link1"
+            ],
+            "default": "192.168.23.0/24"
+        },
+        "link2_network": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "network"
+        },
+        "link2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "netmask"
+        },
+        "link2_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "prefixlen"
+        },
+        "link2_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "wildcard"
+        },
+        "link2_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 1
+        },
+        "link2_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 2
+        },
+        "link2_media": {
+            "type": "choice",
+            "options": "link2_media_options"
+        },
+        "_extra_lo1": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "default": "172.16.0.0/24"
+        },
+        "extra_lo1_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo1",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo1",
+            "attr": "netmask"
+        },
+        "extra_lo1_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo1",
+            "attr": "network"
+        },
+        "_extra_lo2": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1"
+            ],
+            "default": "172.16.1.0/24"
+        },
+        "extra_lo2_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo2",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo2",
+            "attr": "netmask"
+        },
+        "extra_lo2_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo2",
+            "attr": "network"
+        },
+        "_extra_lo3": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2"
+            ],
+            "default": "172.16.2.0/24"
+        },
+        "extra_lo3_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo3",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo3_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo3",
+            "attr": "netmask"
+        },
+        "extra_lo3_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo3",
+            "attr": "network"
+        },
+        "_extra_lo4": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2",
+                "_extra_lo3"
+            ],
+            "default": "172.16.3.0/24"
+        },
+        "extra_lo4_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo4",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo4_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo4",
+            "attr": "netmask"
+        },
+        "extra_lo4_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo4",
+            "attr": "network"
+        },
+        "_extra_lo5": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2",
+                "_extra_lo3",
+                "_extra_lo4"
+            ],
+            "default": "172.16.4.0/24"
+        },
+        "extra_lo5_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo5",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo5_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo5",
+            "attr": "netmask"
+        },
+        "extra_lo5_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo5",
+            "attr": "network"
+        },
+        "_extra_lo6": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2",
+                "_extra_lo3",
+                "_extra_lo4",
+                "_extra_lo5"
+            ],
+            "default": "172.16.5.0/24"
+        },
+        "extra_lo6_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo6",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo6_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo6",
+            "attr": "netmask"
+        },
+        "extra_lo6_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo6",
+            "attr": "network"
+        },
+        "_extra_lo7": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2",
+                "_extra_lo3",
+                "_extra_lo4",
+                "_extra_lo5",
+                "_extra_lo6"
+            ],
+            "default": "172.16.6.0/24"
+        },
+        "extra_lo7_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo7",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo7_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo7",
+            "attr": "netmask"
+        },
+        "extra_lo7_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo7",
+            "attr": "network"
+        },
+        "_extra_lo8": {
+            "type": "random_subnet",
+            "pool": "r1_extra_loopback_pool",
+            "prefix_len": 24,
+            "no_overlap": [
+                "_extra_lo1",
+                "_extra_lo2",
+                "_extra_lo3",
+                "_extra_lo4",
+                "_extra_lo5",
+                "_extra_lo6",
+                "_extra_lo7"
+            ],
+            "default": "172.16.7.0/24"
+        },
+        "extra_lo8_ip": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo8",
+            "attr": "host",
+            "index": 1
+        },
+        "extra_lo8_mask": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo8",
+            "attr": "netmask"
+        },
+        "extra_lo8_network": {
+            "type": "subnet_attr",
+            "subnet": "_extra_lo8",
+            "attr": "network"
+        },
+        "_undertaker_lo": {
+            "type": "random_subnet",
+            "pool": "r3_loopback_pool",
+            "prefix_len": 24,
+            "default": "2.2.2.0/24"
+        },
+        "undertaker_lo_ip": {
+            "type": "subnet_attr",
+            "subnet": "_undertaker_lo",
+            "attr": "host",
+            "index": 1
+        },
+        "undertaker_lo_mask": {
+            "type": "subnet_attr",
+            "subnet": "_undertaker_lo",
+            "attr": "netmask"
+        },
+        "undertaker_lo_network": {
+            "type": "subnet_attr",
+            "subnet": "_undertaker_lo",
+            "attr": "network"
+        }
+    },
+    "scenario": "OSPF Totally NSSA",
+    "goals": "• Configure OSPF on all routers, use the Areas as specified below.\n    Area 0:\n        {{router1_name}}'s {{router1_link1_iface}}\n        {{router2_name}}'s {{router2_link1_iface}}\n    Area 1:\n        {{router2_name}}'s {{router2_link2_iface}}\n        {{router3_name}}'s {{router3_link2_iface}}\n• Router {{router1_name}}: create additional loopbacks:\n    L0: {{extra_lo1_ip}} /24\n    L1: {{extra_lo2_ip}} /24\n    L2: {{extra_lo3_ip}} /24\n    L3: {{extra_lo4_ip}} /24\n• Redistribute these networks into OSPF. Do not use the “network” command to achieve this.\n• Take a look at the routing table of Router {{router3_name}}, you should see all 4 networks. Make sure you can ping them.\n• Change the area type of Area 1 so you don’t see the 4 networks anymore but only 1 default route.\n• Make sure you can still ping the 4 networks.\n• Router {{router1_name}}: create additional loopbacks:\n    L4: {{extra_lo5_ip}} /24\n    L5: {{extra_lo6_ip}} /24\n    L6: {{extra_lo7_ip}} /24\n    L7: {{extra_lo8_ip}} /24\n• Advertise these 4 networks into OSPF Area 0 by using the network command.\n• Take a look at Router {{router3_name}}, you should see all 4 networks.\n• Change the area type of Area 1 so you don’t see these 4 networks anymore but only a default route.\n• Make sure you can still ping the 4 networks.\n• Router {{router3_name}}: configure RIP version 2 and advertise the {{undertaker_lo_network}} network into RIP. (Loopback0 {{undertaker_lo_ip}} /24 is pre-configured.)\n• Router {{router3_name}}: Redistribute RIP into OSPF, you are not allowed to turn Area 1 back into a standard Area.\n• Make sure you still meet all the previous requirements.\n• Make sure you can ping the {{undertaker_lo_network}} network from Router {{router1_name}}.",
+    "startup_configs": {
+        "{{router1_name}}": [
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown"
+        ],
+        "{{router2_name}}": [
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown",
+            "interface {{router2_link2_iface}}",
+            "  ip address {{link2_ip1}} {{link2_mask}}",
+            "  no shutdown"
+        ],
+        "{{router3_name}}": [
+            "interface Loopback0",
+            "  ip address {{undertaker_lo_ip}} {{undertaker_lo_mask}}",
+            "interface {{router3_link2_iface}}",
+            "  ip address {{link2_ip2}} {{link2_mask}}",
+            "  no shutdown"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{extra_lo1_ip}} {{extra_lo1_mask}}",
+            "interface Loopback1",
+            "  ip address {{extra_lo2_ip}} {{extra_lo2_mask}}",
+            "interface Loopback2",
+            "  ip address {{extra_lo3_ip}} {{extra_lo3_mask}}",
+            "interface Loopback3",
+            "  ip address {{extra_lo4_ip}} {{extra_lo4_mask}}",
+            "interface Loopback4",
+            "  ip address {{extra_lo5_ip}} {{extra_lo5_mask}}",
+            "interface Loopback5",
+            "  ip address {{extra_lo6_ip}} {{extra_lo6_mask}}",
+            "interface Loopback6",
+            "  ip address {{extra_lo7_ip}} {{extra_lo7_mask}}",
+            "interface Loopback7",
+            "  ip address {{extra_lo8_ip}} {{extra_lo8_mask}}",
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  redistribute connected subnets",
+            "  network {{extra_lo5_network}} 0.0.0.255 area 0",
+            "  network {{extra_lo6_network}} 0.0.0.255 area 0",
+            "  network {{extra_lo7_network}} 0.0.0.255 area 0",
+            "  network {{extra_lo8_network}} 0.0.0.255 area 0",
+            "  network {{link1_network}} {{link1_wildcard}} area 0"
+        ],
+        "{{router2_name}}": [
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  area 1 nssa no-summary",
+            "  network {{link1_network}} {{link1_wildcard}} area 0",
+            "  network {{link2_network}} {{link2_wildcard}} area 1"
+        ],
+        "{{router3_name}}": [
+            "router ospf 1",
+            "  log-adjacency-changes",
+            "  area 1 nssa",
+            "  redistribute rip subnets",
+            "  network {{link2_network}} {{link2_wildcard}} area 1",
+            "router rip",
+            "  version 2",
+            "  network 2.0.0.0"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Configure OSPF on all routers, use the Areas as specified below.\n    Area 0:\n        {{router1_name}}'s {{router1_link1_iface}}\n        {{router2_name}}'s {{router2_link1_iface}}\n    Area 1:\n        {{router2_name}}'s {{router2_link2_iface}}\n        {{router3_name}}'s {{router3_link2_iface}}",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router1_name}}",
+                    "command": "show ip ospf interface brief",
+                    "expected_result": [
+                        {
+                            "interface": "{{router1_link1_iface}}",
+                            "area": "0"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip ospf interface brief",
+                    "expected_result": [
+                        {
+                            "interface": "{{router2_link1_iface}}",
+                            "area": "0"
+                        },
+                        {
+                            "interface": "{{router2_link2_iface}}",
+                            "area": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-3",
+                    "node": "{{router3_name}}",
+                    "command": "show ip ospf interface brief",
+                    "expected_result": [
+                        {
+                            "interface": "{{router3_link2_iface}}",
+                            "area": "1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "goal": "Router {{router1_name}}: create additional loopbacks:\n    L0: {{extra_lo1_ip}} /24\n    L1: {{extra_lo2_ip}} /24\n    L2: {{extra_lo3_ip}} /24\n    L3: {{extra_lo4_ip}} /24",
+            "testcase": []
+        },
+        {
+            "goal": "Redistribute these networks into OSPF. Do not use the “network” command to achieve this.",
+            "testcase": [
+                {
+                    "id": "2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip protocols | section ospf",
+                    "expected_result": {
+                        "redistribute": {
+                            "op": "contains_all",
+                            "value": [
+                                "connected, includes subnets in redistribution"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Take a look at the routing table of Router {{router3_name}}, you should see all 4 networks. Make sure you can ping them.",
+            "testcase": []
+        },
+        {
+            "goal": "Change the area type of Area 1 so you don’t see the 4 networks anymore but only 1 default route.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo1_network}} {{extra_lo1_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo2_network}} {{extra_lo2_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-3",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo3_network}} {{extra_lo3_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-4",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo4_network}} {{extra_lo4_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "3-5",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route 0.0.0.0 0.0.0.0",
+                    "expected_result": [
+                        {
+                            "protocol": "ospf",
+                            "nexthop_ip": "{{link2_ip1}}"
+                        }
+                    ],
+                    "mode": "strict"
+                }
+            ]
+        },
+        {
+            "goal": "Make sure you can still ping the 4 networks.",
+            "testcase": [
+                {
+                    "id": "4-1",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo1_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "4-2",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo2_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "4-3",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo3_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "4-4",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo4_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Router {{router1_name}}: create additional loopbacks:\n    L4: {{extra_lo5_ip}} /24\n    L5: {{extra_lo6_ip}} /24\n    L6: {{extra_lo7_ip}} /24\n    L7: {{extra_lo8_ip}} /24",
+            "testcase": []
+        },
+        {
+            "goal": "Advertise these 4 networks into OSPF Area 0 by using the network command.",
+            "testcase": [
+                {
+                    "id": "5",
+                    "node": "{{router1_name}}",
+                    "command": "show ip ospf interface brief",
+                    "expected_result": [
+                        {
+                            "interface": "Loopback4",
+                            "area": "0"
+                        },
+                        {
+                            "interface": "Loopback5",
+                            "area": "0"
+                        },
+                        {
+                            "interface": "Loopback6",
+                            "area": "0"
+                        },
+                        {
+                            "interface": "Loopback7",
+                            "area": "0"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "goal": "Take a look at Router {{router3_name}}, you should see all 4 networks.",
+            "testcase": []
+        },
+        {
+            "goal": "Change the area type of Area 1 so you don’t see these 4 networks anymore but only a default route.",
+            "testcase": [
+                {
+                    "id": "6-1",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo5_network}} {{extra_lo5_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "6-2",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo6_network}} {{extra_lo6_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "6-3",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo7_network}} {{extra_lo7_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "6-4",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route {{extra_lo8_network}} {{extra_lo8_mask}}",
+                    "expected_result": {
+                        "op": "empty"
+                    }
+                },
+                {
+                    "id": "6-5",
+                    "node": "{{router3_name}}",
+                    "command": "show ip route 0.0.0.0 0.0.0.0",
+                    "expected_result": [
+                        {
+                            "protocol": "ospf",
+                            "nexthop_ip": "{{link2_ip1}}"
+                        }
+                    ],
+                    "mode": "strict"
+                }
+            ]
+        },
+        {
+            "goal": "Make sure you can still ping the 4 networks.",
+            "testcase": [
+                {
+                    "id": "7-1",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo5_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "7-2",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo6_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "7-3",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo7_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                },
+                {
+                    "id": "7-4",
+                    "node": "{{router3_name}}",
+                    "command": "ping {{extra_lo8_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Configure RIP version 2 and advertise the {{undertaker_lo_network}} network into RIP.",
+            "testcase": [
+                {
+                    "id": "8",
+                    "node": "{{router3_name}}",
+                    "command": "show ip protocols | section rip",
+                    "expected_result": {
+                        "networks": [
+                            "2.0.0.0"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Router {{router3_name}}: Redistribute RIP into OSPF, you are not allowed to turn Area 1 back into a standard Area.",
+            "testcase": [
+                {
+                    "id": "9",
+                    "node": "{{router3_name}}",
+                    "command": "show ip protocols | section ospf",
+                    "expected_result": {
+                        "redistribute": {
+                            "op": "contains_all",
+                            "value": [
+                                "rip, includes subnets in redistribution"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Make sure you still meet all the previous requirements.",
+            "testcase": []
+        },
+        {
+            "goal": "Make sure you can ping the {{undertaker_lo_network}} network from Router {{router1_name}}.",
+            "testcase": [
+                {
+                    "id": "10",
+                    "node": "{{router1_name}}",
+                    "command": "ping {{undertaker_lo_ip}}",
+                    "expected_result": {
+                        "success_pct": {
+                            "op": ">",
+                            "value": "0"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2",
+            "r3"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            },
+            {
+                "id": "link2",
+                "nodes": [
+                    "r2",
+                    "r3"
+                ],
+                "media": "{{link2_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -389.0,
+                "y": -52.0
+            },
+            "r2": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -221.0,
+                "y": -52.0
+            },
+            "r3": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router3_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -43.0,
+                "y": -54.0
+            }
+        },
+        "notes": [
+            {
+                "text": "{{link1_ip1}}",
+                "x": -340.0,
+                "y": -58.0
+            },
+            {
+                "text": "{{link1_ip2}}",
+                "x": -272.0,
+                "y": -58.0
+            },
+            {
+                "text": "{{link1_network}}/{{link1_prefix_len}}",
+                "x": -340.0,
+                "y": -20.0
+            },
+            {
+                "text": "{{link2_ip1}}",
+                "x": -172.0,
+                "y": -58.0
+            },
+            {
+                "text": "{{link2_ip2}}",
+                "x": -90.0,
+                "y": -58.0
+            },
+            {
+                "text": "{{link2_network}}/{{link2_prefix_len}}",
+                "x": -172.0,
+                "y": -20.0
+            },
+            {
+                "text": "Area 0",
+                "x": -400.0,
+                "y": -130.0
+            },
+            {
+                "text": "Area 1",
+                "x": -170.0,
+                "y": -130.0
+            }
+        ],
+        "ellipses": [
+            {
+                "border_style": 2,
+                "fill_color": "#ffff7f",
+                "height": 200.0,
+                "width": 230.0,
+                "x": -490.0,
+                "y": -137.0,
+                "z": -1.0
+            },
+            {
+                "border_style": 2,
+                "fill_color": "#aaffff",
+                "height": 200.0,
+                "width": 230.0,
+                "x": -270.0,
+                "y": -137.0,
+                "z": -1.0
+            }
+        ]
+    }
+}

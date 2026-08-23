@@ -1,0 +1,63 @@
+r1_names:
+- Luigi
+- Atlas
+- Beacon
+- Cobalt
+- Delta
+- Ember
+- Falcon
+- Glacier
+- Harbor
+r2_names:
+- Mario
+- Ivory
+- Jasper
+- Kepler
+- Lagoon
+- Matrix
+- Nimbus
+- Orion
+- Prairie
+r3_names:
+- Toad
+- Quartz
+- Rocket
+- Summit
+- Titan
+- Union
+- Vector
+- Willow
+- Xray
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 24
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 24
+r2_loopback0_pool: 1.0.0.0/8
+r2_loopback0_prefix_lens:
+- 24
+as1_options:
+- 1
+- 10
+- 65001
+as2_options:
+- 2
+- 20
+- 65002
+as3_options:
+- 3
+- 30
+- 65003
+community1_options:
+- "100:100"
+community_delete_options:
+- "200:200"
+community3_options:
+- "300:300"
+community_add_options:
+- "400:400"

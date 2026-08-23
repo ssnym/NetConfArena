@@ -1,0 +1,505 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "router3_name": {
+            "type": "choice",
+            "options": "r3_names",
+            "different_from": [
+                "router1_name",
+                "router2_name"
+            ]
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens",
+            "default": "192.168.1.0/24"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "wildcard"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_cidr": {
+            "type": "format",
+            "template": "{link1_network}/{link1_prefix_len}"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "link2_media": {
+            "type": "choice",
+            "options": "link2_media_options"
+        },
+        "_link2": {
+            "type": "random_subnet",
+            "pool": "link2_pool",
+            "prefix_len": "link2_prefix_lens",
+            "default": "192.168.2.0/24",
+            "no_overlap": [
+                "_link1"
+            ]
+        },
+        "link2_network": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "network"
+        },
+        "link2_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "netmask"
+        },
+        "link2_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "wildcard"
+        },
+        "link2_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "prefixlen"
+        },
+        "link2_cidr": {
+            "type": "format",
+            "template": "{link2_network}/{link2_prefix_len}"
+        },
+        "link2_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 1
+        },
+        "link2_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link2",
+            "attr": "host",
+            "index": 2
+        },
+        "_router1_loopback0": {
+            "type": "random_subnet",
+            "pool": "r1_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "1.1.1.1/32"
+        },
+        "router1_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "network"
+        },
+        "router1_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "netmask"
+        },
+        "router1_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "wildcard"
+        },
+        "router1_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router1_loopback0",
+            "attr": "prefixlen"
+        },
+        "router1_loopback0_cidr": {
+            "type": "format",
+            "template": "{router1_loopback0_network}/{router1_loopback0_prefix_len}"
+        },
+        "_router2_loopback0": {
+            "type": "random_subnet",
+            "pool": "r2_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "2.2.2.2/32"
+        },
+        "router2_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router2_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "network"
+        },
+        "router2_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "netmask"
+        },
+        "router2_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "wildcard"
+        },
+        "router2_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router2_loopback0",
+            "attr": "prefixlen"
+        },
+        "router2_loopback0_cidr": {
+            "type": "format",
+            "template": "{router2_loopback0_network}/{router2_loopback0_prefix_len}"
+        },
+        "_router3_loopback0": {
+            "type": "random_subnet",
+            "pool": "r3_loopback_pool",
+            "prefix_len": [
+                32
+            ],
+            "default": "3.3.3.3/32"
+        },
+        "router3_loopback0_ip": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "host",
+            "index": 1
+        },
+        "router3_loopback0_network": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "network"
+        },
+        "router3_loopback0_mask": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "netmask"
+        },
+        "router3_loopback0_wildcard": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "wildcard"
+        },
+        "router3_loopback0_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_router3_loopback0",
+            "attr": "prefixlen"
+        },
+        "router3_loopback0_cidr": {
+            "type": "format",
+            "template": "{router3_loopback0_network}/{router3_loopback0_prefix_len}"
+        }
+    },
+    "scenario": "MPLS LDP Targeted Remote Session",
+    "goals": "• MPLS forwarding and LDP are already enabled on both core links, all LDP sessions are operational, and every router already uses its Loopback0 address as LDP router-id.\n• {{router1_name}} and {{router3_name}} are not directly connected: they only reach each other through {{router2_name}}. A future layer 2 service will need labels exchanged directly between them.\n• Build a directly targeted LDP session between {{router1_name}} and {{router3_name}}, using their Loopback0 addresses ({{router1_loopback0_ip}} and {{router3_loopback0_ip}}) as the session endpoints. Both routers must actively send the targeted hellos.\n• Do not add any new physical link, and do not enable MPLS on any interface that does not already have it: {{router2_name}} must still have MPLS enabled on exactly its two core interfaces.\n• The new session must reach the operational state and be discovered through targeted hellos, while the two existing link-local sessions stay operational.",
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2",
+            "r3"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            },
+            {
+                "id": "link2",
+                "nodes": [
+                    "r2",
+                    "r3"
+                ],
+                "media": "{{link2_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -400.0,
+                "y": 0.0
+            },
+            "r2": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -200.0,
+                "y": 0.0
+            },
+            "r3": {
+                "type": "C7200",
+                "label": {
+                    "text": "{{router3_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        "notes": [
+            {
+                "color": "#0000ff",
+                "text": "{{link1_network}} /{{link1_prefix_len}}",
+                "x": -300.0,
+                "y": -30.0
+            },
+            {
+                "color": "#0000ff",
+                "text": "{{link2_network}} /{{link2_prefix_len}}",
+                "x": -100.0,
+                "y": -30.0
+            }
+        ]
+    },
+    "startup_configs": {
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{router1_loopback0_ip}} {{router1_loopback0_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown",
+            "router ospf 1",
+            "  router-id {{router1_loopback0_ip}}",
+            "  network {{router1_loopback0_ip}} 0.0.0.0 area 0",
+            "  network {{link1_network}} {{link1_wildcard}} area 0",
+            "mpls label protocol ldp",
+            "mpls ldp router-id Loopback0 force",
+            "interface {{router1_link1_iface}}",
+            "  mpls ip"
+        ],
+        "{{router2_name}}": [
+            "interface Loopback0",
+            "  ip address {{router2_loopback0_ip}} {{router2_loopback0_mask}}",
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown",
+            "interface {{router2_link2_iface}}",
+            "  ip address {{link2_ip1}} {{link2_mask}}",
+            "  no shutdown",
+            "router ospf 1",
+            "  router-id {{router2_loopback0_ip}}",
+            "  network {{router2_loopback0_ip}} 0.0.0.0 area 0",
+            "  network {{link1_network}} {{link1_wildcard}} area 0",
+            "  network {{link2_network}} {{link2_wildcard}} area 0",
+            "mpls label protocol ldp",
+            "mpls ldp router-id Loopback0 force",
+            "interface {{router2_link1_iface}}",
+            "  mpls ip",
+            "interface {{router2_link2_iface}}",
+            "  mpls ip"
+        ],
+        "{{router3_name}}": [
+            "interface Loopback0",
+            "  ip address {{router3_loopback0_ip}} {{router3_loopback0_mask}}",
+            "interface {{router3_link2_iface}}",
+            "  ip address {{link2_ip2}} {{link2_mask}}",
+            "  no shutdown",
+            "router ospf 1",
+            "  router-id {{router3_loopback0_ip}}",
+            "  network {{router3_loopback0_ip}} 0.0.0.0 area 0",
+            "  network {{link2_network}} {{link2_wildcard}} area 0",
+            "mpls label protocol ldp",
+            "mpls ldp router-id Loopback0 force",
+            "interface {{router3_link2_iface}}",
+            "  mpls ip"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "mpls ldp neighbor {{router3_loopback0_ip}} targeted ldp"
+        ],
+        "{{router3_name}}": [
+            "mpls ldp neighbor {{router1_loopback0_ip}} targeted ldp"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Build a directly targeted LDP session between {{router1_name}} and {{router3_name}}, using their Loopback0 addresses as the session endpoints.",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router1_name}}",
+                    "command": "show running-config | include mpls ldp neighbor",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "mpls ldp neighbor {{router3_loopback0_ip}} targeted ldp"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router3_name}}",
+                    "command": "show running-config | include mpls ldp neighbor",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "line": "mpls ldp neighbor {{router1_loopback0_ip}} targeted ldp"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "The new session must reach the operational state and be discovered through targeted hellos, while the two existing link-local sessions stay operational.",
+            "testcase": [
+                {
+                    "id": "2-1",
+                    "node": "{{router1_name}}",
+                    "command": "show mpls ldp neighbor",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "peer_ldp_ident": "{{router3_loopback0_ip}}:0",
+                                "local_ldp_ident": "{{router1_loopback0_ip}}:0",
+                                "state": "Oper",
+                                "targeted": "Yes"
+                            },
+                            {
+                                "peer_ldp_ident": "{{router2_loopback0_ip}}:0",
+                                "local_ldp_ident": "{{router1_loopback0_ip}}:0",
+                                "state": "Oper",
+                                "targeted": "No"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "2-2",
+                    "node": "{{router3_name}}",
+                    "command": "show mpls ldp neighbor",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "peer_ldp_ident": "{{router1_loopback0_ip}}:0",
+                                "local_ldp_ident": "{{router3_loopback0_ip}}:0",
+                                "state": "Oper",
+                                "targeted": "Yes"
+                            },
+                            {
+                                "peer_ldp_ident": "{{router2_loopback0_ip}}:0",
+                                "local_ldp_ident": "{{router3_loopback0_ip}}:0",
+                                "state": "Oper",
+                                "targeted": "No"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "2-3",
+                    "node": "{{router2_name}}",
+                    "command": "show mpls ldp neighbor",
+                    "expected_result": {
+                        "op": "contains_all",
+                        "value": [
+                            {
+                                "peer_ldp_ident": "{{router1_loopback0_ip}}:0",
+                                "local_ldp_ident": "{{router2_loopback0_ip}}:0",
+                                "state": "Oper"
+                            },
+                            {
+                                "peer_ldp_ident": "{{router3_loopback0_ip}}:0",
+                                "local_ldp_ident": "{{router2_loopback0_ip}}:0",
+                                "state": "Oper"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "Do not add any new physical link, and do not enable MPLS on any interface that does not already have it: {{router2_name}} must still have MPLS enabled on exactly its two core interfaces.",
+            "testcase": [
+                {
+                    "id": "3-1",
+                    "node": "{{router2_name}}",
+                    "command": "show mpls interfaces",
+                    "expected_result": {
+                        "op": "count_match",
+                        "match": {
+                            "mpls_ip": "Yes"
+                        },
+                        "count": {
+                            "op": "==",
+                            "value": 2
+                        }
+                    }
+                },
+                {
+                    "id": "3-2",
+                    "node": "{{router1_name}}",
+                    "command": "show mpls interfaces",
+                    "expected_result": {
+                        "op": "count_match",
+                        "match": {
+                            "mpls_ip": "Yes"
+                        },
+                        "count": {
+                            "op": "==",
+                            "value": 1
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

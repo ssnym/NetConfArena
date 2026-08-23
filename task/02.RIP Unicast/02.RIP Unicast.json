@@ -1,0 +1,286 @@
+{
+    "params": {
+        "router1_name": {
+            "type": "choice",
+            "options": "r1_names"
+        },
+        "router2_name": {
+            "type": "choice",
+            "options": "r2_names",
+            "different_from": [
+                "router1_name"
+            ]
+        },
+        "_loopback1": {
+            "type": "random_subnet",
+            "pool": "r1_loopback_pool",
+            "prefix_len": "r1_loopback_prefix_lens"
+        },
+        "router1_loopback_ip": {
+            "type": "subnet_attr",
+            "subnet": "_loopback1",
+            "attr": "host",
+            "index": 1
+        },
+        "router1_loopback_mask": {
+            "type": "subnet_attr",
+            "subnet": "_loopback1",
+            "attr": "netmask"
+        },
+        "router1_loopback_network": {
+            "type": "subnet_attr",
+            "subnet": "_loopback1",
+            "attr": "network"
+        },
+        "router1_loopback_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_loopback1",
+            "attr": "prefixlen"
+        },
+        "_loopback2": {
+            "type": "random_subnet",
+            "pool": "r2_loopback_pool",
+            "prefix_len": "r2_loopback_prefix_lens"
+        },
+        "router2_loopback_ip": {
+            "type": "subnet_attr",
+            "subnet": "_loopback2",
+            "attr": "host",
+            "index": 1
+        },
+        "router2_loopback_mask": {
+            "type": "subnet_attr",
+            "subnet": "_loopback2",
+            "attr": "netmask"
+        },
+        "router2_loopback_network": {
+            "type": "subnet_attr",
+            "subnet": "_loopback2",
+            "attr": "network"
+        },
+        "router2_loopback_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_loopback2",
+            "attr": "prefixlen"
+        },
+        "_link1": {
+            "type": "random_subnet",
+            "pool": "link1_pool",
+            "prefix_len": "link1_prefix_lens"
+        },
+        "link1_network": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "network"
+        },
+        "link1_mask": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "netmask"
+        },
+        "link1_prefix_len": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "prefixlen"
+        },
+        "link1_ip1": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 1
+        },
+        "link1_ip2": {
+            "type": "subnet_attr",
+            "subnet": "_link1",
+            "attr": "host",
+            "index": 2
+        },
+        "link1_media": {
+            "type": "choice",
+            "options": "link1_media_options"
+        }
+    },
+    "scenario": "RIP Unicast",
+    "goals": "• Configure RIP version 2 on both routers, achieve full connectivity for all networks (including the loopbacks).\n• You are not allowed to send RIP packets by multicast or broadcast.",
+    "startup_configs": {
+        "{{router1_name}}": [
+            "interface Loopback0",
+            "  ip address {{router1_loopback_ip}} {{router1_loopback_mask}}",
+            "interface {{router1_link1_iface}}",
+            "  ip address {{link1_ip1}} {{link1_mask}}",
+            "  no shutdown"
+        ],
+        "{{router2_name}}": [
+            "interface Loopback0",
+            "  ip address {{router2_loopback_ip}} {{router2_loopback_mask}}",
+            "interface {{router2_link1_iface}}",
+            "  ip address {{link1_ip2}} {{link1_mask}}",
+            "  no shutdown"
+        ]
+    },
+    "groundtruth_configs": {
+        "{{router1_name}}": [
+            "router rip",
+            "  version 2",
+            "  passive-interface {{router1_link1_iface}}",
+            "  passive-interface Loopback0",
+            "  network 0.0.0.0",
+            "  neighbor {{link1_ip2}}",
+            "  no auto-summary"
+        ],
+        "{{router2_name}}": [
+            "router rip",
+            "  version 2",
+            "  passive-interface {{router2_link1_iface}}",
+            "  passive-interface Loopback0",
+            "  network 0.0.0.0",
+            "  neighbor {{link1_ip1}}",
+            "  no auto-summary"
+        ]
+    },
+    "testcases": [
+        {
+            "goal": "Configure RIP version 2 on both routers, achieve full connectivity for all networks (including the loopbacks).",
+            "testcase": [
+                {
+                    "id": "1-1",
+                    "node": "{{router1_name}}",
+                    "command": "show ip protocols | section rip",
+                    "expected_result": {
+                        "networks": [
+                            "{{link1_network}}/{{link1_prefix_len}}",
+                            "{{router1_loopback_network}}/{{router1_loopback_prefix_len}}"
+                        ]
+                    }
+                },
+                {
+                    "id": "1-2",
+                    "node": "{{router2_name}}",
+                    "command": "show ip protocols | section rip",
+                    "expected_result": {
+                        "networks": [
+                            "{{link1_network}}/{{link1_prefix_len}}",
+                            "{{router2_loopback_network}}/{{router2_loopback_prefix_len}}"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "goal": "You are not allowed to send RIP packets by multicast or broadcast.",
+            "testcase": [
+                {
+                    "id": "2-1",
+                    "node": "{{router1_name}}",
+                    "command": "show ip protocols | section rip",
+                    "expected_result": {
+                        "passive_interfaces": {
+                            "op": "contains_all",
+                            "value": [
+                                "Loopback0",
+                                "{{router1_link1_iface}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "2-2",
+                    "node": "{{router1_name}}",
+                    "command": "show ip protocols | section rip",
+                    "expected_result": {
+                        "neighbors": {
+                            "op": "contains_all",
+                            "value": [
+                                "{{link1_ip2}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "2-3",
+                    "node": "{{router2_name}}",
+                    "command": "show ip protocols | section rip",
+                    "expected_result": {
+                        "passive_interfaces": {
+                            "op": "contains_all",
+                            "value": [
+                                "Loopback0",
+                                "{{router2_link1_iface}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "2-4",
+                    "node": "{{router2_name}}",
+                    "command": "show ip protocols | section rip",
+                    "expected_result": {
+                        "neighbors": {
+                            "op": "contains_all",
+                            "value": [
+                                "{{link1_ip1}}"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "topology_model": {
+        "nodes": [
+            "r1",
+            "r2"
+        ],
+        "links": [
+            {
+                "id": "link1",
+                "nodes": [
+                    "r1",
+                    "r2"
+                ],
+                "media": "{{link1_media}}"
+            }
+        ]
+    },
+    "topology_attributes": {
+        "nodes": {
+            "r1": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router1_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -400.695526217,
+                "y": -125.944696834
+            },
+            "r2": {
+                "type": "C3600",
+                "label": {
+                    "text": "{{router2_name}}",
+                    "x": 19.5,
+                    "y": -25.0
+                },
+                "x": -96.6396103068,
+                "y": -127.358910397
+            }
+        },
+        "notes": [
+            {
+                "text": "{{link1_network}}/{{link1_prefix_len}}",
+                "x": -285.671139599,
+                "y": -129.379725677
+            },
+            {
+                "text": "{{link1_ip1}}",
+                "x": -336.582827845,
+                "y": -126.752308679
+            },
+            {
+                "text": "{{link1_ip2}}",
+                "x": -120.915259583,
+                "y": -128.367532368
+            }
+        ]
+    }
+}

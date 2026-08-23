@@ -1,0 +1,14 @@
+r1_names: [Hogan, Ballast, Alpha, North, Aria]
+r2_names: [Piper, Beam, Beta, East, Brio]
+r3_names: [Undertaker, Brick, Gamma, South, Coda]
+
+r1_extra_loopback_pool: "172.16.0.0/16"
+r3_loopback_pool: "2.0.0.0/8"
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24, 25, 26]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24, 25, 26]
+
+link1_media_options: [ethernet, fastethernet, serial]
+link2_media_options: [ethernet, fastethernet, serial]

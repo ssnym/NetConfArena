@@ -1,0 +1,192 @@
+# Router capabilities probed from the local GNS3/Dynamips environment.
+#
+# Port names use Python format strings. "{slot}" is replaced by the adapter/slot
+# number used by GNS3, and "{port}" is replaced by the physical port number.
+
+default_router_type: C3600
+default_module_options: [NM-4T, NM-4E]
+
+modules:
+  NM-1E:
+    media: ethernet
+    port_numbers: [0]
+    interface_template: "Ethernet{slot}/{port}"
+    layer3: true
+  NM-4E:
+    media: ethernet
+    port_numbers: [0, 1, 2, 3]
+    interface_template: "Ethernet{slot}/{port}"
+    layer3: true
+  NM-1FE-TX:
+    media: fastethernet
+    port_numbers: [0]
+    interface_template: "FastEthernet{slot}/{port}"
+    layer3: true
+  NM-4T:
+    media: serial
+    port_numbers: [0, 1, 2, 3]
+    interface_template: "Serial{slot}/{port}"
+    layer3: true
+  NM-16ESW:
+    media: fastethernet
+    port_numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    interface_template: "FastEthernet{slot}/{port}"
+    layer3: false
+
+  GT96100-FE:
+    layer3: true
+    ports:
+      - {port_number: 0, media: fastethernet, interface: "FastEthernet{slot}/0"}
+      - {port_number: 1, media: fastethernet, interface: "FastEthernet{slot}/1"}
+      - {port_number: 2, media: serial, interface: "Serial{slot}/0"}
+      - {port_number: 3, media: serial, interface: "Serial{slot}/1"}
+      - {port_number: 4, media: serial, interface: "Serial{slot}/2"}
+
+  C7200-IO-FE:
+    media: fastethernet
+    port_numbers: [0]
+    interface_template: "FastEthernet{slot}/{port}"
+    layer3: true
+  C7200-IO-2FE:
+    media: fastethernet
+    port_numbers: [0, 1]
+    interface_template: "FastEthernet{slot}/{port}"
+    layer3: true
+  C7200-IO-GE-E:
+    media: gigabitethernet
+    port_numbers: [0]
+    interface_template: "GigabitEthernet{slot}/{port}"
+    layer3: true
+  PA-FE-TX:
+    media: fastethernet
+    port_numbers: [0]
+    interface_template: "FastEthernet{slot}/{port}"
+    layer3: true
+  PA-2FE-TX:
+    media: fastethernet
+    port_numbers: [0, 1]
+    interface_template: "FastEthernet{slot}/{port}"
+    layer3: true
+  PA-GE:
+    media: gigabitethernet
+    port_numbers: [0]
+    interface_template: "GigabitEthernet{slot}/{port}"
+    layer3: true
+  PA-4E:
+    media: ethernet
+    port_numbers: [0, 1, 2, 3]
+    interface_template: "Ethernet{slot}/{port}"
+    layer3: true
+  PA-8E:
+    media: ethernet
+    port_numbers: [0, 1, 2, 3, 4, 5, 6, 7]
+    interface_template: "Ethernet{slot}/{port}"
+    layer3: true
+  PA-4T+:
+    media: serial
+    port_numbers: [0, 1, 2, 3]
+    interface_template: "Serial{slot}/{port}"
+    layer3: true
+  PA-8T:
+    media: serial
+    port_numbers: [0, 1, 2, 3, 4, 5, 6, 7]
+    interface_template: "Serial{slot}/{port}"
+    layer3: true
+  PA-A1:
+    media: atm
+    port_numbers: [0]
+    interface_template: "ATM{slot}/{port}"
+    layer3: false
+  PA-POS-OC3:
+    media: pos
+    port_numbers: [0]
+    interface_template: "POS{slot}/{port}"
+    layer3: false
+
+platforms:
+  C3600:
+    template: "Cisco 3640 124-25d"
+    platform: c3600
+    slot_range: [0, 3]
+    slot_start: 0
+    wic_range: []
+    slot_modules:
+      "*": [NM-1E, NM-4E, NM-1FE-TX, NM-4T, NM-16ESW]
+    media_modules:
+      ethernet: [NM-4E]
+      fastethernet: [NM-1FE-TX]
+      serial: [NM-4T]
+
+  C3745:
+    template: "Cisco 3745 124-25d"
+    platform: c3745
+    slot_range: [0, 4]
+    slot_start: 1
+    wic_range: [0, 2]
+    template_defaults:
+      slot0: GT96100-FE
+      slot1: NM-1FE-TX
+      slot2: NM-4T
+      slot3: ""
+      slot4: ""
+      wic0: WIC-1T
+      wic1: WIC-1T
+      wic2: WIC-1T
+    slot_modules:
+      slot0: [GT96100-FE]
+      slot1: [NM-1FE-TX, NM-4T, NM-16ESW]
+      slot2: [NM-1FE-TX, NM-4T, NM-16ESW]
+      slot3: [NM-1FE-TX, NM-4T, NM-16ESW]
+      slot4: [NM-1FE-TX, NM-4T, NM-16ESW]
+    wic_modules:
+      wic0: [WIC-1T]
+      wic1: [WIC-1T]
+      wic2: [WIC-1T]
+    media_modules:
+      fastethernet: [NM-1FE-TX]
+      serial: [NM-4T]
+
+  C3725:
+    template: "Cisco 3725"
+    platform: c3725
+    slot_range: [0, 4]
+    slot_start: 1
+    wic_range: [0, 2]
+    template_defaults:
+      slot0: GT96100-FE
+      slot1: NM-1FE-TX
+      slot2: NM-4T
+      slot3: ""
+      slot4: ""
+      wic0: WIC-1T
+      wic1: WIC-1T
+      wic2: WIC-1T
+    slot_modules:
+      slot0: [GT96100-FE]
+      slot1: [NM-1FE-TX, NM-4T, NM-16ESW]
+      slot2: [NM-1FE-TX, NM-4T, NM-16ESW]
+      slot3: [NM-1FE-TX, NM-4T, NM-16ESW]
+      slot4: [NM-1FE-TX, NM-4T, NM-16ESW]
+    wic_modules:
+      wic0: [WIC-1T]
+      wic1: [WIC-1T]
+      wic2: [WIC-1T]
+    media_modules:
+      fastethernet: [NM-1FE-TX]
+      serial: [NM-4T]
+
+  C7200:
+    template: "Cisco 7200 124-24.T5"
+    platform: c7200
+    slot_range: [0, 6]
+    slot_start: 1
+    wic_range: []
+    template_defaults:
+      slot0: C7200-IO-FE
+    slot_modules:
+      "*": [C7200-IO-FE, C7200-IO-2FE, C7200-IO-GE-E, PA-FE-TX, PA-2FE-TX, PA-GE, PA-4E, PA-8E, PA-4T+, PA-8T, PA-A1, PA-POS-OC3]
+    media_modules:
+      ethernet: [PA-4E]
+      fastethernet: [PA-2FE-TX]
+      gigabitethernet: [PA-GE]
+      serial: [PA-4T+]

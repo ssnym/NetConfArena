@@ -1,0 +1,33 @@
+r1_names: [Homer, Orion, Atlas, Apollo, Vulcan]
+r2_names: [Lisa, Lyra, Vega, Celeste, Phoebe]
+r3_names: [Bart, Ajax, Felix, Jasper, Milo]
+r4_names: [Maggie, Luna, Iris, Ceres, Rhea]
+r5_names: [Marge, Hera, Athena, Freya, Selene]
+
+sw1_names: [SW1, LAN-A, Access-A]
+sw2_names: [SW2, LAN-B, Access-B]
+
+lan1_pool: "192.168.1.0/24"
+lan1_prefix_lens: [24]
+lan2_pool: "192.168.2.0/24"
+lan2_prefix_lens: [24]
+
+lan1_media_options: [ethernet, fastethernet]
+lan2_media_options: [ethernet, fastethernet]
+
+r3_lan1_priorities: [90]
+r5_lan1_priorities: [100]
+
+r1_ospf_router_ids:
+  - "222.222.222.222"
+  - "223.223.223.223"
+  - "224.224.224.224"
+  - "225.225.225.225"
+  - "226.226.226.226"
+
+r4_ospf_router_ids:
+  - "211.211.211.211"
+  - "212.212.212.212"
+  - "213.213.213.213"
+  - "214.214.214.214"
+  - "215.215.215.215"
