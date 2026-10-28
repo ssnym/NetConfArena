@@ -1,41 +1,89 @@
 #!/usr/bin/env python3
-"""Cisco->SONiC (FRR) converter for NetConfArena BGP tasks, v2.
-Rule tables; anything without a rule is reported, never guessed.
+"""Cisco->SONiC (FRR 8.4.x) converter for NetConfArena BGP tasks, v3.
+Rule tables validated against a live FRR 8.4.4 instance; anything without a
+rule is reported, never guessed.
 Usage: python3 scripts/cisco2sonic_bgp.py --src task --dst sonic-gen [--only REGEX]
 """
 import argparse, collections, copy, glob, json, os, re, shlex, shutil
 
 PHRE = re.compile(r'\{\{\s*([^}\s]+)\s*\}\}')
 DEFAULT_LO0 = "10.1.0.1/32"
-DROP = {"no auto-summary", "no synchronization", "bgp log-neighbor-changes",
-        "log-adjacency-changes", "ip bgp-community new-format", "version 2", "!"}
+DROP = {"no auto-summary", "no synchronization", "synchronization",
+        "bgp log-neighbor-changes", "log-adjacency-changes",
+        "ip bgp-community new-format", "version 2", "!"}
+IFACE_DROP = {"no cdp enable", "no mips", "no ip mroute", "no ip redirect",
+              "no ip unreachables"}
 BGP_PASS = (r"bgp confederation (identifier|peers) .+", r"bgp cluster-id \S+",
             r"bgp always-compare-med", r"bgp router-id \S+",
             r"bgp bestpath (as-path ignore|compare-routerid)")
+# BGP lines with no FRR equivalent; dropped with a note (task stays convertible)
+BGP_DROP = (r"bgp dmzlink-bw", r"bgp maxas-limit \d+",
+            r"default (local-preference|origin|metric) \S+",
+            r"no bgp default route-target filter")
+NBR_DROP = (r"maximum-as-limit \d+",)
 NBR_GLOBAL = r"(remote-as \S+|ebgp-multihop( \d+)?|update-source \S+|peer-group( \S+)?)"
 NBR_AF = (r"next-hop-self", r"route-reflector-client", r"soft-reconfiguration inbound",
           r"allowas-in( \d+)?", r"send-community( \S+)?", r"route-map \S+ (in|out)",
           r"prefix-list \S+ (in|out)", r"unsuppress-map \S+",
           r"advertise-map \S+ (exist|non-exist)-map \S+", r"default-originate",
-          r"remove-private-as( all)?")
+          r"remove-private-as( all)?", r"maximum-prefix( \d+)?(?: \d+)?")
 RM_KID = (r"match (ip address( prefix-list)? \S+|as-path \S+|community \S+)|"
           r"set (weight|metric|local-preference|origin|as-path prepend|community|comm-list|ip next-hop) .+")
-INCLUDE_OK = ("always-compare-med", "next-hop-self", "route-reflector-client",
-              "allowas-in", "unsuppress-map", "bgp bestpath")
-# expected_result keys each parser can produce today
+OSPF_DROP = (r"auto-cost reference-bandwidth \d+",)
+# expected_result keys each parser can produce (evaluator/parse_sonic.py)
 PARSER_KEYS = {
-    "nbr": {"neighbor", "remote_as", "bgp_state", "localhost_ip", "remote_ip"},
-    "bgp_table": {"network"},
+    "nbr": {"neighbor", "remote_as", "bgp_state", "localhost_ip", "remote_ip",
+            "peer_group", "send_community", "inbound_soft_reconfiguration",
+            "inbound_routemap", "outbound_routemap", "remote_router_id",
+            "update_source", "maximum_prefix", "incoming_filter"},
+    "bgp_table": {"network", "status", "path_selection", "next_hop", "metric",
+                  "local_pref", "weight", "as_path", "origin"},
     "bgp_summary": {"local_as", "as_number", "protocol", "router_id"},
-    "bgp_prefix": {"network", "next_hop"},
-    "rt": {"protocol", "network", "prefix_length"},
-    "rt_detail": {"network", "protocol", "nexthop_ip", "distance"},
+    "bgp_prefix": {"network", "next_hop", "as_path", "origin", "metric",
+                   "local_pref", "weight", "communities", "status"},
+    "rt": {"protocol", "network", "prefix_length", "nexthop_ip"},
+    "rt_detail": {"network", "protocol", "nexthop_ip", "nexthop_if", "distance",
+                  "metric", "learned_from"},
+    "pfxlist": {"name", "seq", "action", "network", "netmask", "le", "ge"},
+    "cmlist": {"name", "community_type", "action", "community"},
+    "rmap": {"name", "action", "seq", "match_clauses", "set_clauses",
+             "match_ip_filter_names"},
+    "eigrp_nbr": {"ip_address", "interface"},
+    "eigrp_topo": {"network", "prefix_length"},
+    "iproute_cfg": {"destination", "nexthop_ip", "distance"},
+    "ospf_nbr": {"neighbor_id", "state", "ip_address", "interface", "priority"},
     "ping": {"success_pct"},
     "ospf_if": {"interface", "area"},
     "line": {"line"},
 }
-META_KEYS = {"op", "value"}
+META_KEYS = {"op", "value", "count", "match"}
 GOAL_FLAGS = re.compile(r"dual-as|synchroniz|\bIOS\b|Cisco|wildcard|\bmask\b|show ", re.I)
+IS_IP = re.compile(r'^\d{1,3}(?:\.\d{1,3}){3}$')
+
+
+def load_yaml(path):
+    """Minimal flat-list YAML reader (params.yaml is flat: scalars + string lists)."""
+    if not os.path.exists(path):
+        return {}
+    out, cur = {}, None
+    for ln in open(path):
+        s = ln.split("#", 1)[0].rstrip()
+        if not s.strip():
+            continue
+        if s.lstrip().startswith("- "):
+            if cur is not None:
+                out[cur].append(s.lstrip()[2:].strip())
+            continue
+        k, _, v = s.partition(":")
+        k = k.strip()
+        v = v.strip()
+        if v:
+            out[k] = v
+            cur = None
+        else:
+            out[k] = []
+            cur = k
+    return out
 
 
 class Unmapped(Exception):
@@ -73,11 +121,16 @@ def keys_of(x, out):
 
 
 class Conv:
-    def __init__(self, params):
+    def __init__(self, params, values=None):
         self.params = params
+        self.values = values or {}
         self.lo0_ip = None
         self.lo0 = {}
         self.notes = []
+        self.cm_seq = collections.defaultdict(int)
+
+    def note(self, msg):
+        self.notes.append(msg)
 
     def plen(self, tok):
         n = lit_len(tok)
@@ -96,11 +149,17 @@ class Conv:
             new = sub.lstrip("_") + "_prefix_len"
             self.params[new] = {"type": "subnet_attr", "subnet": sub, "attr": "prefixlen"}
             return "{{%s}}" % new
-        if p and p.get("type") == "choice":
-            raise Unmapped("choice mask param (pairing unknown): " + tok)
         base = re.sub(r"_(mask|wildcard|network)$", "", name)
         if base + "_prefix_len" in self.params:
             return "{{%s_prefix_len}}" % base
+        if p and p.get("type") == "choice":
+            opts = p.get("options")
+            vals = self.values.get(opts) if isinstance(opts, str) else opts
+            if isinstance(vals, list) and len(vals) == 1:
+                n = lit_len(str(vals[0]))
+                if n is not None:
+                    return n
+            raise Unmapped("choice mask param (multi-option, pairing unknown): " + tok)
         raise Unmapped("no prefix_len sibling: " + tok)
 
     @staticmethod
@@ -123,7 +182,13 @@ class Conv:
             if m:
                 ipaddr = m.group(1)
                 ip = "%s/%s" % (ipaddr, self.plen(m.group(2)))
-            elif k != "no shutdown":
+            elif k in IFACE_DROP or k == "no shutdown":
+                continue
+            elif re.fullmatch(r'ip vrf forwarding \S+', k):
+                out.append("vrf " + k.split()[-1])   # FRR: `vrf NAME` under interface
+            elif k == "mpls ip":
+                self.note("mpls ip dropped (no MPLS in FRR env): check goal/test")
+            else:
                 raise Unmapped("interface child: " + norm(k))
         if name == "Loopback0":
             out.append("config interface ip remove Loopback0 " + DEFAULT_LO0)
@@ -146,6 +211,9 @@ class Conv:
         for k in kids:
             if k in DROP:
                 continue
+            if any(re.fullmatch(p, k) for p in OSPF_DROP):
+                self.note("ospf '%s' dropped (metric semantics may differ): check goal/test" % norm(k))
+                continue
             m = re.fullmatch(r'network (\S+) (\S+) area (\S+)', k)
             if m:
                 out.append("network %s/%s area %s" % (m.group(1), self.plen(m.group(2)), m.group(3))); continue
@@ -157,24 +225,33 @@ class Conv:
                 out.append("redistribute bgp" + (m.group(1) or "")); continue
             if re.fullmatch(r'passive-interface \S+|redistribute (connected|static)', k):
                 out.append(k); continue
+            if re.fullmatch(r'area \S+ authentication( (message-digest|simple))?', k):
+                out.append(k); continue
             raise Unmapped("ospf child: " + norm(k))
         return out + ["exit"]
 
     def bgp_block(self, head, kids):
-        glob_, nbr_g, nets, af, has_rid = [], [], [], [], False
+        glob_, grp, peer, nets, af, has_rid = [], [], [], [], [], False
         for k in kids:
             if k in DROP:
                 continue
             if any(re.fullmatch(p, k) for p in BGP_PASS):
                 has_rid |= k.startswith("bgp router-id")
                 glob_.append(k); continue
-            m = re.fullmatch(r'network (\S+) mask (\S+)', k) or re.fullmatch(r'network (\S+)()', k)
+            if any(re.fullmatch(p, k) for p in BGP_DROP):
+                self.note("bgp '%s' dropped (no FRR equivalent): check goal/test" % norm(k))
+                continue
+            m = re.fullmatch(r'network (\S+) mask (\S+)( backdoor)?', k) or re.fullmatch(r'network (\S+)()', k)
             if m:
                 tok = m.group(2) or m.group(1)       # classful form: use the subnet's own length
-                nets.append("network %s/%s" % (m.group(1), self.plen(tok))); continue
+                bd = " backdoor" if (m.lastindex or 0) >= 3 and m.group(3) else ""
+                nets.append("network %s/%s%s" % (m.group(1), self.plen(tok), bd)); continue
             m = re.fullmatch(r'aggregate-address (\S+) (\S+)((?: as-set| summary-only)*)', k)
             if m:
-                af.append("aggregate-address %s/%s%s" % (m.group(1), self.plen(m.group(2)), m.group(3))); continue
+                flags = m.group(3)
+                if "as-set" in flags and "summary-only" in flags:
+                    flags = " summary-only as-set"        # order FRR 8.4.4 accepts
+                af.append("aggregate-address %s/%s%s" % (m.group(1), self.plen(m.group(2)), flags)); continue
             m = re.fullmatch(r'redistribute (connected|static)|redistribute ospf \d+', k)
             if m:
                 af.append(k if m.group(1) else "redistribute ospf"); continue
@@ -189,24 +266,34 @@ class Conv:
                 lm = re.fullmatch(r'local-as (\d+)( no-prepend)?( replace-as)?( dual-as)?', rest)
                 if lm:
                     if lm.group(4):
-                        self.notes.append("dual-as dropped (no FRR equivalent): check goal/test")
-                    nbr_g.append("neighbor %s local-as %s%s%s" % (who, lm.group(1), lm.group(2) or "", lm.group(3) or ""))
+                        self.note("dual-as dropped (no FRR equivalent): check goal/test")
+                    grp.append("neighbor %s local-as %s%s%s" % (who, lm.group(1), lm.group(2) or "", lm.group(3) or ""))
+                    continue
+                if any(re.fullmatch(p, rest) for p in NBR_DROP):
+                    self.note("neighbor '%s' dropped (no FRR equivalent): check goal/test" % norm(rest))
                     continue
                 if re.fullmatch(NBR_GLOBAL, rest):
-                    nbr_g.append(k); continue
+                    (peer if IS_IP.fullmatch(who) else grp).append(k); continue
                 if any(re.fullmatch(p, rest) for p in NBR_AF):
-                    af.append("neighbor %s %s" % (who, rest.replace("remove-private-as", "remove-private-AS"))); continue
+                    line = "neighbor %s %s" % (who, rest.replace("remove-private-as", "remove-private-AS"))
+                    (peer if IS_IP.fullmatch(who) else grp).append(line); continue
             raise Unmapped("bgp child: " + norm(k))
+        # FRR requires peer-group definition (incl. remote-as) before any peer is
+        # assigned to it, so emit group lines first.
         out = [head]
         if not has_rid and self.lo0_ip:
             out.append("bgp router-id " + self.lo0_ip)
         out.append("no bgp ebgp-requires-policy")
-        out += glob_ + nbr_g
+        out += glob_
+        assignments = [l for l in peer if re.fullmatch(r'neighbor \S+ peer-group \S+', l)]
+        out += grp + assignments + [l for l in peer if l not in assignments]
         if nets or af:
             out += ["address-family ipv4 unicast"] + nets + af + ["exit-address-family"]
         return out + ["exit"]
 
     def policy_or_top(self, head, kids):
+        if head in DROP:
+            return "route", []
         m = re.fullmatch(r'route-map (\S+) (permit|deny) (\S+)', head)
         if m:
             out = [head]
@@ -226,12 +313,16 @@ class Conv:
         m = re.fullmatch(r'ip as-path access-list (\S+) (permit|deny) (.+)', head)
         if m:
             return "policy", ["bgp as-path access-list %s %s %s" % m.groups()]
-        m = re.fullmatch(r'ip community-list (\S+) (permit|deny) (.+)', head)
+        m = re.fullmatch(r'ip community-list(?: (standard|expanded))? (\S+) (permit|deny) (.+)', head)
         if m:
-            return "policy", ["bgp community-list %s %s %s" % m.groups()]
+            # FRR 8.4.4: bgp community-list <type> <name> seq N <action> <comm>
+            self.cm_seq[m.group(2)] += 1
+            return "policy", ["bgp community-list %s %s seq %d %s %s"
+                              % (m.group(1) or "standard", m.group(2), 5 * self.cm_seq[m.group(2)],
+                                 m.group(3), m.group(4))]
         m = re.fullmatch(r'ip route (\S+) (\S+) (\S+)(?: (\d+))?', head)
         if m:
-            gw = "blackhole" if m.group(3).lower() == "null0" else m.group(3)
+            gw = "null0" if m.group(3).lower() == "null0" else m.group(3)
             return "route", ["ip route %s/%s %s%s" % (m.group(1), self.plen(m.group(2)), gw, " " + m.group(4) if m.group(4) else "")]
         raise Unmapped("top-level: " + norm(head))
 
@@ -249,6 +340,19 @@ class Conv:
                 rtr += self.ospf_block(head, kids)
             elif head.startswith("router bgp"):
                 rtr += self.bgp_block(head, kids)
+            elif re.fullmatch(r'router eigrp \d+', head):
+                out = [head]
+                for k in kids:
+                    if k in DROP:
+                        continue
+                    m = re.fullmatch(r'network (\S+)(?: (\S+))?', k)
+                    if m:
+                        tok = m.group(2) or m.group(1)   # classful form: use the network's own length
+                        out.append("network %s/%s" % (m.group(1), self.plen(tok))); continue
+                    if re.fullmatch(r'redistribute (connected|static|ip route)', k):
+                        out.append(k); continue
+                    raise Unmapped("eigrp child: " + norm(k))
+                rtr += out + ["exit"]
             elif head.startswith("router "):
                 raise Unmapped("block: " + norm(head))
             else:
@@ -256,13 +360,14 @@ class Conv:
                 (pol if kind == "policy" else rte).extend(out)
         return ifc + pol + rtr + rte
 
-    # ---- testcase commands -> (shell command, parser kind)
+    # ---- testcase commands -> (device command, parser kind)
     def cmd(self, c):
         c = c.strip()
         v = lambda s: 'sudo vtysh -c "%s"' % s
         m = re.fullmatch(r'show ip bgp neighbors(?: (\S+))?', c)
         if m: return v("show ip bgp neighbors%s json" % (" " + m.group(1) if m.group(1) else "")), "nbr"
-        if c == "show ip bgp": return v("show ip bgp json"), "bgp_table"
+        if c == "show ip bgp":
+            return v("show ip bgp"), "bgp_table"       # text: carries 's' suppressed flag
         if c in ("show ip bgp summary", "show ip protocols | section bgp"):
             return v("show ip bgp summary json"), "bgp_summary"
         m = re.fullmatch(r'show ip bgp (\S+) (\S+)', c)
@@ -274,19 +379,32 @@ class Conv:
         if m and not c.startswith("show ip route vrf"):
             return v("show ip route %s/%s" % (m.group(1), self.plen(m.group(2)))), "rt_detail"
         m = re.fullmatch(r'show ip route (\S+)', c)
-        if m: return v("show ip route " + m.group(1)), "rt_detail"
+        if m and m.group(1) not in ("vrf", "connected", "static", "protocol"):
+            return v("show ip route " + m.group(1)), "rt_detail"
+        if c == "show ip ospf neighbor": return v("show ip ospf neighbor json"), "ospf_nbr"
+        if c == "show ip eigrp neighbors": return v("show ip eigrp neighbors"), "eigrp_nbr"
+        if c == "show ip eigrp topology": return v("show ip eigrp topology"), "eigrp_topo"
         if c == "show ip ospf interface brief": return v("show ip ospf interface json"), "ospf_if"
+        if c == "show ip prefix-list": return v("show ip prefix-list"), "pfxlist"
+        m = re.fullmatch(r'show ip community-list(?: (\S+))?', c)
+        if m: return v("show bgp community-list"), "cmlist"
+        if c == "show route-map": return v("show route-map"), "rmap"
         m = re.fullmatch(r'ping (\S+)(?: source (\S+))?', c)
         if m: return "ping -c 5 %s%s" % ("-I %s " % m.group(2) if m.group(2) else "", m.group(1)), "ping"
         m = re.fullmatch(r'show running-config \| include (.+)', c)
-        if m and any(w in m.group(1) for w in INCLUDE_OK):
-            return 'sudo vtysh -c "show running-config" | grep -E %s' % shlex.quote(m.group(1)), "line"
+        if m:
+            # FRR vtysh supports the same pipe; include is a regex in both IOS and FRR
+            return v("show running-config | include %s" % m.group(1)), "line"
+        m = re.fullmatch(r'show running-config \| section (ip route)', c)
+        if m:
+            # parsed static routes: {destination, nexthop_ip, distance}
+            return v("show running-config | include ^ip route"), "iproute_cfg"
         raise Unmapped("testcase cmd: " + norm(c))
 
 
-def convert(d):
+def convert(d, values=None):
     d = copy.deepcopy(d)
-    cv = Conv(d["params"])
+    cv = Conv(d["params"], values)
     why = []
     for node in d.get("topology_attributes", {}).get("nodes", {}).values():
         node["type"] = "SONiC-VS"
@@ -332,7 +450,7 @@ def main():
             continue
         if "router bgp" not in json.dumps(d["startup_configs"]) + json.dumps(d["groundtruth_configs"]):
             continue
-        out, why, notes = convert(d)
+        out, why, notes = convert(d, load_yaml(os.path.join(os.path.dirname(p), "params.yaml")))
         if why:
             skipped += 1
             reasons.update(why)

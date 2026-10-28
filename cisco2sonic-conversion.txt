@@ -1,0 +1,226 @@
+(.venv) sam@linux:~/repo/NetConfArena$ python3 -I scripts/cisco2sonic_bgp.py --src task --dst /tmp/gen-all 2>&1 | tee /tmp/convert_all.txt | tail -80
+  4  testcase cmd: show ip route vrf <P> <P> <P>
+  4  testcase cmd: ping vrf <P> <P> source Loopback1
+  3  testcase cmd: show ip prefix-list
+  3  testcase cmd: show running-config | section ip route
+  3  parser keys [bgp_table]: next_hop,path_selection
+  3  testcase cmd: show running-config | include aggregate-address
+  3  testcase cmd: show ip vrf interfaces
+  3  testcase cmd: show running-config | include ^ rd
+  3  testcase cmd: show running-config | include route-target
+  3  testcase cmd: show running-config | include send-community
+  3  testcase cmd: show running-config | include redistribute
+  3  testcase cmd: show running-config | include route-target filter
+  2  parser keys [bgp_table]: status
+  2  parser keys [rt_detail]: learned_from
+  2  parser keys [bgp_table]: as_path
+  2  block: router eigrp <N>
+  2  block: router rip
+  2  interface block in groundtruth
+  2  testcase cmd: show ip community-list
+  2  top-level: ip bgp-community new-format
+  2  parser keys [bgp_prefix]: as_path
+  2  testcase cmd: show ip bgp vpnv4 vrf <P> neighbors <P>
+  2  testcase cmd: show running-config | include address-family ipv4 vrf
+  2  testcase cmd: show running-config | include router ospf
+  2  bgp child: no bgp default route-target filter
+  1  bgp child: synchronization
+  1  parser keys [bgp_summary]: igp_sync
+  1  parser keys [nbr]: inbound_soft_reconfiguration
+  1  parser keys [nbr]: incoming_filter
+  1  parser keys [nbr]: remote_router_id
+  1  parser keys [nbr]: peer_group
+  1  parser keys [bgp_table]: as_path,next_hop,origin
+  1  bgp child: bgp maxas-limit <N>
+  1  parser keys [bgp_table]: as_path,origin
+  1  testcase cmd: show running-config | include as-path|filter-list
+  1  bgp child: neighbor <P> distribute-list <P> in
+  1  choice mask param (pairing unknown): {{summary_mask}}
+  1  testcase cmd: show ip access-lists
+  1  choice mask param (pairing unknown): {{host_route_mask}}
+  1  bgp child: bgp dmzlink-bw
+  1  parser keys [bgp_summary]: maximum_path
+  1  parser keys [bgp_table]: count,distinct,match
+  1  parser keys [nbr]: dmzlink_bw
+  1  parser keys [nbr]: advertise_map,condition_map,conditional_advertise_status
+  1  parser keys [bgp_prefix]: communities,count,match
+  1  parser keys [nbr]: send_community
+  1  parser keys [nbr]: outbound_routemap,send_community
+  1  testcase cmd: show ip eigrp neighbors
+  1  testcase cmd: show ip eigrp topology
+  1  testcase cmd: show running-config | include backdoor
+  1  testcase cmd: show running-config | include local-preference|origin|metric|as-path|med
+  1  testcase cmd: show running-config | include bgp router-id
+  1  testcase cmd: show running-config | include route-map|set|local-preference|weight|as-path|metric|med
+  1  parser keys [bgp_table]: next_hop,origin
+  1  testcase cmd: show running-config | include local-preference|weight|as-path|metric|med
+  1  testcase cmd: show running-config | include local-preference|weight|as-path|origin
+  1  parser keys [bgp_table]: local_pref
+  1  testcase cmd: show running-config | include ^ip as-path access-list
+  1  parser keys [nbr]: outbound_routemap
+  1  testcase cmd: show running-config | include filter-list|match as-path
+  1  testcase cmd: show running-config | include ip as-path access-list
+  1  parser keys [bgp_table]: as_path,metric,next_hop
+  1  parser keys [bgp_table]: as_path,metric,path_selection
+  1  testcase cmd: show running-config | include ^ip prefix-list|^access-list
+  1  testcase cmd: show running-config | include access-list
+  1  testcase cmd: show running-config | include prefix-list
+  1  testcase cmd: show running-config | include ip address <N>.
+  1  bgp child: address-family ipv4 vrf <P>
+  1  block: router ospf <P> vrf <P>
+  1  interface child: ip ospf network point-to-point
+  1  testcase cmd: show ip ospf neighbor
+  1  parser keys [rt_detail]: metric
+  1  bgp child: address-family vpnv4
+  1  parser keys [nbr]: count,distinct,match
+  1  testcase cmd: show running-config | include neighbor <P> send-community
+  1  testcase cmd: show running-config | include ip vrf forwarding
+  1  testcase cmd: show mpls forwarding-table <P> <IP>
+  1  testcase cmd: show mpls ldp neighbor
+  1  testcase cmd: show running-config | include mpls
+  1  testcase cmd: show running-config | include tunnel source|tunnel destination
+(.venv) sam@linux:~/repo/NetConfArena$ cat /tmp/convert_all.txt 
+OK   19.IBGP-Internal BGP                          
+OK   20.EBGP-External BGP                          
+OK   21.BGP Update Source                          
+OK   22.BGP Transit AS                             
+SKIP 23.BGP Traffic Engineering Unsuppress-Map     2: parser keys [bgp_table]: status; parser keys [rt_detail]: learned_from
+SKIP 24.BGP Synchronization                        3: bgp child: synchronization; parser keys [bgp_summary]: igp_sync
+SKIP 25.BGP Soft Reconfiguration                   4: parser keys [bgp_table]: origin; parser keys [nbr]: inbound_soft_reconfiguration
+SKIP 26.BGP Route Reflectors and Clusters          2: parser keys [bgp_table]: origin; parser keys [nbr]: remote_router_id
+SKIP 27.BGP Remove Private AS                      2: parser keys [bgp_table]: as_path; parser keys [bgp_table]: origin
+SKIP 28.BGP Peer Group                             1: parser keys [nbr]: peer_group
+SKIP 29.BGP Next-Hop Self Manual                   3: parser keys [bgp_table]: next_hop; parser keys [bgp_table]: origin
+SKIP 30.BGP Next hop self                          3: parser keys [bgp_table]: as_path,next_hop,origin; parser keys [bgp_table]: next_hop
+SKIP 31.BGP Max AS Limit                           3: bgp child: bgp maxas-limit <N>; parser keys [bgp_table]: as_path,origin
+OK   32.BGP Local AS                               REVIEW: dual-as dropped (no FRR equivalent): check goal/test
+SKIP 33.BGP Local Preference MED                   3: block: router eigrp <N>; parser keys [bgp_table]: next_hop,path_selection
+SKIP 34.BGP IBGP Blackhole Routing                 3: block: router rip; interface block in groundtruth
+SKIP 35.BGP Filtering Prefix-List                  1: testcase cmd: show ip prefix-list
+SKIP 36.BGP Filtering Extended Access-List         3: bgp child: neighbor <P> distribute-list <P> in; choice mask param (pairing unknown): {{summary_mask}}
+SKIP 37.BGP EBGP Multihop                          1: choice mask param (pairing unknown): {{host_route_mask}}
+SKIP 38.BGP DMZ Link Bandwidth                     4: bgp child: bgp dmzlink-bw; parser keys [bgp_summary]: maximum_path
+OK   39.BGP Confederations                         
+SKIP 40.BGP Conditional Advertisement              3: parser keys [bgp_table]: next_hop; parser keys [nbr]: advertise_map,condition_map,conditional_advertise_status
+SKIP 41.BGP Communities No-Export                  3: parser keys [bgp_prefix]: communities; parser keys [nbr]: inbound_routemap
+SKIP 42.BGP Communities No-Advertise               3: parser keys [bgp_prefix]: communities; parser keys [nbr]: inbound_routemap
+SKIP 43.BGP Communities Local-AS                   1: parser keys [bgp_prefix]: communities
+SKIP 44.BGP Communities Delete and Additive        7: parser keys [bgp_prefix]: communities; parser keys [bgp_prefix]: communities,count,match
+SKIP 45.BGP Communities                            7: parser keys [bgp_prefix]: communities; parser keys [bgp_table]: next_hop,path_selection
+SKIP 46.BGP Backdoor                               5: block: router eigrp <N>; parser keys [bgp_table]: status
+SKIP 47.BGP Attribute Weight                       4: parser keys [nbr]: inbound_routemap; parser keys [rt_detail]: learned_from
+SKIP 48.BGP Attribute Router ID                    4: parser keys [bgp_table]: next_hop; parser keys [rt]: nexthop_ip
+SKIP 49.BGP Attribute Origin                       4: parser keys [bgp_table]: next_hop; parser keys [bgp_table]: next_hop,origin
+SKIP 50.BGP Attribute MED                          3: parser keys [rt]: nexthop_ip; testcase cmd: show route-map
+SKIP 51.BGP Attribute Local Preference             4: parser keys [bgp_table]: local_pref; testcase cmd: show ip prefix-list
+SKIP 52.BGP Attribute AS Path Ignore               3: parser keys [bgp_table]: next_hop; parser keys [rt]: nexthop_ip
+SKIP 53.BGP Attribute AS Path                      4: parser keys [bgp_table]: next_hop,path_selection; parser keys [nbr]: outbound_routemap
+SKIP 54.BGP AS Path Access List                    3: parser keys [bgp_prefix]: as_path; testcase cmd: show running-config | include filter-list|match as-path
+SKIP 55.BGP Always compare MED                     3: parser keys [bgp_table]: as_path; parser keys [bgp_table]: as_path,metric,next_hop
+SKIP 56.BGP Allow AS In                            1: parser keys [bgp_prefix]: as_path
+SKIP 57.BGP Aggregation Unsuppress Map             3: testcase cmd: show route-map; testcase cmd: show running-config | include ^ip prefix-list|^access-list
+SKIP 58.BGP Aggregation AS SET                     3: testcase cmd: show running-config | include access-list; testcase cmd: show running-config | include aggregate-address
+SKIP 59.BGP Aggregation                            3: testcase cmd: show running-config | include aggregate-address; testcase cmd: show running-config | include ip address <N>.
+SKIP 78.MPLS L3VPN VRF and VPNv4 Basics            8: block: ip vrf <P>; mask/network token not resolvable: all
+SKIP 79.MPLS L3VPN BGP PE-CE Routing               6: bgp child: address-family ipv4 vrf <P>; mask/network token not resolvable: all
+SKIP 80.MPLS L3VPN OSPF PE-CE Routing              7: block: router ospf <P> vrf <P>; interface child: ip ospf network point-to-point
+SKIP 81.MPLS L3VPN RIP PE-CE Routing               7: block: router rip; mask/network token not resolvable: all
+SKIP 82.MPLS L3VPN Hub and Spoke Route Targets     6: block: ip vrf <P>; testcase cmd: show ip route vrf <P> <P> <P>
+SKIP 83.MPLS L3VPN VPNv4 Route Reflector           8: bgp child: address-family vpnv4; bgp child: no bgp default route-target filter
+SKIP 84.MPLS L3VPN Inter-AS Option A               9: block: ip vrf <P>; testcase cmd: ping vrf <P> <P> source Loopback1
+SKIP 85.MPLS L3VPN Inter-AS Option B               9: bgp child: no bgp default route-target filter; block: ip vrf <P>
+SKIP 86.MPLS L3VPN over a GRE Core                 9: block: ip vrf <P>; interface block in groundtruth
+
+converted=6 skipped=44
+
+== unmapped shapes (count = #tasks) ==
+ 12  testcase cmd: show route-map
+  8  top-level: mpls label protocol ldp
+  7  mask/network token not resolvable: all
+  6  parser keys [bgp_table]: origin
+  6  parser keys [bgp_table]: next_hop
+  5  parser keys [bgp_prefix]: communities
+  5  parser keys [nbr]: inbound_routemap
+  5  parser keys [rt]: nexthop_ip
+  5  block: ip vrf <P>
+  4  testcase cmd: show ip route vrf <P> <P> <P>
+  4  testcase cmd: ping vrf <P> <P> source Loopback1
+  3  testcase cmd: show ip prefix-list
+  3  testcase cmd: show running-config | section ip route
+  3  parser keys [bgp_table]: next_hop,path_selection
+  3  testcase cmd: show running-config | include aggregate-address
+  3  testcase cmd: show ip vrf interfaces
+  3  testcase cmd: show running-config | include ^ rd
+  3  testcase cmd: show running-config | include route-target
+  3  testcase cmd: show running-config | include send-community
+  3  testcase cmd: show running-config | include redistribute
+  3  testcase cmd: show running-config | include route-target filter
+  2  parser keys [bgp_table]: status
+  2  parser keys [rt_detail]: learned_from
+  2  parser keys [bgp_table]: as_path
+  2  block: router eigrp <N>
+  2  block: router rip
+  2  interface block in groundtruth
+  2  testcase cmd: show ip community-list
+  2  top-level: ip bgp-community new-format
+  2  parser keys [bgp_prefix]: as_path
+  2  testcase cmd: show ip bgp vpnv4 vrf <P> neighbors <P>
+  2  testcase cmd: show running-config | include address-family ipv4 vrf
+  2  testcase cmd: show running-config | include router ospf
+  2  bgp child: no bgp default route-target filter
+  1  bgp child: synchronization
+  1  parser keys [bgp_summary]: igp_sync
+  1  parser keys [nbr]: inbound_soft_reconfiguration
+  1  parser keys [nbr]: incoming_filter
+  1  parser keys [nbr]: remote_router_id
+  1  parser keys [nbr]: peer_group
+  1  parser keys [bgp_table]: as_path,next_hop,origin
+  1  bgp child: bgp maxas-limit <N>
+  1  parser keys [bgp_table]: as_path,origin
+  1  testcase cmd: show running-config | include as-path|filter-list
+  1  bgp child: neighbor <P> distribute-list <P> in
+  1  choice mask param (pairing unknown): {{summary_mask}}
+  1  testcase cmd: show ip access-lists
+  1  choice mask param (pairing unknown): {{host_route_mask}}
+  1  bgp child: bgp dmzlink-bw
+  1  parser keys [bgp_summary]: maximum_path
+  1  parser keys [bgp_table]: count,distinct,match
+  1  parser keys [nbr]: dmzlink_bw
+  1  parser keys [nbr]: advertise_map,condition_map,conditional_advertise_status
+  1  parser keys [bgp_prefix]: communities,count,match
+  1  parser keys [nbr]: send_community
+  1  parser keys [nbr]: outbound_routemap,send_community
+  1  testcase cmd: show ip eigrp neighbors
+  1  testcase cmd: show ip eigrp topology
+  1  testcase cmd: show running-config | include backdoor
+  1  testcase cmd: show running-config | include local-preference|origin|metric|as-path|med
+  1  testcase cmd: show running-config | include bgp router-id
+  1  testcase cmd: show running-config | include route-map|set|local-preference|weight|as-path|metric|med
+  1  parser keys [bgp_table]: next_hop,origin
+  1  testcase cmd: show running-config | include local-preference|weight|as-path|metric|med
+  1  testcase cmd: show running-config | include local-preference|weight|as-path|origin
+  1  parser keys [bgp_table]: local_pref
+  1  testcase cmd: show running-config | include ^ip as-path access-list
+  1  parser keys [nbr]: outbound_routemap
+  1  testcase cmd: show running-config | include filter-list|match as-path
+  1  testcase cmd: show running-config | include ip as-path access-list
+  1  parser keys [bgp_table]: as_path,metric,next_hop
+  1  parser keys [bgp_table]: as_path,metric,path_selection
+  1  testcase cmd: show running-config | include ^ip prefix-list|^access-list
+  1  testcase cmd: show running-config | include access-list
+  1  testcase cmd: show running-config | include prefix-list
+  1  testcase cmd: show running-config | include ip address <N>.
+  1  bgp child: address-family ipv4 vrf <P>
+  1  block: router ospf <P> vrf <P>
+  1  interface child: ip ospf network point-to-point
+  1  testcase cmd: show ip ospf neighbor
+  1  parser keys [rt_detail]: metric
+  1  bgp child: address-family vpnv4
+  1  parser keys [nbr]: count,distinct,match
+  1  testcase cmd: show running-config | include neighbor <P> send-community
+  1  testcase cmd: show running-config | include ip vrf forwarding
+  1  testcase cmd: show mpls forwarding-table <P> <IP>
+  1  testcase cmd: show mpls ldp neighbor
+  1  testcase cmd: show running-config | include mpls
+  1  testcase cmd: show running-config | include tunnel source|tunnel destination
+(.venv) sam@linux:~/repo/NetConfArena$ 
