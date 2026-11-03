@@ -1125,6 +1125,7 @@
     "groundtruth_configs": {
         "{{router1_name}}": [
             "router ospf",
+            "ospf router-id {{router1_loopback0_ip}}",
             "network {{router1_loopback0_network}}/{{router1_loopback0_prefix_len}} area {{ospf_area}}",
             "network {{link1_network}}/{{link1_prefix_len}} area {{ospf_area}}",
             "network {{link2_network}}/{{link2_prefix_len}} area {{ospf_area}}",
@@ -1151,6 +1152,7 @@
         ],
         "{{router2_name}}": [
             "router ospf",
+            "ospf router-id {{router2_loopback0_ip}}",
             "network {{router2_loopback0_network}}/{{router2_loopback0_prefix_len}} area {{ospf_area}}",
             "network {{link5_network}}/{{link5_prefix_len}} area {{ospf_area}}",
             "network {{link1_network}}/{{link1_prefix_len}} area {{ospf_area}}",
@@ -1200,6 +1202,7 @@
         ],
         "{{router5_name}}": [
             "router ospf",
+            "ospf router-id {{router5_loopback0_ip}}",
             "network {{router5_loopback0_network}}/{{router5_loopback0_prefix_len}} area {{ospf_area}}",
             "network {{link8_network}}/{{link8_prefix_len}} area {{ospf_area}}",
             "network {{link2_network}}/{{link2_prefix_len}} area {{ospf_area}}",
@@ -1226,6 +1229,7 @@
         ],
         "{{router6_name}}": [
             "router ospf",
+            "ospf router-id {{router6_loopback0_ip}}",
             "network {{router6_loopback0_network}}/{{router6_loopback0_prefix_len}} area {{ospf_area}}",
             "network {{link5_network}}/{{link5_prefix_len}} area {{ospf_area}}",
             "network {{link8_network}}/{{link8_prefix_len}} area {{ospf_area}}",
@@ -1264,18 +1268,18 @@
                         "value": [
                             {
                                 "protocol": "O",
-                                "network": "{{router2_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router2_loopback0_network}}",
+                                "prefix_length": "{{router2_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router5_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router5_loopback0_network}}",
+                                "prefix_length": "{{router5_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router1_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router1_loopback0_network}}",
+                                "prefix_length": "{{router1_loopback0_prefix_len}}"
                             }
                         ]
                     }
@@ -1289,18 +1293,18 @@
                         "value": [
                             {
                                 "protocol": "O",
-                                "network": "{{router6_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router6_loopback0_network}}",
+                                "prefix_length": "{{router6_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router5_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router5_loopback0_network}}",
+                                "prefix_length": "{{router5_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router1_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router1_loopback0_network}}",
+                                "prefix_length": "{{router1_loopback0_prefix_len}}"
                             }
                         ]
                     }
@@ -1314,18 +1318,18 @@
                         "value": [
                             {
                                 "protocol": "O",
-                                "network": "{{router6_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router6_loopback0_network}}",
+                                "prefix_length": "{{router6_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router2_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router2_loopback0_network}}",
+                                "prefix_length": "{{router2_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router1_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router1_loopback0_network}}",
+                                "prefix_length": "{{router1_loopback0_prefix_len}}"
                             }
                         ]
                     }
@@ -1339,18 +1343,18 @@
                         "value": [
                             {
                                 "protocol": "O",
-                                "network": "{{router6_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router6_loopback0_network}}",
+                                "prefix_length": "{{router6_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router2_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router2_loopback0_network}}",
+                                "prefix_length": "{{router2_loopback0_prefix_len}}"
                             },
                             {
                                 "protocol": "O",
-                                "network": "{{router5_loopback0_ip}}",
-                                "prefix_length": "32"
+                                "network": "{{router5_loopback0_network}}",
+                                "prefix_length": "{{router5_loopback0_prefix_len}}"
                             }
                         ]
                     }

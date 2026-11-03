@@ -1,0 +1,40 @@
+r1_names:
+- Ping
+- Atlas
+- Beacon
+- Cobalt
+- Delta
+- Ember
+- Falcon
+- Glacier
+- Harbor
+r2_names:
+- Pong
+- Ivory
+- Jasper
+- Kepler
+- Lagoon
+- Matrix
+- Nimbus
+- Orion
+- Prairie
+as_options:
+- 100
+- 200
+- 300
+- 400
+- 65001
+- 65002
+host_route_masks:
+- 255.255.255.255
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 24
+r1_loopback0_pool: 1.0.0.0/8
+r1_loopback0_prefix_lens:
+- 24
+r2_loopback0_pool: 2.0.0.0/8
+r2_loopback0_prefix_lens:
+- 24

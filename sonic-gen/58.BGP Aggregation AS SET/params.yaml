@@ -1,0 +1,60 @@
+r1_names:
+- Haarlem
+- Atlas
+- Beacon
+- Cobalt
+- Delta
+- Ember
+- Falcon
+- Glacier
+- Harbor
+r2_names:
+- Hoofddorp
+- Ivory
+- Jasper
+- Kepler
+- Lagoon
+- Matrix
+- Nimbus
+- Orion
+- Prairie
+r3_names:
+- Tilburg
+- Quartz
+- Rocket
+- Summit
+- Titan
+- Union
+- Vector
+- Willow
+- Xray
+r1_as_options:
+- 3
+- 65003
+- 65103
+r2_as_options:
+- 2
+- 65002
+- 65102
+r3_as_options:
+- 1
+- 65001
+- 65101
+link1_media_options:
+- fastethernet
+link2_media_options:
+- fastethernet
+link3_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 24
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 24
+link3_pool: 192.168.0.0/16
+link3_prefix_lens:
+- 24
+r1_loopback_summary_pool: 172.16.0.0/12
+r1_loopback_summary_prefix_lens:
+- 16

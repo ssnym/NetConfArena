@@ -1,0 +1,23 @@
+as1_options: [100, 110, 120, 130, 65010]
+as2_options: [200, 210, 220, 230, 65020]
+
+r1_names: [HanSolo, Falcon, Wedge, Lando, Ackbar]
+r2_names: [Leia, Padme, Rey, Jyn, Hera]
+r3_names: [Luke, Kenobi, Yoda, Mace, Ezra]
+
+r1_loopback_pool: "1.0.0.0/8"
+r1_loopback_prefix_lens: [24]
+r2_loopback0_pool: "3.0.0.0/8"
+r2_loopback0_prefix_lens: [24]
+r2_loopback1_pool: "33.0.0.0/8"
+r2_loopback1_prefix_lens: [24]
+r3_loopback_pool: "2.0.0.0/8"
+r3_loopback_prefix_lens: [24]
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet]
+link2_media_options: [serial]

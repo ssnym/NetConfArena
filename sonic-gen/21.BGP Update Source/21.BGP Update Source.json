@@ -166,6 +166,7 @@
     "groundtruth_configs": {
         "{{router1_name}}": [
             "router ospf",
+            "ospf router-id {{router1_lo0_ip}}",
             "network 0.0.0.0/32 area 0",
             "exit",
             "router bgp {{bgp_as}}",
@@ -177,6 +178,7 @@
         ],
         "{{router2_name}}": [
             "router ospf",
+            "ospf router-id {{router2_lo0_ip}}",
             "network 0.0.0.0/32 area 0",
             "exit",
             "router bgp {{bgp_as}}",

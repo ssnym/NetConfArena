@@ -488,6 +488,7 @@
     "groundtruth_configs": {
         "{{router1_name}}": [
             "router ospf",
+            "ospf router-id {{router1_lo0_ip}}",
             "network {{router1_lo0_network}}/24 area 0",
             "network {{link1_network}}/{{link1_prefix_len}} area 0",
             "network {{link2_network}}/{{link2_prefix_len}} area 0",
@@ -508,6 +509,7 @@
         ],
         "{{router2_name}}": [
             "router ospf",
+            "ospf router-id {{router2_lo0_ip}}",
             "network {{router2_lo0_network}}/24 area 0",
             "network {{link3_network}}/{{link3_prefix_len}} area 0",
             "network {{link2_network}}/{{link2_prefix_len}} area 0",
@@ -528,6 +530,7 @@
         ],
         "{{router3_name}}": [
             "router ospf",
+            "ospf router-id {{router3_lo0_ip}}",
             "network {{router3_lo0_network}}/24 area 0",
             "network {{link4_network}}/{{link4_prefix_len}} area 0",
             "network {{link1_network}}/{{link1_prefix_len}} area 0",
@@ -548,6 +551,7 @@
         ],
         "{{router4_name}}": [
             "router ospf",
+            "ospf router-id {{router4_lo0_ip}}",
             "network {{router4_lo0_network}}/24 area 0",
             "network {{link3_network}}/{{link3_prefix_len}} area 0",
             "network {{link4_network}}/{{link4_prefix_len}} area 0",

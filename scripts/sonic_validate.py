@@ -8,7 +8,7 @@ from environment.task_environment import TaskEnvironment
 from environment.device_profile import sonic_wrap_batch
 from evaluator.evaluate_task import Evaluator
 
-ERR = re.compile(r'Error|failed|Exiting|Usage:|^%|not running|Unknown command|Ambiguous|incomplete', re.M | re.I)
+ERR = re.compile(r'Error|failed|Exiting|Usage:|^%|not running|Unknown command|Ambiguous|(?<!set origin )incomplete', re.M | re.I)
 OK_ERR = re.compile(r'does not exist|not found|No such', re.I)
 
 def apply_verbose(env, configs):

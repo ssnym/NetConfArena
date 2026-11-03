@@ -1,0 +1,68 @@
+bgp_as_options: [1, 10, 100, 65001, 65100]
+
+r1_names: [Tilburg, Rotterdam, Eindhoven, Groningen, Breda]
+r2_names: [Amsterdam, Haarlem, Leiden, Delft, Arnhem]
+r3_names: [Utrecht, Zwolle, Assen, Venlo, Gouda]
+r4_names: [NewYork, Chicago, Dallas, Denver, Phoenix]
+r5_names: [LosAngeles, Seattle, Austin, Miami, Orlando]
+r6_names: [Boston, Atlanta, Portland, Detroit, Memphis]
+r7_names: [Hamburg, Munich, Cologne, Dresden, Bremen]
+r8_names: [Dusseldorf, Stuttgart, Leipzig, Bonn, Essen]
+r9_names: [Berlin, Frankfurt, Hanover, Dortmund, Mainz]
+
+r1_loopback_pool: "1.0.0.0/8"
+r1_loopback_prefix_lens: [24]
+r2_loopback_pool: "2.0.0.0/8"
+r2_loopback_prefix_lens: [24]
+r3_loopback_pool: "3.0.0.0/8"
+r3_loopback_prefix_lens: [24]
+r4_loopback_pool: "4.0.0.0/8"
+r4_loopback_prefix_lens: [24]
+r5_loopback_pool: "5.0.0.0/8"
+r5_loopback_prefix_lens: [24]
+r6_loopback_pool: "6.0.0.0/8"
+r6_loopback_prefix_lens: [24]
+r7_loopback_pool: "7.0.0.0/8"
+r7_loopback_prefix_lens: [24]
+r8_loopback_pool: "8.0.0.0/8"
+r8_loopback_prefix_lens: [24]
+r9_loopback_pool: "9.0.0.0/8"
+r9_loopback_prefix_lens: [24]
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24]
+link4_pool: "192.168.0.0/16"
+link4_prefix_lens: [24]
+link5_pool: "192.168.0.0/16"
+link5_prefix_lens: [24]
+link6_pool: "192.168.0.0/16"
+link6_prefix_lens: [24]
+link7_pool: "192.168.0.0/16"
+link7_prefix_lens: [24]
+link8_pool: "192.168.0.0/16"
+link8_prefix_lens: [24]
+link9_pool: "192.168.0.0/16"
+link9_prefix_lens: [24]
+link10_pool: "192.168.0.0/16"
+link10_prefix_lens: [24]
+link11_pool: "192.168.0.0/16"
+link11_prefix_lens: [24]
+link12_pool: "192.168.0.0/16"
+link12_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet]
+link2_media_options: [ethernet, fastethernet]
+link3_media_options: [ethernet, fastethernet]
+link4_media_options: [ethernet, fastethernet]
+link5_media_options: [ethernet, fastethernet]
+link6_media_options: [ethernet, fastethernet]
+link7_media_options: [ethernet, fastethernet]
+link8_media_options: [ethernet, fastethernet]
+link9_media_options: [ethernet, fastethernet]
+link10_media_options: [ethernet, fastethernet]
+link11_media_options: [ethernet, fastethernet]
+link12_media_options: [ethernet, fastethernet]

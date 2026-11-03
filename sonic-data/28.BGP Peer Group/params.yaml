@@ -1,0 +1,27 @@
+bgp_as_options: [1234, 2345, 3456, 4567, 65000]
+peer_group_names: [PEERS, SPOKES, CLIENTS, IBGP-GROUP]
+
+r1_names: [Bit, Hub, Core, Center, Root]
+r2_names: [Byte, Word, Frame, Packet, Segment]
+r3_names: [Octet, Block, Cell, Token, Chunk]
+r4_names: [Nibble, Slice, Shard, Unit, Slot]
+
+r1_loopback_pool: "1.0.0.0/8"
+r1_loopback_prefix_lens: [24]
+r2_loopback_pool: "2.0.0.0/8"
+r2_loopback_prefix_lens: [24]
+r3_loopback_pool: "3.0.0.0/8"
+r3_loopback_prefix_lens: [24]
+r4_loopback_pool: "4.0.0.0/8"
+r4_loopback_prefix_lens: [24]
+
+link1_pool: "192.168.0.0/16"
+link1_prefix_lens: [24]
+link2_pool: "192.168.0.0/16"
+link2_prefix_lens: [24]
+link3_pool: "192.168.0.0/16"
+link3_prefix_lens: [24]
+
+link1_media_options: [ethernet, fastethernet]
+link2_media_options: [ethernet, fastethernet]
+link3_media_options: [ethernet, fastethernet]

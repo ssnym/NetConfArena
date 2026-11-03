@@ -367,7 +367,8 @@ def parse_frr_community_list(text):
             continue
         m = re.match(r'^\s*(permit|deny)\s+(.+?)\s*$', raw)
         if m and typ:
-            rows.append({"name": name, "community_type": typ,
+            rows.append({"name": name, "list_number": name,
+                         "community_type": typ,
                          "action": m.group(1), "community": m.group(2)})
     return rows
 
@@ -482,8 +483,17 @@ def parse_sonic_cli_output(command, output):
         return parse_frr_running_routes(output)
     rows = []
     for l in output.splitlines():
-        l = l.strip()
+        # Strip ANSI escape sequences
+        l = re.sub(r'\x1b\[[0-9;]*[a-zA-Z]', '', l).strip()
         if not l:
+            continue
+        # Skip command echoes and prompts
+        if l.startswith("sudo vtysh") or l.startswith("vtysh"):
+            continue
+        if re.match(r'^[A-Za-z0-9_.\-]+@[A-Za-z0-9_.\-]+:[^\r\n]*[$#]\s?$', l):
+            continue
+        # Skip stray quotes and single-char noise
+        if re.fullmatch(r'["\'\s]+', l):
             continue
         rows.append({"line": l})
         # IOS-style twin for aggregate-address lines (net <mask> instead of /len)

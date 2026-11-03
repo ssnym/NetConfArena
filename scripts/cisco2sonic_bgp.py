@@ -15,7 +15,7 @@ IFACE_DROP = {"no cdp enable", "no mips", "no ip mroute", "no ip redirect",
               "no ip unreachables"}
 BGP_PASS = (r"bgp confederation (identifier|peers) .+", r"bgp cluster-id \S+",
             r"bgp always-compare-med", r"bgp router-id \S+",
-            r"bgp bestpath (as-path ignore|compare-routerid)")
+            r"bgp bestpath (as-path ignore|compare-routerid)", r"no bgp default ipv4-unicast")
 # BGP lines with no FRR equivalent; dropped with a note (task stays convertible)
 BGP_DROP = (r"bgp dmzlink-bw", r"bgp maxas-limit \d+",
             r"default (local-preference|origin|metric) \S+",
@@ -29,7 +29,7 @@ NBR_AF = (r"next-hop-self", r"route-reflector-client", r"soft-reconfiguration in
           r"remove-private-as( all)?", r"maximum-prefix( \d+)?(?: \d+)?")
 RM_KID = (r"match (ip address( prefix-list)? \S+|as-path \S+|community \S+)|"
           r"set (weight|metric|local-preference|origin|as-path prepend|community|comm-list|ip next-hop) .+")
-OSPF_DROP = (r"auto-cost reference-bandwidth \d+",)
+OSPF_DROP = ()
 # expected_result keys each parser can produce (evaluator/parse_sonic.py)
 PARSER_KEYS = {
     "nbr": {"neighbor", "remote_as", "bgp_state", "localhost_ip", "remote_ip",
@@ -208,11 +208,17 @@ class Conv:
         if " vrf " in head:
             raise Unmapped("block: " + norm(head))
         out = ["router ospf"]
+        if self.lo0_ip and not any(re.fullmatch(r"router-id \S+", k) for k in kids):
+            out.append("ospf router-id " + self.lo0_ip)
         for k in kids:
             if k in DROP:
                 continue
             if any(re.fullmatch(p, k) for p in OSPF_DROP):
                 self.note("ospf '%s' dropped (metric semantics may differ): check goal/test" % norm(k))
+                continue
+            m_ac = re.fullmatch(r'auto-cost reference-bandwidth (\d+)', k)
+            if m_ac:
+                out.append(k)
                 continue
             m = re.fullmatch(r'network (\S+) (\S+) area (\S+)', k)
             if m:
@@ -265,9 +271,7 @@ class Conv:
                     continue
                 lm = re.fullmatch(r'local-as (\d+)( no-prepend)?( replace-as)?( dual-as)?', rest)
                 if lm:
-                    if lm.group(4):
-                        self.note("dual-as dropped (no FRR equivalent): check goal/test")
-                    grp.append("neighbor %s local-as %s%s%s" % (who, lm.group(1), lm.group(2) or "", lm.group(3) or ""))
+                    grp.append("neighbor %s local-as %s%s%s%s" % (who, lm.group(1), lm.group(2) or "", lm.group(3) or "", lm.group(4) or ""))
                     continue
                 if any(re.fullmatch(p, rest) for p in NBR_DROP):
                     self.note("neighbor '%s' dropped (no FRR equivalent): check goal/test" % norm(rest))
@@ -367,7 +371,7 @@ class Conv:
         m = re.fullmatch(r'show ip bgp neighbors(?: (\S+))?', c)
         if m: return v("show ip bgp neighbors%s json" % (" " + m.group(1) if m.group(1) else "")), "nbr"
         if c == "show ip bgp":
-            return v("show ip bgp"), "bgp_table"       # text: carries 's' suppressed flag
+            return v("show ip bgp json"), "bgp_table" 
         if c in ("show ip bgp summary", "show ip protocols | section bgp"):
             return v("show ip bgp summary json"), "bgp_summary"
         m = re.fullmatch(r'show ip bgp (\S+) (\S+)', c)
@@ -402,6 +406,27 @@ class Conv:
         raise Unmapped("testcase cmd: " + norm(c))
 
 
+_LO32 = re.compile(r"\{\{(router\d+)_loopback0_ip\}\}")
+
+
+def _fix32(x, cv):
+    """Cisco OSPF advertises Loopbacks as /32; FRR here uses the configured prefix."""
+    if isinstance(x, dict):
+        net, pl = x.get("network"), x.get("prefix_length")
+        if x.get("protocol") == "O" and str(pl) == "32" and isinstance(net, str):
+            m = _LO32.fullmatch(net)
+            if m:
+                r = m.group(1)
+                x["network"] = "{{%s_loopback0_network}}" % r
+                x["prefix_length"] = "{{%s_loopback0_prefix_len}}" % r
+                cv.notes.append("OSPF loopback /32 expectation rewritten to configured prefix (Cisco-vs-FRR)")
+        for v in x.values():
+            _fix32(v, cv)
+    elif isinstance(x, list):
+        for v in x:
+            _fix32(v, cv)
+
+
 def convert(d, values=None):
     d = copy.deepcopy(d)
     cv = Conv(d["params"], values)
@@ -418,6 +443,7 @@ def convert(d, values=None):
         for t in g.get("testcase", []):
             try:
                 t["command"], kind = cv.cmd(t["command"])
+                _fix32(t.get("expected_result"), cv)
                 ks = set(); keys_of(t.get("expected_result", {}), ks)
                 missing = ks - META_KEYS - PARSER_KEYS[kind]
                 if missing:

@@ -155,7 +155,7 @@
             "router bgp 1",
             "no bgp ebgp-requires-policy",
             "neighbor {{link1_ip2}} remote-as 2",
-            "neighbor {{link1_ip2}} local-as 100 no-prepend replace-as",
+            "neighbor {{link1_ip2}} local-as 100 no-prepend replace-as dual-as",
             "exit"
         ],
         "{{router2_name}}": [

@@ -1,0 +1,11 @@
+Copied from sonic-gen tasks with score=1.0 in results/sonic_validate.txt
+
+25.BGP Soft Reconfiguration
+26.BGP Route Reflectors and Clusters
+27.BGP Remove Private AS
+28.BGP Peer Group
+35.BGP Filtering Prefix-List
+37.BGP EBGP Multihop
+52.BGP Attribute AS Path Ignore
+56.BGP Allow AS In
+
