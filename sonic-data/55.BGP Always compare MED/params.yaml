@@ -1,0 +1,96 @@
+r1_names:
+- Batman
+- Atlas
+- Beacon
+- Cobalt
+- Delta
+- Ember
+- Falcon
+- Glacier
+- Harbor
+r2_names:
+- Ironman
+- Ivory
+- Jasper
+- Kepler
+- Lagoon
+- Matrix
+- Nimbus
+- Orion
+- Prairie
+r3_names:
+- Spiderman
+- Quartz
+- Rocket
+- Summit
+- Titan
+- Union
+- Vector
+- Willow
+- Xray
+r4_names:
+- Superman
+- Yukon
+- Zenith
+- Apollo
+- Bison
+- Canyon
+- Drift
+as100_options:
+- 100
+- 65010
+- 65100
+as200_options:
+- 200
+- 65020
+- 65200
+as300_options:
+- 300
+- 65030
+- 65300
+med_low_options:
+- 50
+- 75
+- 100
+med_high_options:
+- 150
+- 175
+- 200
+link1_media_options:
+- fastethernet
+link1_pool: 192.168.0.0/16
+link1_prefix_lens:
+- 24
+link2_media_options:
+- fastethernet
+link2_pool: 192.168.0.0/16
+link2_prefix_lens:
+- 24
+link3_media_options:
+- fastethernet
+link3_pool: 192.168.0.0/16
+link3_prefix_lens:
+- 24
+link4_media_options:
+- fastethernet
+link4_pool: 192.168.0.0/16
+link4_prefix_lens:
+- 24
+r1_loopback0_pool: 2.0.0.0/8
+r1_loopback0_prefix_lens:
+- 24
+r1_loopback1_pool: 1.0.0.0/8
+r1_loopback1_prefix_lens:
+- 32
+r2_loopback0_pool: 3.0.0.0/8
+r2_loopback0_prefix_lens:
+- 24
+r3_loopback0_pool: 1.0.0.0/8
+r3_loopback0_prefix_lens:
+- 24
+r4_loopback0_pool: 4.0.0.0/8
+r4_loopback0_prefix_lens:
+- 24
+r4_loopback1_pool: 1.0.0.0/8
+r4_loopback1_prefix_lens:
+- 32
