@@ -476,7 +476,7 @@
                 {
                     "id": "4-1",
                     "node": "{{router1_name}}",
-                    "command": "ping -c 5 -I Loopback0 {{router2_lo0_ip}}",
+                    "command": "ping -c 5 -I {{router1_lo0_ip}} {{router2_lo0_ip}}",
                     "expected_result": {
                         "success_pct": {
                             "op": ">",
@@ -487,7 +487,7 @@
                 {
                     "id": "4-2",
                     "node": "{{router1_name}}",
-                    "command": "ping -c 5 -I Loopback0 {{router3_lo0_ip}}",
+                    "command": "ping -c 5 -I {{router1_lo0_ip}} {{router3_lo0_ip}}",
                     "expected_result": {
                         "success_pct": {
                             "op": ">",
@@ -498,7 +498,7 @@
                 {
                     "id": "4-3",
                     "node": "{{router1_name}}",
-                    "command": "ping -c 5 -I Loopback0 {{router4_lo0_ip}}",
+                    "command": "ping -c 5 -I {{router1_lo0_ip}} {{router4_lo0_ip}}",
                     "expected_result": {
                         "success_pct": {
                             "op": ">",
@@ -509,7 +509,7 @@
                 {
                     "id": "4-4",
                     "node": "{{router2_name}}",
-                    "command": "ping -c 5 -I Loopback0 {{router3_lo0_ip}}",
+                    "command": "ping -c 5 -I {{router2_lo0_ip}} {{router3_lo0_ip}}",
                     "expected_result": {
                         "success_pct": {
                             "op": ">",
@@ -520,7 +520,7 @@
                 {
                     "id": "4-5",
                     "node": "{{router2_name}}",
-                    "command": "ping -c 5 -I Loopback0 {{router4_lo0_ip}}",
+                    "command": "ping -c 5 -I {{router2_lo0_ip}} {{router4_lo0_ip}}",
                     "expected_result": {
                         "success_pct": {
                             "op": ">",
@@ -531,7 +531,7 @@
                 {
                     "id": "4-6",
                     "node": "{{router3_name}}",
-                    "command": "ping -c 5 -I Loopback0 {{router4_lo0_ip}}",
+                    "command": "ping -c 5 -I {{router3_lo0_ip}} {{router4_lo0_ip}}",
                     "expected_result": {
                         "success_pct": {
                             "op": ">",
