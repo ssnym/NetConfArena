@@ -128,6 +128,7 @@ class Conv:
         self.lo0 = {}
         self.notes = []
         self.cm_seq = collections.defaultdict(int)
+        self.if_ips = []
 
     def note(self, msg):
         self.notes.append(msg)
@@ -198,6 +199,7 @@ class Conv:
             out.append("config loopback add " + name)
         if ip:
             out.append("config interface ip add %s %s" % (name, ip))
+            self.if_ips.append(ip.split('/')[0])
         if name == "Loopback0" and ip:
             out += ["route-map RM_SET_SRC permit 10", "set src " + ipaddr, "exit"]
         if "no shutdown" in kids and not name.startswith("Loopback"):
@@ -222,7 +224,14 @@ class Conv:
                 continue
             m = re.fullmatch(r'network (\S+) (\S+) area (\S+)', k)
             if m:
-                out.append("network %s/%s area %s" % (m.group(1), self.plen(m.group(2)), m.group(3))); continue
+                net, mask, area = m.group(1), m.group(2), m.group(3)
+                if net == "0.0.0.0" and mask == "255.255.255.255":
+                    for if_ip in self.if_ips:
+                        out.append(f"network {if_ip}/32 area {area}")
+                    if not self.if_ips:
+                        self.note("OSPF network 0.0.0.0/32 generated but no interface IPs found yet")
+                    continue
+                out.append("network %s/%s area %s" % (net, self.plen(mask), area)); continue
             m = re.fullmatch(r'router-id (\S+)', k)
             if m:
                 out.append("ospf router-id " + m.group(1)); continue
@@ -365,7 +374,7 @@ class Conv:
         return ifc + pol + rtr + rte
 
     # ---- testcase commands -> (device command, parser kind)
-    def cmd(self, c):
+    def cmd(self, c, node=None):
         c = c.strip()
         v = lambda s: 'sudo vtysh -c "%s"' % s
         m = re.fullmatch(r'show ip bgp neighbors(?: (\S+))?', c)
@@ -394,7 +403,15 @@ class Conv:
         if m: return v("show bgp community-list"), "cmlist"
         if c == "show route-map": return v("show route-map"), "rmap"
         m = re.fullmatch(r'ping (\S+)(?: source (\S+))?', c)
-        if m: return "ping -c 5 %s%s" % ("-I %s " % m.group(2) if m.group(2) else "", m.group(1)), "ping"
+        if m:
+            target = m.group(1)
+            src = m.group(2)
+            if src and src.startswith("Loopback") and node:
+                m_node = re.search(r'\{\{(router\d+)_name\}\}', node)
+                if m_node:
+                    src = "{{%s_lo0_ip}}" % m_node.group(1)
+            src_arg = f"-I {src} " if src else ""
+            return f"ping -c 5 {src_arg}{target}", "ping"
         m = re.fullmatch(r'show running-config \| include (.+)', c)
         if m:
             # FRR vtysh supports the same pipe; include is a regex in both IOS and FRR
@@ -442,7 +459,7 @@ def convert(d, values=None):
     for g in d.get("testcases", []):
         for t in g.get("testcase", []):
             try:
-                t["command"], kind = cv.cmd(t["command"])
+                t["command"], kind = cv.cmd(t["command"], t.get("node"))
                 _fix32(t.get("expected_result"), cv)
                 ks = set(); keys_of(t.get("expected_result", {}), ks)
                 missing = ks - META_KEYS - PARSER_KEYS[kind]
